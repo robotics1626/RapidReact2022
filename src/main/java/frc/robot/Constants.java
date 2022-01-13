@@ -14,7 +14,7 @@ package frc.robot;
  */
 public final class Constants {
     // Operator and Drive Controllers
-    public static final int OPERATOR = 0;
+    public static final int CONTROLLER_OPERATOR = 0;
     public static final int JOYSTICK_LEFT = 1;
     public static final int JOYSTICK_RIGHT = 2; 
 
