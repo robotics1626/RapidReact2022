@@ -18,6 +18,9 @@ public final class Constants {
     public static final int JOYSTICK_LEFT = 1;
     public static final int JOYSTICK_RIGHT = 2; 
 
-    // Temp. Piston
+    // Compressor
+    public static final int COMPRESSOR = 0;
+    
+    // Piston
     public static final int [] TEMP_SOLENOID = new int[] {0, 1};
 }

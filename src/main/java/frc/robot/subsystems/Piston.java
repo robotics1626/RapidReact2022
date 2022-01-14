@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -13,12 +14,19 @@ import frc.robot.Constants;
 public class Piston extends SubsystemBase {
   // Create a DoubleSolenoid object to control the solenoids on the piston
     
-  DoubleSolenoid solenoid = new DoubleSolenoid(
+  private final Compressor compressor = new Compressor(
+    Constants.COMPRESSOR, PneumaticsModuleType.CTREPCM);
+
+  private final DoubleSolenoid solenoid = new DoubleSolenoid(
     PneumaticsModuleType.CTREPCM, 
     Constants.TEMP_SOLENOID[0], 
     Constants.TEMP_SOLENOID[1]);
   
   public Piston() {}
+
+  public void Compressor() {
+    compressor.enableDigital();
+  }
 
   public void extend() {
     solenoid.set(Value.kReverse);

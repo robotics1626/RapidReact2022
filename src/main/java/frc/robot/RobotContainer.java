@@ -4,9 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.subsystems.Piston;
@@ -23,12 +21,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Piston m_piston = new Piston();
   private final XboxController m_operator = new XboxController(Constants.CONTROLLER_OPERATOR);
-  private final Compressor compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    m_piston.Compressor();
   }
 
   /**
@@ -40,12 +38,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(m_operator, Button.kA.value)
       .whenPressed(() -> m_piston.extend());
-
     new JoystickButton(m_operator, Button.kB.value)
       .whenPressed(() -> m_piston.retract());
-
-    new JoystickButton(m_operator, Button.kX.value)
-      .whenPressed(() -> compressor.enableDigital());
   }
 
   /**
