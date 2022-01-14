@@ -26,7 +26,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    m_piston.Compressor();
   }
 
   /**
@@ -40,6 +39,8 @@ public class RobotContainer {
       .whenPressed(() -> m_piston.extend());
     new JoystickButton(m_operator, Button.kB.value)
       .whenPressed(() -> m_piston.retract());
+    new JoystickButton(m_operator, Button.kLeftBumper.value)
+      .whenPressed(() -> m_piston.Compressor());
   }
 
   /**
