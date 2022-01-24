@@ -4,9 +4,9 @@
 
 package frc.robot.subsystems;
 
-//import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,23 +17,24 @@ public class Piston extends SubsystemBase {
 /*  private final Compressor compressor = new Compressor(
     Constants.COMPRESSOR, PneumaticsModuleType.REVPH);*/
 
-  private final DoubleSolenoid solenoid = new DoubleSolenoid(
+  private final Solenoid m_solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.SOLENOID);
+  private final DoubleSolenoid m_doubleSolenoid = new DoubleSolenoid(
     PneumaticsModuleType.REVPH, 
-    Constants.TEMP_SOLENOID[0], 
-    Constants.TEMP_SOLENOID[1]);
+    Constants.DOUBLE_SOLENOID[0], 
+    Constants.DOUBLE_SOLENOID[1]);
   
   public Piston() {}
 
-  /* public void Compressor() {
-    compressor.enableDigital();
-  } */
+  public void enable() {
+    m_solenoid.set(true);
+  }
 
   public void extend() {
-    solenoid.set(Value.kReverse);
+    m_doubleSolenoid.set(Value.kReverse);
   }
 
   public void retract() {
-    solenoid.set(Value.kForward);
+    m_doubleSolenoid.set(Value.kForward);
   }
 
   @Override

@@ -45,10 +45,6 @@ public class RobotContainer {
       () -> m_driverRight.getY()
       )
     );
-
-
-    // Enable compressor
-    //m_piston.Compressor();
   }
 
   /**
@@ -58,9 +54,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    new JoystickButton(m_operator, Button.kB.value)
+      .whenPressed(() -> m_piston.enable());
     new JoystickButton(m_operator, Button.kA.value)
       .whenPressed(() -> m_piston.extend());
-    new JoystickButton(m_operator, Button.kB.value)
+    new JoystickButton(m_operator, Button.kX.value)
       .whenPressed(() -> m_piston.retract());
   }
 
