@@ -28,6 +28,5 @@ public final class Constants {
     public static final int COMPRESSOR = 0;
     
     // Piston
-    public static final int SOLENOID = 0;
-    public static final int [] DOUBLE_SOLENOID = new int[] {1, 2};
+    public static final int [] DOUBLE_SOLENOID = new int[] {0, 1};
 }

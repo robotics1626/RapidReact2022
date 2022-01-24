@@ -6,28 +6,18 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Piston extends SubsystemBase {
-  // Create a DoubleSolenoid object to control the solenoids on the piston
-    
-/*  private final Compressor compressor = new Compressor(
-    Constants.COMPRESSOR, PneumaticsModuleType.REVPH);*/
 
-  private final Solenoid m_solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.SOLENOID);
   private final DoubleSolenoid m_doubleSolenoid = new DoubleSolenoid(
     PneumaticsModuleType.REVPH, 
     Constants.DOUBLE_SOLENOID[0], 
     Constants.DOUBLE_SOLENOID[1]);
   
   public Piston() {}
-
-  public void enable() {
-    m_solenoid.set(true);
-  }
 
   public void extend() {
     m_doubleSolenoid.set(Value.kReverse);
