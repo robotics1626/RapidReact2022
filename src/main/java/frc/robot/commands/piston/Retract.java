@@ -1,4 +1,4 @@
-package frc.robot.commands.piston;
+package frc.robot.commands.Piston;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Piston;

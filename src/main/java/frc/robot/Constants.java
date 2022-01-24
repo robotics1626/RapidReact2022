@@ -16,7 +16,13 @@ public final class Constants {
     // Operator and Drive Controllers
     public static final int CONTROLLER_OPERATOR = 0;
     public static final int JOYSTICK_LEFT = 1;
-    public static final int JOYSTICK_RIGHT = 2; 
+    public static final int JOYSTICK_RIGHT = 2;
+
+    // Drive Train
+    public static final int DRIVE_FRONT_LEFT = 1;
+    public static final int DRIVE_REAR_LEFT = 2;
+    public static final int DRIVE_FRONT_RIGHT = 3;
+    public static final int DRIVE_REAR_RIGHT = 4;
 
     // Compressor
     public static final int COMPRESSOR = 0;

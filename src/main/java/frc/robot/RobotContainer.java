@@ -5,11 +5,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.subsystems.Piston;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Piston;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.commands.Drivetrain.TankDrive;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,14 +21,31 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final Piston m_piston = new Piston();
+  // Controllers
   private final XboxController m_operator = new XboxController(Constants.CONTROLLER_OPERATOR);
+  private final Joystick m_driverLeft = new Joystick(Constants.JOYSTICK_LEFT);
+  private final Joystick m_driverRight = new Joystick(Constants.JOYSTICK_RIGHT);
+
+  // Drivetrain
+  private final Drivetrain m_drivetrain = new Drivetrain();
+
+  // Piston
+  private final Piston m_piston = new Piston();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    // Tank Drive
+    m_drivetrain.setDefaultCommand(
+      new TankDrive(
+        m_drivetrain, 
+      () -> m_driverLeft.getY(),
+      () -> m_driverRight.getY()
+      )
+    );
+
 
     // Enable compressor
     m_piston.Compressor();
