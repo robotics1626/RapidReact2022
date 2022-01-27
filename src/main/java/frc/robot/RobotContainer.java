@@ -14,6 +14,7 @@ import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.Drivetrain.TankDrive;
+import frc.robot.commands.Autonomous.TemporaryAutonomous;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -36,6 +37,9 @@ public class RobotContainer {
 
   // Intake
   private final Intake m_intake = new Intake();
+
+  // Autonomous
+  private final TemporaryAutonomous m_temporaryAutonomous = new TemporaryAutonomous();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -76,5 +80,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  //public Command getAutonomousCommand() {}
+  public Command getAutonomousCommand() {
+    return m_temporaryAutonomous;
+  }
 }
