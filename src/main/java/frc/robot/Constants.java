@@ -19,10 +19,13 @@ public final class Constants {
     public static final int JOYSTICK_RIGHT = 2;
 
     // Drive Train
-    public static final int DRIVE_FRONT_LEFT = 0;
-    public static final int DRIVE_REAR_LEFT = 1;
-    public static final int DRIVE_FRONT_RIGHT = 19;
-    public static final int DRIVE_REAR_RIGHT = 18;
+    public static final int DRIVE_FRONT_LEFT = 5;
+    public static final int DRIVE_REAR_LEFT = 6;
+    public static final int DRIVE_FRONT_RIGHT = 7;
+    public static final int DRIVE_REAR_RIGHT = 8;
+
+    // Intake
+    public static final int INTAKE = 9;
 
     // Compressor
     public static final int COMPRESSOR = 0;
