@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 import frc.robot.commands.Drivetrain.TankDrive;
 
 /**
@@ -31,6 +32,9 @@ public class RobotContainer {
 
   // Piston
   private final Piston m_piston = new Piston();
+
+  // Intake
+  private final Intake m_intake = new Intake();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -58,6 +62,10 @@ public class RobotContainer {
       .whenPressed(() -> m_piston.extend());
     new JoystickButton(m_operator, Button.kX.value)
       .whenPressed(() -> m_piston.retract());
+    new JoystickButton(m_operator, Button.kLeftBumper.value)
+      .whenActive(() -> m_intake.pull());
+    new JoystickButton(m_operator, Button.kRightBumper.value)
+      .whenActive(() -> m_intake.push());
   }
 
   /**
