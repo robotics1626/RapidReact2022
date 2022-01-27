@@ -21,6 +21,7 @@ import frc.robot.commands.Drivetrain.TankDrive;
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
+
 public class RobotContainer {
   // Controllers
   private final XboxController m_operator = new XboxController(Constants.CONTROLLER_OPERATOR);
@@ -44,9 +45,9 @@ public class RobotContainer {
     // Tank Drive
     m_drivetrain.setDefaultCommand(
       new TankDrive(
-        m_drivetrain, 
-      () -> m_driverLeft.getY(),
-      () -> m_driverRight.getY()
+        m_drivetrain,
+        () -> m_driverLeft.getY(),
+        () -> m_driverRight.getY()
       )
     );
   }
@@ -58,10 +59,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    // Piston
     new JoystickButton(m_operator, Button.kA.value)
       .whenPressed(() -> m_piston.extend());
     new JoystickButton(m_operator, Button.kX.value)
       .whenPressed(() -> m_piston.retract());
+    // Intake
     new JoystickButton(m_operator, Button.kLeftBumper.value)
       .whenActive(() -> m_intake.pull());
     new JoystickButton(m_operator, Button.kRightBumper.value)

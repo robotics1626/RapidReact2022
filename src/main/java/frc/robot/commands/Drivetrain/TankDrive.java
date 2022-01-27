@@ -4,20 +4,18 @@
 
 package frc.robot.commands.Drivetrain;
 
-import frc.robot.subsystems.Drivetrain;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Drivetrain;
 
 public class TankDrive extends CommandBase {
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Drivetrain m_drivetrain;
-    private final DoubleSupplier m_throttle, m_rotation;
+    private final DoubleSupplier m_left, m_right;
 
-    // TankDrive
-    public TankDrive(Drivetrain drivetrain, DoubleSupplier throttle, DoubleSupplier rotation) {
+    public TankDrive(Drivetrain drivetrain, DoubleSupplier left, DoubleSupplier right) {
         m_drivetrain = drivetrain;
-        m_throttle = throttle;
-        m_rotation = rotation;
+        m_left = left;
+        m_right = right;
 
         addRequirements(m_drivetrain);
     }
@@ -25,10 +23,9 @@ public class TankDrive extends CommandBase {
     @Override
     public void initialize() {}
 
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_drivetrain.tankDrive(m_throttle.getAsDouble(), m_rotation.getAsDouble());
+        m_drivetrain.tankDrive(m_left.getAsDouble(), m_right.getAsDouble());
     }
 
     // Called once the command ends or is interrupted.
