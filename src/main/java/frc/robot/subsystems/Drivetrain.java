@@ -27,6 +27,9 @@ public class Drivetrain extends SubsystemBase {
     // DifferentialDrive
     DifferentialDrive drive = new DifferentialDrive(motorsLeft, motorsRight);
 
+    // Gear Shift
+    boolean gear = false;
+
     // Drivetrain
     public Drivetrain() {
         // Coast
@@ -41,9 +44,18 @@ public class Drivetrain extends SubsystemBase {
         motorRearRight.setInverted(true);
     }
 
+    public void shiftGears(){
+        gear = !gear;
+    }
+
     // Tank Drive
     public void tankDrive(double left, double right) {
-        drive.tankDrive(left, right);
+        if (gear) {
+            drive.tankDrive(left, right);
+        } else {
+            drive.tankDrive(Math.pow(left,(5/3)), Math.pow(right,(5/3)));
+        }
+        
     }
 
     public void stop() {

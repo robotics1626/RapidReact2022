@@ -63,6 +63,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    // Drive
+    new JoystickButton(m_driverLeft, 1)
+      .whenPressed(() -> m_drivetrain.shiftGears());
+    new JoystickButton(m_driverRight, 1)
+      .whenPressed(() -> m_drivetrain.shiftGears());
     // Piston
     new JoystickButton(m_operator, Button.kA.value)
       .whenPressed(() -> m_piston.extend());
