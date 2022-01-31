@@ -29,15 +29,16 @@ public class Drivetrain extends SubsystemBase {
 
     // Drivetrain
     public Drivetrain() {
-        // Brake
-        motorFrontLeft.setIdleMode(IdleMode.kBrake);
-        motorFrontRight.setIdleMode(IdleMode.kBrake);
-        motorRearLeft.setIdleMode(IdleMode.kBrake);
-        motorRearRight.setIdleMode(IdleMode.kBrake);
+        // Coast
+        motorFrontLeft.setIdleMode(IdleMode.kCoast);
+        motorFrontRight.setIdleMode(IdleMode.kCoast);
+        motorRearLeft.setIdleMode(IdleMode.kCoast);
+        motorRearRight.setIdleMode(IdleMode.kCoast);
 
-        /*
+
+
         motorFrontRight.setInverted(true);
-        motorRearRight.setInverted(true); */
+        motorRearRight.setInverted(true);
     }
 
     // Tank Drive
