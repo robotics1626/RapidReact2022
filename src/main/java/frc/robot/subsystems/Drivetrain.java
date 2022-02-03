@@ -32,30 +32,22 @@ public class Drivetrain extends SubsystemBase {
 
     // Drivetrain
     public Drivetrain() {
-        // Coast
+        // Coast while idle
         motorFrontLeft.setIdleMode(IdleMode.kCoast);
         motorFrontRight.setIdleMode(IdleMode.kCoast);
         motorRearLeft.setIdleMode(IdleMode.kCoast);
         motorRearRight.setIdleMode(IdleMode.kCoast);
-
-
-
+        // Invert right-side Motors
         motorFrontRight.setInverted(true);
         motorRearRight.setInverted(true);
     }
 
-    public void shiftGears(){
-        gear = !gear;
-    }
-
     // Tank Drive
     public void tankDrive(double left, double right) {
-        if (gear) {
-            drive.tankDrive(left, right);
-        } else {
-            drive.tankDrive(Math.pow(left,(5/3)), Math.pow(right,(5/3)));
-        }
-        
+        drive.tankDrive(
+                Math.pow(left,Constants.JOYSTICK_SENSITIVITY), 
+                Math.pow(right,Constants.JOYSTICK_SENSITIVITY)
+            );
     }
 
     public void stop() {
