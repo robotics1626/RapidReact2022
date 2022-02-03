@@ -7,12 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeBelt;
+import frc.robot.subsystems.IntakeArm;
 import frc.robot.commands.Indexer.IndexerController;
 import frc.robot.commands.Drivetrain.TankDrive;
 import frc.robot.commands.Autonomous.TemporaryAutonomous;
@@ -31,7 +31,8 @@ public class RobotContainer {
   private final Joystick m_driverRight = new Joystick(Constants.JOYSTICK_RIGHT);
 
   private final Drivetrain m_drivetrain = new Drivetrain();
-  private final Intake m_intake = new Intake();
+  private final IntakeBelt m_intakeBelt = new IntakeBelt();
+  private final IntakeArm m_intakeArm = new IntakeArm();
   private final Indexer m_indexer = new Indexer();
 
   private final TemporaryAutonomous m_temporaryAutonomous = new TemporaryAutonomous();
@@ -67,13 +68,13 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(m_driverLeft, 1)
-      .whenPressed(() -> m_intake.extend());
+      .whenPressed(() -> m_intakeArm.extend());
     new JoystickButton(m_driverRight, 1)
-      .whenPressed(() -> m_intake.retract());
+      .whenPressed(() -> m_intakeArm.retract());
     new JoystickButton(m_driverLeft, 2)
-      .whenPressed(() -> m_intake.pull());
+      .whenPressed(() -> m_intakeBelt.pull());
     new JoystickButton(m_driverRight, 2)
-      .whenPressed(() -> m_intake.push());
+      .whenPressed(() -> m_intakeBelt.push());
   }
 
   /**
