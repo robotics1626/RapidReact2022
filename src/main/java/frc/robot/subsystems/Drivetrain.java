@@ -45,8 +45,8 @@ public class Drivetrain extends SubsystemBase {
     // Tank Drive
     public void tankDrive(double left, double right) {
         drive.tankDrive(
-                Math.pow(left,Constants.JOYSTICK_SENSITIVITY), 
-                Math.pow(right,Constants.JOYSTICK_SENSITIVITY)
+                Math.pow(left,Constants.JOYSTICK_CURVE), 
+                Math.pow(right,Constants.JOYSTICK_CURVE)
             );
     }
 

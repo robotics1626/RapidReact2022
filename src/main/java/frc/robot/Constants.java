@@ -17,7 +17,7 @@ public final class Constants {
     public static final int CONTROLLER_OPERATOR = 0;
     public static final int JOYSTICK_LEFT = 1;
     public static final int JOYSTICK_RIGHT = 2;
-    public static final double JOYSTICK_SENSITIVITY = 5/3;
+    public static final double JOYSTICK_CURVE = 5/3;
 
     // Drive Train
     public static final int DRIVE_FRONT_LEFT = 3;
