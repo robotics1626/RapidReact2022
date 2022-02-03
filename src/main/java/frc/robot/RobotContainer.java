@@ -8,14 +8,13 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.IntakeBelt;
-import frc.robot.subsystems.IntakeArm;
-import frc.robot.commands.Indexer.IndexerController;
-import frc.robot.commands.Drivetrain.TankDrive;
-import frc.robot.commands.Autonomous.TemporaryAutonomous;
+import frc.robot.subsystems.*;
+import frc.robot.commands.Drivetrain.*;
+import frc.robot.commands.Indexer.*;
+import frc.robot.commands.Shooter.*;
+import frc.robot.commands.Autonomous.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,11 +29,14 @@ public class RobotContainer {
   private final Joystick m_driverLeft = new Joystick(Constants.JOYSTICK_LEFT);
   private final Joystick m_driverRight = new Joystick(Constants.JOYSTICK_RIGHT);
 
+  // Robot Compontents
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final IntakeBelt m_intakeBelt = new IntakeBelt();
   private final IntakeArm m_intakeArm = new IntakeArm();
   private final Indexer m_indexer = new Indexer();
+  private final Shooter m_shooter = new Shooter();
 
+  // Autonomous
   private final TemporaryAutonomous m_temporaryAutonomous = new TemporaryAutonomous();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -42,7 +44,9 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    // Tank Drive
+    // Drive Train
+    // The Driver's left joystick controls the left side of the robot
+    // The Driver's right joystick controls the right side of the robot
     m_drivetrain.setDefaultCommand(
       new TankDrive(
         m_drivetrain,
@@ -52,10 +56,20 @@ public class RobotContainer {
     );
 
     // Indexer
+    // The Operator's right joystick controls the indexer
     m_indexer.setDefaultCommand(
       new IndexerController(
         m_indexer, 
         () -> m_operator.getRightY()
+      )
+    );
+
+    // Shooter
+    // The Operator's right trigger controls the shooter
+    m_shooter.setDefaultCommand(
+      new ShooterController(
+        m_shooter, 
+        () -> m_operator.getRightTriggerAxis()
       )
     );
   }
@@ -67,14 +81,23 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    // Intake
+    // The Driver's left trigger extends the arm
     new JoystickButton(m_driverLeft, 1)
-      .whenPressed(() -> m_intakeArm.extend());
+      .whenPressed(() -> m_intakeArm.extend()
+    );
+    // The Driver's right trigger retracts the arm
     new JoystickButton(m_driverRight, 1)
-      .whenPressed(() -> m_intakeArm.retract());
+      .whenPressed(() -> m_intakeArm.retract()
+    );
+    // The Driver's left thumb button runs the belt backwards
     new JoystickButton(m_driverLeft, 2)
-      .whenPressed(() -> m_intakeBelt.pull());
+      .whenPressed(() -> m_intakeBelt.backwards()
+    );
+    // The Driver's right thumb button runs the belt forwards
     new JoystickButton(m_driverRight, 2)
-      .whenPressed(() -> m_intakeBelt.push());
+      .whenPressed(() -> m_intakeBelt.forwards()
+    );
   }
 
   /**

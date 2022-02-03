@@ -34,7 +34,10 @@ public final class Constants {
     public static final int [] INTAKE_ARM_LEFT = new int[] {0, 1};
     public static final int [] INTAKE_ARM_RIGHT = new int[] {2, 3};
 
-    // Intaker
+    // Indexer
     public static final int INDEXER = 7;
+
+    // Shooter
+    public static final int SHOOTER = 8;
    
 }

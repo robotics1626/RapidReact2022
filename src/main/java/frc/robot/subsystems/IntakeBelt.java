@@ -23,15 +23,11 @@ public class IntakeBelt extends SubsystemBase {
         m_intakeBeltRight.setIdleMode(IdleMode.kBrake);
     }
 
-    public void IntakeController(double input) {
-        m_intakeBelt.arcadeDrive(input, 0.0);
-    }
-
-    public void pull(){
+    public void forwards(){
         m_intakeBelt.tankDrive(1.0, 1.0);
     }
 
-    public void push(){
+    public void backwards(){
         m_intakeBelt.tankDrive(-1.0, -1.0);
     }
 

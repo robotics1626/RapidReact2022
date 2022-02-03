@@ -2,17 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.IntakeBelt;
+package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeBelt;
+import frc.robot.subsystems.Shooter;
 
-public class Pull extends CommandBase {
-    private final IntakeBelt m_intakeBelt;
+public class Retreat extends CommandBase {
+    private final Shooter m_shooter;
 
-    public Pull(IntakeBelt intakeBelt) {
-        m_intakeBelt = intakeBelt;
-        addRequirements(m_intakeBelt);
+    public Retreat(Shooter intakeBelt) {
+        m_shooter = intakeBelt;
+        addRequirements(m_shooter);
     }
 
     @Override
@@ -20,12 +20,12 @@ public class Pull extends CommandBase {
 
     @Override
     public void execute() {
-        m_intakeBelt.pull();
+        m_shooter.retreat();
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_intakeBelt.stop();
+        m_shooter.stop();
     }
 
     @Override

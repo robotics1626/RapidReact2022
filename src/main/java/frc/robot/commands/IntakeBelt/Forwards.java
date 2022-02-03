@@ -7,10 +7,10 @@ package frc.robot.commands.IntakeBelt;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeBelt;
 
-public class Push extends CommandBase {
+public class Forwards extends CommandBase {
     private final IntakeBelt m_intakeBelt;
 
-    public Push(IntakeBelt intakeBelt) {
+    public Forwards(IntakeBelt intakeBelt) {
         m_intakeBelt = intakeBelt;
         addRequirements(m_intakeBelt);
     }
@@ -20,9 +20,10 @@ public class Push extends CommandBase {
 
     @Override
     public void execute() {
-        m_intakeBelt.push();
+        m_intakeBelt.forwards();
     }
 
+    // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         m_intakeBelt.stop();
