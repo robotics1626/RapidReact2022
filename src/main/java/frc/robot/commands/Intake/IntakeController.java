@@ -4,14 +4,18 @@
 
 package frc.robot.commands.Intake;
 
+import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
-public class Pull extends CommandBase {
+public class IntakeController extends CommandBase {
     private final Intake m_intake;
+    private final DoubleSupplier m_input;
 
-    public Pull(Intake intake) {
+    public IntakeController(Intake intake, DoubleSupplier input) {
         m_intake = intake;
+        m_input = input;
+
         addRequirements(m_intake);
     }
 
@@ -20,12 +24,16 @@ public class Pull extends CommandBase {
 
     @Override
     public void execute() {
-        m_intake.pull();
+        m_intake.IntakeController(m_input.getAsDouble());
     }
 
+    // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {}
+    public void end(boolean interrupted) {
+        m_intake.stop();
+    }
 
+    // Returns true when the command should end.
     @Override
     public boolean isFinished() {
         return false;

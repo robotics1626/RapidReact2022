@@ -25,12 +25,13 @@ public final class Constants {
     public static final int DRIVE_FRONT_RIGHT = 4;
     public static final int DRIVE_REAR_RIGHT = 2;
 
-    // Intake
-    public static final int INTAKE = 9;
-
     // Compressor
     public static final int COMPRESSOR = 0;
     
-    // Piston
-    public static final int [] DOUBLE_SOLENOID = new int[] {0, 1};
+    // Intake
+    public static final int INTAKE_FRONT = 5;
+    public static final int INTAKE_BACK = 6;
+    public static final int [] INTAKE_PISTON_LEFT = new int[] {0, 1};
+    public static final int [] INTAKE_PISTON_RIGHT = new int[] {2, 3};
+   
 }
