@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
-import frc.robot.commands.Intake.IntakeController;
+import frc.robot.commands.Indexer.IndexerController;
 import frc.robot.commands.Drivetrain.TankDrive;
 import frc.robot.commands.Autonomous.TemporaryAutonomous;
 
@@ -29,13 +30,10 @@ public class RobotContainer {
   private final Joystick m_driverLeft = new Joystick(Constants.JOYSTICK_LEFT);
   private final Joystick m_driverRight = new Joystick(Constants.JOYSTICK_RIGHT);
 
-  // Drivetrain
   private final Drivetrain m_drivetrain = new Drivetrain();
-
-  // Intake
   private final Intake m_intake = new Intake();
+  private final Indexer m_indexer = new Indexer();
 
-  // Autonomous
   private final TemporaryAutonomous m_temporaryAutonomous = new TemporaryAutonomous();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -52,10 +50,10 @@ public class RobotContainer {
       )
     );
 
-    // Intake
-    m_intake.setDefaultCommand(
-      new IntakeController(
-        m_intake, 
+    // Indexer
+    m_indexer.setDefaultCommand(
+      new IndexerController(
+        m_indexer, 
         () -> m_operator.getRightY()
       )
     );
@@ -68,11 +66,14 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    /*
-    new JoystickButton(m_operator, Button.kA.value)
+    new JoystickButton(m_driverLeft, 1)
       .whenPressed(() -> m_intake.extend());
-    new JoystickButton(m_operator, Button.kX.value)
-      .whenPressed(() -> m_intake.retract());*/
+    new JoystickButton(m_driverRight, 1)
+      .whenPressed(() -> m_intake.retract());
+    new JoystickButton(m_driverLeft, 2)
+      .whenPressed(() -> m_intake.pull());
+    new JoystickButton(m_driverRight, 2)
+      .whenPressed(() -> m_intake.push());
   }
 
   /**

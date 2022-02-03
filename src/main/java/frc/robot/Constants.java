@@ -29,9 +29,12 @@ public final class Constants {
     public static final int COMPRESSOR = 0;
     
     // Intake
-    public static final int INTAKE_FRONT = 5;
-    public static final int INTAKE_BACK = 6;
-    public static final int [] INTAKE_PISTON_LEFT = new int[] {0, 1};
-    public static final int [] INTAKE_PISTON_RIGHT = new int[] {2, 3};
+    public static final int INTAKE_BELT_LEFT = 5;
+    public static final int INTAKE_BELT_RIGHT = 6;
+    public static final int [] INTAKE_ARM_LEFT = new int[] {0, 1};
+    public static final int [] INTAKE_ARM_RIGHT = new int[] {2, 3};
+
+    // Intaker
+    public static final int INDEXER = 7;
    
 }

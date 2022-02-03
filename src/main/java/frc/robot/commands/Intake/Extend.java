@@ -2,17 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Piston;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Piston;
+import frc.robot.subsystems.Intake;
 
-public class Retract extends CommandBase {
-    private final Piston m_piston;
+public class Extend extends CommandBase {
+    private final Intake m_intake;
 
-    public Retract(Piston piston) {
-        m_piston = piston;
-        addRequirements(m_piston);
+    public Extend(Intake intake) {
+        m_intake = intake;
+        addRequirements(m_intake);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class Retract extends CommandBase {
 
     @Override
     public void execute() {
-        m_piston.retract();
+        m_intake.extend();
     }
 
     @Override
