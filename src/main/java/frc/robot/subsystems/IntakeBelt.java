@@ -28,7 +28,7 @@ public class IntakeBelt extends SubsystemBase {
 
     PowerDistribution m_pdh = new PowerDistribution(Constants.PDH,ModuleType.kRev);
 
-    double m_velocity, voltage;
+    double m_velocity, m_voltage;
 
     public IntakeBelt() {
         m_intakeBeltLeft.setIdleMode(IdleMode.kBrake);
@@ -51,8 +51,9 @@ public class IntakeBelt extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
         m_velocity = m_encoderBeltLeft.getVelocity();
-        voltage = m_pdh.getCurrent(Constants.PDH_INTAKE_BELT_LEFT);
+        m_voltage = m_pdh.getCurrent(Constants.PDH_INTAKE_BELT_LEFT);
         SmartDashboard.putNumber("Intake Belt Velocity (RPM)", m_velocity);
+        SmartDashboard.putNumber("Intake Belt Velocity (RPM)", m_voltage);
     }
 
 }
