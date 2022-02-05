@@ -19,6 +19,16 @@ public final class Constants {
     public static final int JOYSTICK_RIGHT = 2;
     public static final double JOYSTICK_CURVE = 5/3;
 
+    // Power Distribution Hub
+    public static final int PDH = 1;
+    public static final int PDH_DRIVE_REAR_RIGHT = 0;
+    public static final int PDH_DRIVE_FRONT_RIGHT = 1;
+    public static final int PDH_DRIVE_FRONT_LEFT = 18;
+    public static final int PDH_DRIVE_REAR_LEFT = 19;
+
+    // Pneumatic Hub
+    public static final int PNEUMATIC_H = 1;
+
     // Drive Train
     public static final int DRIVE_FRONT_LEFT = 3;
     public static final int DRIVE_REAR_LEFT = 1;
