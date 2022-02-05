@@ -53,7 +53,7 @@ public class IntakeBelt extends SubsystemBase {
         m_velocity = m_encoderBeltLeft.getVelocity();
         m_voltage = m_pdh.getCurrent(Constants.PDH_INTAKE_BELT_LEFT);
         SmartDashboard.putNumber("Intake Belt Velocity (RPM)", m_velocity);
-        SmartDashboard.putNumber("Intake Belt Velocity (RPM)", m_voltage);
+        SmartDashboard.putNumber("Intake Belt Voltage", m_voltage);
     }
 
 }
