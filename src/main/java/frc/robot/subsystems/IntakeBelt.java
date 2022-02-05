@@ -51,6 +51,7 @@ public class IntakeBelt extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
         m_velocity = m_encoderBeltLeft.getVelocity();
+        voltage = m_pdh.getCurrent(Constants.PDH_INTAKE_BELT_LEFT);
         SmartDashboard.putNumber("Intake Belt Velocity (RPM)", m_velocity);
     }
 
