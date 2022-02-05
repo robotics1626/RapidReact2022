@@ -91,11 +91,11 @@ public class RobotContainer {
     );
     // The Driver's left thumb button runs the belt backwards
     new JoystickButton(m_driverLeft, 2)
-      .whenPressed(() -> m_intakeBelt.backwards()
+      .whileActiveContinuous(() -> m_intakeBelt.backwards()
     );
     // The Driver's right thumb button runs the belt forwards
     new JoystickButton(m_driverRight, 2)
-      .whenPressed(() -> m_intakeBelt.forwards()
+      .whileActiveContinuous(() -> m_intakeBelt.forwards()
     );
   }
 
