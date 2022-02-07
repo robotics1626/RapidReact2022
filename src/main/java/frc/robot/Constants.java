@@ -28,7 +28,7 @@ public final class Constants {
     public static final int PDH_INTAKE_BELT_LEFT = 2;
 
     // Pneumatic Hub
-    public static final int PNEUMATIC_H = 1;
+    public static final int PNEUMATIC_HUB = 1;
 
     // Drive Train
     public static final int DRIVE_FRONT_LEFT = 3;

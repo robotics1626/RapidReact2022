@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
@@ -19,16 +21,10 @@ public class Shooter extends SubsystemBase {
     SparkMaxPIDController m_pidController = m_shooter.getPIDController();
     RelativeEncoder m_encoder = m_shooter.getEncoder();
 
+    PowerDistribution m_pdh = new PowerDistribution(Constants.PDH,ModuleType.kRev);
+
     public Shooter() {
         m_shooter.setIdleMode(IdleMode.kBrake);
-
-        // PID Control
-        /* m_pidController.setP(0);
-        m_pidController.setI(0);
-        m_pidController.setD(0);
-        m_pidController.setIZone(0);
-        m_pidController.setFF(0);
-        m_pidController.setOutputRange(-1, 1); */
     }
 
     public void ShooterController(double input) {
@@ -41,11 +37,19 @@ public class Shooter extends SubsystemBase {
     public void stop() {
         m_shooter.stopMotor();
     }
-
+/** This method will be called once per scheduler run */
     @Override
     public void periodic() {
-        // This method will be called once per scheduler run
-        SmartDashboard.putNumber("Shooter Velocity (RPM)", m_encoder.getVelocity());
+        // Display the shooter's velocity on SmartDashboard.
+        SmartDashboard.putNumber(
+            "Shooter Velocity (RPM)", 
+            m_encoder.getVelocity()
+        );
+        // Display the shooter's voltage on SmartDashboard.
+        SmartDashboard.putNumber(
+            "Shooter Current", 
+            m_shooter.getBusVoltage()
+        );
     }
 
 }
