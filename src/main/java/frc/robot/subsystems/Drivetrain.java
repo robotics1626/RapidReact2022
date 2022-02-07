@@ -12,46 +12,51 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 
-
 public class Drivetrain extends SubsystemBase {
-    // Motors
-    CANSparkMax motorFrontLeft = new CANSparkMax(Constants.DRIVE_FRONT_LEFT, MotorType.kBrushless);
-    CANSparkMax motorRearLeft = new CANSparkMax(Constants.DRIVE_REAR_LEFT, MotorType.kBrushless);
-    CANSparkMax motorFrontRight = new CANSparkMax(Constants.DRIVE_FRONT_RIGHT, MotorType.kBrushless);
-    CANSparkMax motorRearRight = new CANSparkMax(Constants.DRIVE_REAR_RIGHT, MotorType.kBrushless);
+    // Define the drivetrain motors.
+    private final CANSparkMax m_motorFrontLeft = new CANSparkMax(Constants.DRIVE_FRONT_LEFT, MotorType.kBrushless);
+    private final CANSparkMax m_motorRearLeft = new CANSparkMax(Constants.DRIVE_REAR_LEFT, MotorType.kBrushless);
+    private final CANSparkMax m_motorFrontRight = new CANSparkMax(Constants.DRIVE_FRONT_RIGHT, MotorType.kBrushless);
+    private final CANSparkMax m_motorRearRight = new CANSparkMax(Constants.DRIVE_REAR_RIGHT, MotorType.kBrushless);
 
-    // MotorControllerGroup
-    MotorControllerGroup motorsLeft = new MotorControllerGroup(motorFrontLeft, motorRearLeft);
-    MotorControllerGroup motorsRight = new MotorControllerGroup(motorFrontRight, motorRearRight);
+    // Group the motors by left and right side.
+    private final MotorControllerGroup m_motorsLeft = new MotorControllerGroup(m_motorFrontLeft, m_motorRearLeft);
+    private final MotorControllerGroup m_motorsRight = new MotorControllerGroup(m_motorFrontRight, m_motorRearRight);
 
-    // DifferentialDrive
-    DifferentialDrive drive = new DifferentialDrive(motorsLeft, motorsRight);
+    // Define the drivetrain with the motor groups.
+    private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_motorsLeft, m_motorsRight);
 
-    // Gear Shift
-    boolean gear = false;
-
-    // Drivetrain
+    /**
+    * This function is run when the robot is first started up and should be used for any
+    * initialization code.
+    */
     public Drivetrain() {
-        // Coast while idle
-        motorFrontLeft.setIdleMode(IdleMode.kCoast);
-        motorFrontRight.setIdleMode(IdleMode.kCoast);
-        motorRearLeft.setIdleMode(IdleMode.kCoast);
-        motorRearRight.setIdleMode(IdleMode.kCoast);
-        // Invert right-side Motors
-        motorFrontRight.setInverted(true);
-        motorRearRight.setInverted(true);
+        // Set the motors to coast while idle.
+        m_motorFrontLeft.setIdleMode(IdleMode.kCoast);
+        m_motorFrontRight.setIdleMode(IdleMode.kCoast);
+        m_motorRearLeft.setIdleMode(IdleMode.kCoast);
+        m_motorRearRight.setIdleMode(IdleMode.kCoast);
+
+        // Invert the right-side motors.
+        m_motorFrontRight.setInverted(true);
+        m_motorRearRight.setInverted(true);
     }
 
-    // Tank Drive
+    /** This function makes use of the driver input to control the robot like a tank. */
     public void tankDrive(double left, double right) {
-        drive.tankDrive(
+        // Set the drivetrain to operate as tank drive.
+        m_drivetrain.tankDrive(
+                // Exponentiate the driver input by a number for a more comfortable
+                // sensitivity curve.
                 Math.pow(left,Constants.JOYSTICK_CURVE), 
                 Math.pow(right,Constants.JOYSTICK_CURVE)
             );
     }
 
+    /** This function is called once each time the the command ends or is interrupted. */
     public void stop() {
-        drive.stopMotor();
+        // Stop all of the motors on the drivetrain.
+        m_drivetrain.stopMotor();
     }
 
     @Override
