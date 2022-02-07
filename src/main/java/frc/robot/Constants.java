@@ -50,5 +50,6 @@ public final class Constants {
 
     // Shooter
     public static final int SHOOTER = 8;
+    public static final double SHOOTER_RPM = 3000;
    
 }
