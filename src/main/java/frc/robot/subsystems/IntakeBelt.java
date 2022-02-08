@@ -21,6 +21,7 @@ public class IntakeBelt extends SubsystemBase {
     public IntakeBelt() {
         m_intakeBeltLeft.setIdleMode(IdleMode.kBrake);
         m_intakeBeltRight.setIdleMode(IdleMode.kBrake);
+        m_intakeBeltRight.setInverted(true);
     }
 
     public void forwards(){
