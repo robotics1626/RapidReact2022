@@ -30,17 +30,22 @@ public class IntakeBelt extends SubsystemBase {
 
     double m_velocity, voltage;
 
+    double defaultBeltPower=0.80;
+
     public IntakeBelt() {
         m_intakeBeltLeft.setIdleMode(IdleMode.kBrake);
         m_intakeBeltRight.setIdleMode(IdleMode.kBrake);
+
+        m_intakeBeltRight.setInverted(true);
+
     }
 
     public void forwards(){
-        m_intakeBelt.tankDrive(0.25, 0.25);
+        m_intakeBelt.tankDrive(defaultBeltPower, defaultBeltPower);
     }
 
     public void backwards(){
-        m_intakeBelt.tankDrive(-0.25, -0.25);
+        m_intakeBelt.tankDrive(-defaultBeltPower, -defaultBeltPower);
     }
 
     public void stop() {
