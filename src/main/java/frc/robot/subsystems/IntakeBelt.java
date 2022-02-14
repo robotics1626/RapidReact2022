@@ -18,17 +18,17 @@ import frc.robot.Constants;
 
 public class IntakeBelt extends SubsystemBase {
     
-    private final CANSparkMax m_intakeBeltLeft = new CANSparkMax(Constants.INTAKE_BELT_LEFT, MotorType.kBrushless);
-    private final CANSparkMax m_intakeBeltRight = new CANSparkMax(Constants.INTAKE_BELT_RIGHT, MotorType.kBrushless);
+    CANSparkMax m_intakeBeltLeft = new CANSparkMax(Constants.INTAKE_BELT_LEFT, MotorType.kBrushless);
+    CANSparkMax m_intakeBeltRight = new CANSparkMax(Constants.INTAKE_BELT_RIGHT, MotorType.kBrushless);
 
-    private final DifferentialDrive m_intakeBelt = new DifferentialDrive(m_intakeBeltLeft, m_intakeBeltRight);
+    DifferentialDrive m_intakeBelt = new DifferentialDrive(m_intakeBeltLeft, m_intakeBeltRight);
 
-    private final RelativeEncoder m_encoderBeltLeft = m_intakeBeltLeft.getEncoder();
-    private final RelativeEncoder m_encoderBeltRight = m_intakeBeltRight.getEncoder();
+    RelativeEncoder m_encoderBeltLeft = m_intakeBeltLeft.getEncoder();
+    RelativeEncoder m_encoderBeltRight = m_intakeBeltRight.getEncoder();
 
-    private final PowerDistribution m_pdh = new PowerDistribution(Constants.PDH,ModuleType.kRev);
+    PowerDistribution m_pdh = new PowerDistribution(Constants.PDH,ModuleType.kRev);
 
-    private double m_velocity, voltage;
+    double m_velocity, voltage;
 
     public IntakeBelt() {
         m_intakeBeltLeft.setIdleMode(IdleMode.kBrake);

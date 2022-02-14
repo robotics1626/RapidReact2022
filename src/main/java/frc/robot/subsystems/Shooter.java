@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -16,22 +17,22 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
     
     // Shooter motors
-    private final CANSparkMax m_shooterLeft  = new CANSparkMax(Constants.SHOOTER_LEFT, MotorType.kBrushless);
-    private final CANSparkMax m_shooterRight = new CANSparkMax(Constants.SHOOTER_RIGHT, MotorType.kBrushless);
+    CANSparkMax m_shooterLeft  = new CANSparkMax(Constants.SHOOTER_LEFT, MotorType.kBrushless);
+    CANSparkMax m_shooterRight = new CANSparkMax(Constants.SHOOTER_RIGHT, MotorType.kBrushless);
 
     // Shooter drivetrain
-    private final DifferentialDrive m_shooter = new DifferentialDrive(m_intakeBeltLeft, m_intakeBeltRight);
+    DifferentialDrive m_shooter = new DifferentialDrive(m_shooterLeft, m_shooterRight);
 
     // Shooter PID controllers
-    private final SparkMaxPIDController m_pidControllerLeft  = m_shooterLeft.getPIDController();
-    private final SparkMaxPIDController m_pidControllerRight = m_shooterRight.getPIDController();
+    SparkMaxPIDController m_pidControllerLeft  = m_shooterLeft.getPIDController();
+    SparkMaxPIDController m_pidControllerRight = m_shooterRight.getPIDController();
 
     // Shooter encoders
-    private RelativeEncoder m_encoderLeft  = m_shooterLeft.getEncoder();
-    private RelativeEncoder m_encoderRight = m_shooterRight.getEncoder();
+    RelativeEncoder m_encoderLeft  = m_shooterLeft.getEncoder();
+    RelativeEncoder m_encoderRight = m_shooterRight.getEncoder();
 
     // Input
-    private final double m_input, m_velocity;
+    double m_input, m_velocity;
 
     public Shooter() {
         // Set shooter motors' idle mode to brake 

@@ -12,13 +12,13 @@ import frc.robot.Constants;
 
 public class IntakeArm extends SubsystemBase {
     
-    private final DoubleSolenoid m_intakeArmLeft = new DoubleSolenoid(
+    DoubleSolenoid m_intakeArmLeft = new DoubleSolenoid(
         PneumaticsModuleType.REVPH, 
         Constants.INTAKE_ARM_LEFT[0], 
         Constants.INTAKE_ARM_LEFT[1]
     );
 
-    private final DoubleSolenoid m_intakeArmRight = new DoubleSolenoid(
+    DoubleSolenoid m_intakeArmRight = new DoubleSolenoid(
         PneumaticsModuleType.REVPH, 
         Constants.INTAKE_ARM_RIGHT[0], 
         Constants.INTAKE_ARM_RIGHT[1]

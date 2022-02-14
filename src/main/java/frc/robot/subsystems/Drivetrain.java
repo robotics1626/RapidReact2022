@@ -15,17 +15,17 @@ import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
     // Motors
-    private final CANSparkMax motorFrontLeft = new CANSparkMax(Constants.DRIVE_FRONT_LEFT, MotorType.kBrushless);
-    private final CANSparkMax motorRearLeft = new CANSparkMax(Constants.DRIVE_REAR_LEFT, MotorType.kBrushless);
-    private final CANSparkMax motorFrontRight = new CANSparkMax(Constants.DRIVE_FRONT_RIGHT, MotorType.kBrushless);
-    private final CANSparkMax motorRearRight = new CANSparkMax(Constants.DRIVE_REAR_RIGHT, MotorType.kBrushless);
+    CANSparkMax motorFrontLeft = new CANSparkMax(Constants.DRIVE_FRONT_LEFT, MotorType.kBrushless);
+    CANSparkMax motorRearLeft = new CANSparkMax(Constants.DRIVE_REAR_LEFT, MotorType.kBrushless);
+    CANSparkMax motorFrontRight = new CANSparkMax(Constants.DRIVE_FRONT_RIGHT, MotorType.kBrushless);
+    CANSparkMax motorRearRight = new CANSparkMax(Constants.DRIVE_REAR_RIGHT, MotorType.kBrushless);
 
     // MotorControllerGroup
-    private final MotorControllerGroup motorsLeft = new MotorControllerGroup(motorFrontLeft, motorRearLeft);
-    private final MotorControllerGroup motorsRight = new MotorControllerGroup(motorFrontRight, motorRearRight);
+    MotorControllerGroup motorsLeft = new MotorControllerGroup(motorFrontLeft, motorRearLeft);
+    MotorControllerGroup motorsRight = new MotorControllerGroup(motorFrontRight, motorRearRight);
 
     // DifferentialDrive
-    private final DifferentialDrive drive = new DifferentialDrive(motorsLeft, motorsRight);
+    DifferentialDrive drive = new DifferentialDrive(motorsLeft, motorsRight);
 
     // Drivetrain
     public Drivetrain() {
