@@ -24,7 +24,7 @@ public class ShooterController extends CommandBase {
 
     @Override
     public void execute() {
-        m_shooter.IndexerController(m_input.getAsDouble());
+        m_shooter.ShooterController(m_input.getAsDouble());
     }
 
     // Called once the command ends or is interrupted.

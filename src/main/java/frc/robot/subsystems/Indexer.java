@@ -13,7 +13,7 @@ import frc.robot.Constants;
 
 public class Indexer extends SubsystemBase {
     
-    CANSparkMax m_indexer = new CANSparkMax(Constants.INDEXER, MotorType.kBrushless);
+    private final CANSparkMax m_indexer = new CANSparkMax(Constants.INDEXER, MotorType.kBrushless);
 
     public Indexer() {
         m_indexer.setIdleMode(IdleMode.kBrake);

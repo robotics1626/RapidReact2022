@@ -18,34 +18,30 @@ import frc.robot.Constants;
 
 public class IntakeBelt extends SubsystemBase {
     
-    CANSparkMax m_intakeBeltLeft = new CANSparkMax(Constants.INTAKE_BELT_LEFT, MotorType.kBrushless);
-    CANSparkMax m_intakeBeltRight = new CANSparkMax(Constants.INTAKE_BELT_RIGHT, MotorType.kBrushless);
+    private final CANSparkMax m_intakeBeltLeft = new CANSparkMax(Constants.INTAKE_BELT_LEFT, MotorType.kBrushless);
+    private final CANSparkMax m_intakeBeltRight = new CANSparkMax(Constants.INTAKE_BELT_RIGHT, MotorType.kBrushless);
 
-    DifferentialDrive m_intakeBelt = new DifferentialDrive(m_intakeBeltLeft, m_intakeBeltRight);
+    private final DifferentialDrive m_intakeBelt = new DifferentialDrive(m_intakeBeltLeft, m_intakeBeltRight);
 
-    RelativeEncoder m_encoderBeltLeft = m_intakeBeltLeft.getEncoder();
-    RelativeEncoder m_encoderBeltRight = m_intakeBeltRight.getEncoder();
+    private final RelativeEncoder m_encoderBeltLeft = m_intakeBeltLeft.getEncoder();
+    private final RelativeEncoder m_encoderBeltRight = m_intakeBeltRight.getEncoder();
 
-    PowerDistribution m_pdh = new PowerDistribution(Constants.PDH,ModuleType.kRev);
+    private final PowerDistribution m_pdh = new PowerDistribution(Constants.PDH,ModuleType.kRev);
 
-    double m_velocity, voltage;
-
-    double defaultBeltPower=0.80;
+    private double m_velocity, voltage;
 
     public IntakeBelt() {
         m_intakeBeltLeft.setIdleMode(IdleMode.kBrake);
         m_intakeBeltRight.setIdleMode(IdleMode.kBrake);
-
         m_intakeBeltRight.setInverted(true);
-
     }
 
     public void forwards(){
-        m_intakeBelt.tankDrive(defaultBeltPower, defaultBeltPower);
+        m_intakeBelt.tankDrive(Constants.INTAKE_BELT_POWER, Constants.INTAKE_BELT_POWER);
     }
 
     public void backwards(){
-        m_intakeBelt.tankDrive(-defaultBeltPower, -defaultBeltPower);
+        m_intakeBelt.tankDrive(-Constants.INTAKE_BELT_POWER, -Constants.INTAKE_BELT_POWER);
     }
 
     public void stop() {
