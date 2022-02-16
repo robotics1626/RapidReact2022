@@ -15,13 +15,13 @@ package frc.robot;
 public final class Constants {
     // Operator and Drive Controllers
     public static final int CONTROLLER_OPERATOR = 0;
-    public static final int JOYSTICK_LEFT = 1;
-    public static final int JOYSTICK_RIGHT = 2;
-    public static final double JOYSTICK_CURVE = 5/3;
+    public static final int JOYSTICK_LEFT       = 1;
+    public static final int JOYSTICK_RIGHT      = 2;
+    public static final double JOYSTICK_CURVE   = 5/3;
 
     // Power Distribution Hub
     public static final int PDH = 1;
-    public static final int PDH_DRIVE_REAR_RIGHT = 0;
+    public static final int PDH_DRIVE_REAR_RIGHT  = 0;
     public static final int PDH_DRIVE_FRONT_RIGHT = 1;
     public static final int PDH_DRIVE_FRONT_LEFT = 18;
     public static final int PDH_DRIVE_REAR_LEFT = 19;
@@ -31,25 +31,26 @@ public final class Constants {
     public static final int PNEUMATIC_HUB = 1;
 
     // Drive Train
-    public static final int DRIVE_FRONT_LEFT = 3;
-    public static final int DRIVE_REAR_LEFT = 1;
+    public static final int DRIVE_FRONT_LEFT  = 3;
+    public static final int DRIVE_REAR_LEFT   = 1;
     public static final int DRIVE_FRONT_RIGHT = 4;
-    public static final int DRIVE_REAR_RIGHT = 2;
+    public static final int DRIVE_REAR_RIGHT  = 2;
 
     // Compressor
     public static final int COMPRESSOR = 0;
     
     // Intake
-    public static final int INTAKE_BELT_LEFT = 5;
-    public static final int INTAKE_BELT_RIGHT = 6;
-    public static final int [] INTAKE_ARM_LEFT = new int[] {0, 1};
-    public static final int [] INTAKE_ARM_RIGHT = new int[] {2, 3};
+    public static final int INTAKE_BELT_LEFT     = 5;
+    public static final int INTAKE_BELT_RIGHT    = 6;
+    public static final double INTAKE_BELT_POWER = 0.80;
+    public static final int [] INTAKE_ARM_LEFT   = new int[] {0, 1};
+    public static final int [] INTAKE_ARM_RIGHT  = new int[] {2, 3};
 
     // Indexer
     public static final int INDEXER = 7;
 
     // Shooter
-    public static final int SHOOTER = 8;
-    public static final double SHOOTER_RPM = 3000;
-   
+    public static final int SHOOTER_LEFT   = 8;
+    public static final int SHOOTER_RIGHT  = 9;
+    public static final double SHOOTER_RPM = 200;
 }

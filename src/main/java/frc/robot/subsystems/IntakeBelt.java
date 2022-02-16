@@ -25,11 +25,11 @@ public class IntakeBelt extends SubsystemBase {
     }
 
     public void forwards(){
-        m_intakeBelt.tankDrive(0.25, 0.25);
+        m_intakeBelt.tankDrive(Constants.INTAKE_BELT_POWER, Constants.INTAKE_BELT_POWER);
     }
 
     public void backwards(){
-        m_intakeBelt.tankDrive(-0.25, -0.25);
+        m_intakeBelt.tankDrive(-Constants.INTAKE_BELT_POWER, -Constants.INTAKE_BELT_POWER);
     }
 
     public void stop() {

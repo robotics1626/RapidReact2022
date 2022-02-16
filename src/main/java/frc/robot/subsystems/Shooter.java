@@ -16,40 +16,50 @@ import com.revrobotics.RelativeEncoder;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-    
-    CANSparkMax m_shooter = new CANSparkMax(Constants.SHOOTER, MotorType.kBrushless);
-    SparkMaxPIDController m_pidController = m_shooter.getPIDController();
-    RelativeEncoder m_encoder = m_shooter.getEncoder();
 
-    PowerDistribution m_pdh = new PowerDistribution(Constants.PDH,ModuleType.kRev);
+    // Shooter motors
+    CANSparkMax m_shooterLeft  = new CANSparkMax(Constants.SHOOTER_LEFT, MotorType.kBrushless);
+    CANSparkMax m_shooterRight = new CANSparkMax(Constants.SHOOTER_RIGHT, MotorType.kBrushless);
+
+    // Shooter drivetrain
+    DifferentialDrive m_shooter = new DifferentialDrive(m_shooterLeft, m_shooterRight);
+
+    // Shooter PID controllers
+    SparkMaxPIDController m_pidControllerLeft  = m_shooterLeft.getPIDController();
+    SparkMaxPIDController m_pidControllerRight = m_shooterRight.getPIDController();
+
+    // Shooter encoders
+    RelativeEncoder m_encoderLeft  = m_shooterLeft.getEncoder();
+    RelativeEncoder m_encoderRight = m_shooterRight.getEncoder();
+
+    // Input
+    double m_input, m_velocity;
 
     public Shooter() {
-        m_shooter.setIdleMode(IdleMode.kBrake);
+        // Set shooter motors' idle mode to brake 
+        m_shooterLeft.setIdleMode(IdleMode.kBrake);
+        m_shooterRight.setIdleMode(IdleMode.kBrake);
+        // Invert right-side motor
+        m_shooterRight.setInverted(true);
     }
 
     public void ShooterController(double input) {
-        m_pidController.setReference(
-            input * Constants.SHOOTER_RPM,
-            CANSparkMax.ControlType.kVelocity
-        );
+        ChangesFromTesting
+        m_input = (input == 0 ? input : Math.pow(input,0)) * Constants.SHOOTER_RPM;
+        m_pidControllerLeft.setReference(input, CANSparkMax.ControlType.kVelocity);
+        m_pidControllerRight.setReference(input, CANSparkMax.ControlType.kVelocity);
     }
 
     public void stop() {
+        // Stop motors
         m_shooter.stopMotor();
     }
 /** This method will be called once per scheduler run */
     @Override
     public void periodic() {
-        // Display the shooter's velocity on SmartDashboard.
-        SmartDashboard.putNumber(
-            "Shooter Velocity (RPM)", 
-            m_encoder.getVelocity()
-        );
-        // Display the shooter's voltage on SmartDashboard.
-        SmartDashboard.putNumber(
-            "Shooter Current", 
-            m_shooter.getBusVoltage()
-        );
+        // This method will be called once per scheduler run
+        m_velocity = (m_encoderLeft.getVelocity() + m_encoderLeft.getVelocity())/2;
+        SmartDashboard.putNumber("ProcessVariable", m_velocity);
     }
 
 }
