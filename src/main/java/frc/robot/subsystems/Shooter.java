@@ -4,14 +4,15 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.RelativeEncoder;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
@@ -52,7 +53,7 @@ public class Shooter extends SubsystemBase {
         // Stop motors
         m_shooter.stopMotor();
     }
-
+/** This method will be called once per scheduler run */
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
