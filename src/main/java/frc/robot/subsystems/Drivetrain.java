@@ -18,12 +18,18 @@ public class Drivetrain extends SubsystemBase {
     private final CANSparkMax m_motorRearLeft = new CANSparkMax(Constants.DRIVE_REAR_LEFT, MotorType.kBrushless);
     private final CANSparkMax m_motorFrontRight = new CANSparkMax(Constants.DRIVE_FRONT_RIGHT, MotorType.kBrushless);
     private final CANSparkMax m_motorRearRight = new CANSparkMax(Constants.DRIVE_REAR_RIGHT, MotorType.kBrushless);
-
+    
     // Group the motors by left and right side.
     private final MotorControllerGroup m_motorsLeft = new MotorControllerGroup(m_motorFrontLeft, m_motorRearLeft);
     private final MotorControllerGroup m_motorsRight = new MotorControllerGroup(m_motorFrontRight, m_motorRearRight);
 
-    // Drivetrain
+    // Define the drivetrain with the motor groups.
+    private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_motorsLeft, m_motorsRight);
+
+    /**
+    * This function is run when the robot is first started up and should be used for any
+    * initialization code.
+    */
     public Drivetrain() {
         // Set the motors to coast while idle.
         m_motorFrontLeft.setIdleMode(IdleMode.kCoast);

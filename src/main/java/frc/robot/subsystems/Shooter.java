@@ -16,7 +16,7 @@ import com.revrobotics.RelativeEncoder;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-    
+
     // Shooter motors
     CANSparkMax m_shooterLeft  = new CANSparkMax(Constants.SHOOTER_LEFT, MotorType.kBrushless);
     CANSparkMax m_shooterRight = new CANSparkMax(Constants.SHOOTER_RIGHT, MotorType.kBrushless);
@@ -44,6 +44,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void ShooterController(double input) {
+        ChangesFromTesting
         m_input = (input == 0 ? input : Math.pow(input,0)) * Constants.SHOOTER_RPM;
         m_pidControllerLeft.setReference(input, CANSparkMax.ControlType.kVelocity);
         m_pidControllerRight.setReference(input, CANSparkMax.ControlType.kVelocity);
