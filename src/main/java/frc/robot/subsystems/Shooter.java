@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
@@ -44,7 +45,6 @@ public class Shooter extends SubsystemBase {
     }
 
     public void ShooterController(double input) {
-        ChangesFromTesting
         m_input = (input == 0 ? input : Math.pow(input,0)) * Constants.SHOOTER_RPM;
         m_pidControllerLeft.setReference(input, CANSparkMax.ControlType.kVelocity);
         m_pidControllerRight.setReference(input, CANSparkMax.ControlType.kVelocity);
