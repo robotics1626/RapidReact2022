@@ -26,9 +26,6 @@ public class Shooter extends SubsystemBase {
     // Shooter drivetrain
     DifferentialDrive m_shooter = new DifferentialDrive(m_shooterLeft, m_shooterRight);
 
-    // Process variable filter
-    private final MedianFilter m_filter = new MedianFilter(5);
-
     // Shooter PID controllers
     SparkMaxPIDController m_pidControllerLeft  = m_shooterLeft.getPIDController();
     SparkMaxPIDController m_pidControllerRight = m_shooterRight.getPIDController();
