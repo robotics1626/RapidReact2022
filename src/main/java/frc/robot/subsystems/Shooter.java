@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -25,6 +26,9 @@ public class Shooter extends SubsystemBase {
     // Shooter drivetrain
     DifferentialDrive m_shooter = new DifferentialDrive(m_shooterLeft, m_shooterRight);
 
+    // Process variable filter
+    private final MedianFilter m_filter = new MedianFilter(5);
+
     // Shooter PID controllers
     SparkMaxPIDController m_pidControllerLeft  = m_shooterLeft.getPIDController();
     SparkMaxPIDController m_pidControllerRight = m_shooterRight.getPIDController();
@@ -38,16 +42,16 @@ public class Shooter extends SubsystemBase {
 
     public Shooter() {
         // Set shooter motors' idle mode to brake 
-        m_shooterLeft.setIdleMode(IdleMode.kBrake);
-        m_shooterRight.setIdleMode(IdleMode.kBrake);
+        m_shooterLeft.setIdleMode(IdleMode.kCoast);
+        m_shooterRight.setIdleMode(IdleMode.kCoast);
         // Invert right-side motor
         m_shooterRight.setInverted(true);
     }
 
     public void ShooterController(double input) {
-        m_input = (input == 0 ? input : Math.pow(input,0)) * Constants.SHOOTER_RPM;
-        m_pidControllerLeft.setReference(input, CANSparkMax.ControlType.kVelocity);
-        m_pidControllerRight.setReference(input, CANSparkMax.ControlType.kVelocity);
+       m_input = (input == 0 ? input : Math.pow(input,1.0)) * Constants.SHOOTER_RPM;
+       m_pidControllerLeft.setReference(input, CANSparkMax.ControlType.kVelocity);
+       m_pidControllerRight.setReference(input, CANSparkMax.ControlType.kVelocity);
     }
 
     public void stop() {
@@ -58,7 +62,7 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        m_velocity = (m_encoderLeft.getVelocity() + m_encoderLeft.getVelocity())/2;
+        m_velocity = (m_encoderLeft.getVelocity() + m_encoderRight.getVelocity())/2;
         SmartDashboard.putNumber("ProcessVariable", m_velocity);
     }
 
