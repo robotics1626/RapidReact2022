@@ -53,4 +53,12 @@ public final class Constants {
     public static final int SHOOTER_LEFT   = 8;
     public static final int SHOOTER_RIGHT  = 9;
     public static final double SHOOTER_RPM = 5000;
+
+    // Climber
+    public static final int [] CLIMBER_LEFT_UPPER  = new int[] {4, 5};
+    public static final int [] CLIMBER_LEFT_LOWER  = new int[] {6, 7};
+    public static final int [] CLIMBER_RIGHT_UPPER = new int[] {8, 9};
+    public static final int [] CLIMBER_RIGHT_LOWER = new int[] {10, 11};
+    public static final int CLIMBER_SPINNER = 10;
+    
 }
