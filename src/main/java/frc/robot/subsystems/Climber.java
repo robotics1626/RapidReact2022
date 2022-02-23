@@ -38,6 +38,10 @@ public class Climber extends SubsystemBase {
         lower = false;
     }
 
+    public void spin(double input){
+        m_climberSpinner.set(input*0.25);
+    }
+
     public void toggleUpper() {
         if (upper || lower) {
             m_climberLeftUpper.toggle();

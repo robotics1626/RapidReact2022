@@ -110,12 +110,19 @@ public class RobotContainer {
     new JoystickButton(m_driverRight, 2)
       .whileActiveContinuous(() -> m_intakeBelt.forwards()
     );
-    // Climber
+    // The Operator's A and B buttons toggle the climber's claws
     new JoystickButton(m_operator, Button.kA.value)
       .whenPressed(() -> m_climber.toggleUpper()
     );
     new JoystickButton(m_operator, Button.kB.value)
       .whenPressed(() -> m_climber.toggleLower()
+    );
+    // The Operator's bumbers spin the climber
+    new JoystickButton(m_operator, Button.kLeftBumper.value)
+      .whenPressed(() -> m_climber.spin(1)
+    );
+    new JoystickButton(m_operator, Button.kRightBumper.value)
+      .whenPressed(() -> m_climber.spin(-1)
     );
   }
 
