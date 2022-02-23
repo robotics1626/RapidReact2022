@@ -39,9 +39,7 @@ public class Gatekeeper extends SubsystemBase {
             if(m_shooterSpeed < Constants.SHOOTER_RPM && m_indexerEnabled) m_gatekeeper.set(0.25);
             else if (m_shooterSpeed >= Constants.SHOOTER_RPM && m_indexerEnabled) m_gatekeeper.set(0);
             else if (m_shooterSpeed <= Constants.SHOOTER_RPM - 100 || !m_indexerEnabled) stop();
-        } else {
-            stop();
-        }
+        } else stop();
     }
 
 }
