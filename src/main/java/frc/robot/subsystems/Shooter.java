@@ -17,19 +17,19 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
 
     // Shooter motors
-    CANSparkMax m_shooterLeft  = new CANSparkMax(Constants.SHOOTER_LEFT, MotorType.kBrushless);
-    CANSparkMax m_shooterRight = new CANSparkMax(Constants.SHOOTER_RIGHT, MotorType.kBrushless);
+    static CANSparkMax m_shooterLeft  = new CANSparkMax(Constants.SHOOTER_LEFT, MotorType.kBrushless);
+    static CANSparkMax m_shooterRight = new CANSparkMax(Constants.SHOOTER_RIGHT, MotorType.kBrushless);
 
     // Shooter drivetrain
-    DifferentialDrive m_shooter = new DifferentialDrive(m_shooterLeft, m_shooterRight);
+    static DifferentialDrive m_shooter = new DifferentialDrive(m_shooterLeft, m_shooterRight);
 
     // Shooter PID controllers
-    SparkMaxPIDController m_pidControllerLeft  = m_shooterLeft.getPIDController();
-    SparkMaxPIDController m_pidControllerRight = m_shooterRight.getPIDController();
+    static SparkMaxPIDController m_pidControllerLeft  = m_shooterLeft.getPIDController();
+    static SparkMaxPIDController m_pidControllerRight = m_shooterRight.getPIDController();
 
     // Shooter encoders
-    RelativeEncoder m_encoderLeft  = m_shooterLeft.getEncoder();
-    RelativeEncoder m_encoderRight = m_shooterRight.getEncoder();
+    static RelativeEncoder m_encoderLeft  = m_shooterLeft.getEncoder();
+    static RelativeEncoder m_encoderRight = m_shooterRight.getEncoder();
 
     // Input
     double m_input, m_velocity;
