@@ -15,15 +15,15 @@ public class Gatekeep extends SubsystemBase {
     static CANSparkMax m_gatekeeper = new CANSparkMax(Constants.GATEKEEPER, MotorType.kBrushless);
     
     double m_shooterSpeed;
-    boolean m_gatekeeperUnlocked, m_indexerEnabled;
+    boolean m_gatekeeperLocked, m_indexerEnabled;
 
     public Gatekeep() {
         m_gatekeeper.setIdleMode(IdleMode.kBrake);
-        m_gatekeeperEnabled = false; m_indexerEnabled = false;
+        m_gatekeeperLocked = true; m_indexerEnabled = false;
     }
 
     public void Girlboss(double input) {
-        m_gatekeeperUnlocked = (input != 0) ? true : false;
+        m_gatekeeperLocked = (input != 0) ? false : true;
     }
 
     public void stop() {
@@ -35,8 +35,8 @@ public class Gatekeep extends SubsystemBase {
         // This method will be called once per scheduler run
         m_shooterSpeed = (Shooter.m_encoderLeft.getVelocity() + Shooter.m_encoderRight.getVelocity())/2;
         m_indexerEnabled = (Indexer.m_indexer.getEncoder().getVelocity() < -50) ? true : false;
-        if(m_shooterSpeed < Constants.SHOOTER_RPM && m_indexerEnabled && !m_gatekeeperUnlocked) m_gatekeeper.set(0.25);
-        else if (m_shooterSpeed >= Constants.SHOOTER_RPM && m_indexerEnabled && m_gatekeeperUnlocked) m_gatekeeper.set(0);
+        if(m_shooterSpeed < Constants.SHOOTER_RPM && m_indexerEnabled && m_gatekeeperLocked) m_gatekeeper.set(0.25);
+        else if (m_shooterSpeed >= Constants.SHOOTER_RPM && m_indexerEnabled && !m_gatekeeperLocked) m_gatekeeper.set(0);
         else if (m_shooterSpeed <= Constants.SHOOTER_RPM - 100 || !m_indexerEnabled) stop();
     }
 
