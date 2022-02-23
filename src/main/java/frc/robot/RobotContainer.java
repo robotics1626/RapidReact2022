@@ -7,11 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.*;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Indexer.*;
+import frc.robot.commands.Gatekeeper.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Autonomous.*;
 
@@ -33,7 +35,9 @@ public class RobotContainer {
   private final IntakeBelt m_intakeBelt = new IntakeBelt();
   private final IntakeArm m_intakeArm = new IntakeArm();
   private final Indexer m_indexer = new Indexer();
+  private final Gatekeeper m_gatekeeper = new Gatekeeper();
   private final Shooter m_shooter = new Shooter();
+  private final Climber m_climber = new Climber();
 
   // Autonomous
   private final TemporaryAutonomous m_temporaryAutonomous = new TemporaryAutonomous();
@@ -55,11 +59,20 @@ public class RobotContainer {
     );
 
     // Indexer
-    // The Operator's right joystick controls the indexer
+    // The Operator's left joystick controls the indexer
     m_indexer.setDefaultCommand(
       new IndexerController(
         m_indexer, 
         () -> m_operator.getLeftY()
+      )
+    );
+
+    // Gatekeeper
+    // The Operator's right trigger controls the gatekeeper
+    m_gatekeeper.setDefaultCommand(
+      new Girlboss(
+        m_gatekeeper, 
+        () -> m_operator.getRightTriggerAxis()
       )
     );
 
@@ -68,7 +81,7 @@ public class RobotContainer {
     m_shooter.setDefaultCommand(
       new ShooterController(
         m_shooter, 
-        () -> m_operator.getRightTriggerAxis()
+        () -> m_operator.getLeftTriggerAxis()
       )
     );
   }
@@ -96,6 +109,13 @@ public class RobotContainer {
     // The Driver's right thumb button runs the belt forwards
     new JoystickButton(m_driverRight, 2)
       .whileActiveContinuous(() -> m_intakeBelt.forwards()
+    );
+    // Climber
+    new JoystickButton(m_operator, Button.kA.value)
+      .whenPressed(() -> m_climber.toggleUpper()
+    );
+    new JoystickButton(m_operator, Button.kB.value)
+      .whenPressed(() -> m_climber.toggleLower()
     );
   }
 

@@ -17,49 +17,42 @@ public class Climber extends SubsystemBase {
 
     CANSparkMax m_climberSpinner = new CANSparkMax(Constants.CLIMBER_SPINNER, MotorType.kBrushless);
     
-    DoubleSolenoid m_climberLeftUpper = new DoubleSolenoid(
-        PneumaticsModuleType.REVPH, 
-        Constants.CLIMBER_LEFT_UPPER[0], 
-        Constants.CLIMBER_LEFT_UPPER[1]
-    );
+    DoubleSolenoid m_climberLeftUpper = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_LEFT_UPPER[0], Constants.CLIMBER_LEFT_UPPER[1]);
+    DoubleSolenoid m_climberLeftLower = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_LEFT_LOWER[0], Constants.CLIMBER_LEFT_LOWER[1]);
 
-    DoubleSolenoid m_climberLeftLower = new DoubleSolenoid(
-        PneumaticsModuleType.REVPH, 
-        Constants.CLIMBER_LEFT_LOWER[0], 
-        Constants.CLIMBER_LEFT_LOWER[1]
-    );
-
-    DoubleSolenoid m_climberRightUpper = new DoubleSolenoid(
-        PneumaticsModuleType.REVPH, 
-        Constants.CLIMBER_RIGHT_UPPER[0], 
-        Constants.CLIMBER_RIGHT_UPPER[1]
-    );
-
-    DoubleSolenoid m_climberRightLower = new DoubleSolenoid(
-        PneumaticsModuleType.REVPH, 
-        Constants.CLIMBER_RIGHT_LOWER[0], 
-        Constants.CLIMBER_RIGHT_LOWER[1]
-    );
+    DoubleSolenoid m_climberRightUpper = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_RIGHT_UPPER[0], Constants.CLIMBER_RIGHT_UPPER[1]);
+    DoubleSolenoid m_climberRightLower = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_RIGHT_LOWER[0], Constants.CLIMBER_RIGHT_LOWER[1]);
 
     public Climber() {
         m_climberSpinner.setIdleMode(IdleMode.kBrake);
+
+        m_climberLeftUpper.set(Value.kReverse);
+        m_climberLeftLower.set(Value.kReverse);
+
+        m_climberRightUpper.set(Value.kReverse);
+        m_climberRightLower.set(Value.kReverse);
     }
 
-    public void open() {
-        m_climberLeftUpper.set(Value.kReverse);
-        m_climberLeftLower.set(Value.kReverse);
-        m_climberRightUpper.set(Value.kReverse);
-        m_climberRightLower.set(Value.kReverse);
-      }
-    
-      public void close() {
-        m_climberLeftUpper.set(Value.kReverse);
-        m_climberLeftLower.set(Value.kReverse);
-        m_climberRightUpper.set(Value.kReverse);
-        m_climberRightLower.set(Value.kReverse);
-      }
+    public void toggleUpper() {
+        m_climberLeftUpper.toggle();
+        m_climberRightUpper.toggle();
+    }
 
-    public void stop() {}
+    public void toggleLower() {
+        m_climberLeftLower.toggle();
+        m_climberRightLower.toggle();
+    }
+
+    public void stop() {
+        m_climberSpinner.stopMotor();
+
+        m_climberLeftUpper.set(Value.kReverse);
+        m_climberLeftLower.set(Value.kReverse);
+        
+        m_climberRightUpper.set(Value.kReverse);
+        m_climberRightLower.set(Value.kReverse);
+
+    }
 
     @Override
     public void periodic() {

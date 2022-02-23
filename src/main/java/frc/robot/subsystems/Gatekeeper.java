@@ -19,7 +19,11 @@ public class Gatekeeper extends SubsystemBase {
 
     public Gatekeeper() {
         m_gatekeeper.setIdleMode(IdleMode.kBrake);
-        m_gatekeeperEnabled = true; m_indexerEnabled = false;
+        m_gatekeeperEnabled = false; m_indexerEnabled = false;
+    }
+
+    public void Girlboss(double input) {
+        m_gatekeeperEnabled = (input != 0) ? true : false;
     }
 
     public void stop() {
@@ -29,11 +33,15 @@ public class Gatekeeper extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        m_shooterSpeed = (Shooter.m_encoderLeft.getVelocity() + Shooter.m_encoderRight.getVelocity())/2;
-        m_indexerEnabled = (Indexer.m_indexer.getEncoder().getVelocity() < -50) ? true : false;
-        if(m_shooterSpeed < Constants.SHOOTER_RPM && m_indexerEnabled) m_gatekeeper.set(0.25);
-        else if (m_shooterSpeed >= Constants.SHOOTER_RPM && m_indexerEnabled) m_gatekeeper.set(0);
-        else if (m_shooterSpeed <= Constants.SHOOTER_RPM - 100 || !m_indexerEnabled) m_gatekeeper.stopMotor();
+        if (m_gatekeeperEnabled) {
+            m_shooterSpeed = (Shooter.m_encoderLeft.getVelocity() + Shooter.m_encoderRight.getVelocity())/2;
+            m_indexerEnabled = (Indexer.m_indexer.getEncoder().getVelocity() < -50) ? true : false;
+            if(m_shooterSpeed < Constants.SHOOTER_RPM && m_indexerEnabled) m_gatekeeper.set(0.25);
+            else if (m_shooterSpeed >= Constants.SHOOTER_RPM && m_indexerEnabled) m_gatekeeper.set(0);
+            else if (m_shooterSpeed <= Constants.SHOOTER_RPM - 100 || !m_indexerEnabled) stop();
+        } else {
+            stop();
+        }
     }
 
 }
