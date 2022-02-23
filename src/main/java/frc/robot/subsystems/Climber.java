@@ -23,6 +23,8 @@ public class Climber extends SubsystemBase {
     DoubleSolenoid m_climberRightUpper = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_RIGHT_UPPER[0], Constants.CLIMBER_RIGHT_UPPER[1]);
     DoubleSolenoid m_climberRightLower = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_RIGHT_LOWER[0], Constants.CLIMBER_RIGHT_LOWER[1]);
 
+    boolean upper, lower;
+
     public Climber() {
         m_climberSpinner.setIdleMode(IdleMode.kBrake);
 
@@ -31,16 +33,25 @@ public class Climber extends SubsystemBase {
 
         m_climberRightUpper.set(Value.kReverse);
         m_climberRightLower.set(Value.kReverse);
+
+        upper = false;
+        lower = false;
     }
 
     public void toggleUpper() {
-        m_climberLeftUpper.toggle();
-        m_climberRightUpper.toggle();
+        if (upper || lower) {
+            m_climberLeftUpper.toggle();
+            m_climberRightUpper.toggle();
+            upper = (upper) ? true : false;
+        }
     }
 
     public void toggleLower() {
-        m_climberLeftLower.toggle();
-        m_climberRightLower.toggle();
+        if (upper || lower) {
+            m_climberLeftLower.toggle();
+            m_climberRightLower.toggle();
+            lower = (lower) ? true : false;
+        }
     }
 
     public void stop() {
