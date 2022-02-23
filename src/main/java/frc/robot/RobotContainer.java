@@ -59,7 +59,7 @@ public class RobotContainer {
     m_indexer.setDefaultCommand(
       new IndexerController(
         m_indexer, 
-        () -> m_operator.getRightY()
+        () -> m_operator.getLeftY()
       )
     );
 
