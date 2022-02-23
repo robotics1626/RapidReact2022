@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.*;
 import frc.robot.commands.Drivetrain.*;
+import frc.robot.commands.Gatekeep.*;
 import frc.robot.commands.Indexer.*;
-import frc.robot.commands.Gatekeeper.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Autonomous.*;
 
@@ -35,7 +35,7 @@ public class RobotContainer {
   private final IntakeBelt m_intakeBelt = new IntakeBelt();
   private final IntakeArm m_intakeArm = new IntakeArm();
   private final Indexer m_indexer = new Indexer();
-  private final Gatekeeper m_gatekeeper = new Gatekeeper();
+  private final Gatekeep m_gatekeeper = new Gatekeep();
   private final Shooter m_shooter = new Shooter();
   private final Climber m_climber = new Climber();
 

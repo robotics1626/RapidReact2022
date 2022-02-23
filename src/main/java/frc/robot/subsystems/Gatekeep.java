@@ -10,14 +10,14 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 
-public class Gatekeeper extends SubsystemBase {
+public class Gatekeep extends SubsystemBase {
     
     static CANSparkMax m_gatekeeper = new CANSparkMax(Constants.GATEKEEPER, MotorType.kBrushless);
     
     double m_shooterSpeed;
     boolean m_gatekeeperEnabled, m_indexerEnabled;
 
-    public Gatekeeper() {
+    public Gatekeep() {
         m_gatekeeper.setIdleMode(IdleMode.kBrake);
         m_gatekeeperEnabled = false; m_indexerEnabled = false;
     }

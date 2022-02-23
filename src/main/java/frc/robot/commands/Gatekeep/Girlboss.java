@@ -2,17 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Gatekeeper;
+package frc.robot.commands.Gatekeep;
 
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Gatekeeper;
+import frc.robot.subsystems.Gatekeep;
 
 public class Girlboss extends CommandBase {
-    private final Gatekeeper m_gatekeeper;
+    private final Gatekeep m_gatekeeper;
     private final DoubleSupplier m_input;
 
-    public Girlboss(Gatekeeper gatekeeper, DoubleSupplier input) {
+    public Girlboss(Gatekeep gatekeeper, DoubleSupplier input) {
         m_gatekeeper = gatekeeper;
         m_input = input;
 
