@@ -15,29 +15,35 @@ public class Gatekeep extends SubsystemBase {
     static CANSparkMax m_gatekeeper = new CANSparkMax(Constants.GATEKEEPER, MotorType.kBrushless);
     
     double m_shooterSpeed;
-    boolean m_gatekeeperLocked, m_indexerEnabled;
+    boolean m_gaslight, m_indexerEnabled;
 
     public Gatekeep() {
         m_gatekeeper.setIdleMode(IdleMode.kBrake);
-        m_gatekeeperLocked = true; m_indexerEnabled = false;
+        m_gaslight = false; m_indexerEnabled = false;
     }
 
     public void Girlboss(double input) {
-        m_gatekeeperLocked = (input != 0) ? false : true;
+        m_gaslight = (input == 1) ? true : false;
     }
 
     public void stop() {
         m_gatekeeper.stopMotor();
+        m_gaslight = false;
     }
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        m_shooterSpeed = (Shooter.m_encoderLeft.getVelocity() + Shooter.m_encoderRight.getVelocity())/2;
+        /*m_shooterSpeed = (Shooter.m_encoderLeft.getVelocity() + Shooter.m_encoderRight.getVelocity())/2;
         m_indexerEnabled = ((Indexer.m_indexerLeft.getEncoder().getVelocity() + Indexer.m_indexerRight.getEncoder().getVelocity())/2 < -50) ? true : false;
         if(m_shooterSpeed < Constants.SHOOTER_RPM && m_indexerEnabled && m_gatekeeperLocked) m_gatekeeper.set(-0.25);
         else if (m_shooterSpeed >= Constants.SHOOTER_RPM && m_indexerEnabled && !m_gatekeeperLocked) m_gatekeeper.set(0.25);
-        else if (m_shooterSpeed <= Constants.SHOOTER_RPM - 100 || !m_indexerEnabled) stop();
+        else if (m_shooterSpeed <= Constants.SHOOTER_RPM - 100 || !m_indexerEnabled) stop();*/
+        if (m_gaslight) {
+            m_gatekeeper.set(0.5);
+        } else {
+            stop();
+        }
     }
 
 }

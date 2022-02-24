@@ -24,8 +24,8 @@ public class Shooter extends SubsystemBase {
     static DifferentialDrive m_shooter = new DifferentialDrive(m_shooterLeft, m_shooterRight);
 
     // Shooter PID controllers
-    static SparkMaxPIDController m_pidControllerLeft  = m_shooterLeft.getPIDController();
-    static SparkMaxPIDController m_pidControllerRight = m_shooterRight.getPIDController();
+    SparkMaxPIDController m_pidControllerLeft;
+    SparkMaxPIDController m_pidControllerRight;
 
     // Shooter encoders
     static RelativeEncoder m_encoderLeft  = m_shooterLeft.getEncoder();
@@ -38,13 +38,18 @@ public class Shooter extends SubsystemBase {
         // Set shooter motors' idle mode to brake 
         m_shooterLeft.setIdleMode(IdleMode.kCoast);
         m_shooterRight.setIdleMode(IdleMode.kCoast);
+        // PID Stuff
+        m_pidControllerLeft  = m_shooterLeft.getPIDController();
+        m_pidControllerRight = m_shooterRight.getPIDController();
         // Invert right-side motor
         m_shooterRight.setInverted(true);
     }
 
     public void ShooterController(double input) {
-       m_pidControllerLeft.setReference(Constants.SHOOTER_RPM, CANSparkMax.ControlType.kVelocity);
-       m_pidControllerRight.setReference(Constants.SHOOTER_RPM, CANSparkMax.ControlType.kVelocity);
+        if (input != 0) {
+            m_pidControllerLeft.setReference(Constants.SHOOTER_RPM, CANSparkMax.ControlType.kVelocity);
+            m_pidControllerRight.setReference(Constants.SHOOTER_RPM, CANSparkMax.ControlType.kVelocity);
+        }
     }
 
     public void stop() {
@@ -55,8 +60,8 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        m_velocity = (m_encoderLeft.getVelocity() + m_encoderRight.getVelocity())/2;
-        SmartDashboard.putNumber("ProcessVariable", m_velocity);
+        m_velocity = ((m_encoderLeft.getVelocity() + m_encoderRight.getVelocity()/2)*6e-5);
+        SmartDashboard.putNumber("Shooter Speed (RPM)", m_velocity);
     }
 
 }

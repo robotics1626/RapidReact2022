@@ -44,7 +44,7 @@ public final class Constants {
     public static final int INTAKE_BELT_RIGHT    = 6;
     public static final double INTAKE_BELT_POWER = 0.80;
     public static final int [] INTAKE_ARM_LEFT   = new int[] {8, 9};
-    public static final int [] INTAKE_ARM_RIGHT  = new int[] {7, 6};
+    public static final int [] INTAKE_ARM_RIGHT  = new int[] {6, 7};
 
     // Indexer
     public static final int INDEXER_LEFT  = 7;
@@ -56,7 +56,7 @@ public final class Constants {
     // Shooter
     public static final int SHOOTER_LEFT   = 10;
     public static final int SHOOTER_RIGHT  = 11;
-    public static final double SHOOTER_RPM = 5000;
+    public static final double SHOOTER_RPM = 10000;
 
     // Climber
     public static final int [] CLIMBER_LEFT_UPPER  = new int[] {10, 11};
