@@ -43,9 +43,8 @@ public class Shooter extends SubsystemBase {
     }
 
     public void ShooterController(double input) {
-       m_input = (input == 0 ? input : Math.pow(input,1.0)) * Constants.SHOOTER_RPM;
-       m_pidControllerLeft.setReference(input, CANSparkMax.ControlType.kVelocity);
-       m_pidControllerRight.setReference(input, CANSparkMax.ControlType.kVelocity);
+       m_pidControllerLeft.setReference(Constants.SHOOTER_RPM, CANSparkMax.ControlType.kVelocity);
+       m_pidControllerRight.setReference(Constants.SHOOTER_RPM, CANSparkMax.ControlType.kVelocity);
     }
 
     public void stop() {
