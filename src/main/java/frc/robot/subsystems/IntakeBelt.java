@@ -19,8 +19,8 @@ public class IntakeBelt extends SubsystemBase {
     DifferentialDrive m_intakeBelt = new DifferentialDrive(m_intakeBeltLeft, m_intakeBeltRight);
 
     public IntakeBelt() {
-        m_intakeBeltLeft.setIdleMode(IdleMode.kBrake);
-        m_intakeBeltRight.setIdleMode(IdleMode.kBrake);
+        m_intakeBeltLeft.setIdleMode(IdleMode.kCoast);
+        m_intakeBeltRight.setIdleMode(IdleMode.kCoast);
         m_intakeBeltRight.setInverted(true);
     }
 

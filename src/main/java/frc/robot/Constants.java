@@ -43,8 +43,8 @@ public final class Constants {
     public static final int INTAKE_BELT_LEFT     = 5;
     public static final int INTAKE_BELT_RIGHT    = 6;
     public static final double INTAKE_BELT_POWER = 0.80;
-    public static final int [] INTAKE_ARM_LEFT   = new int[] {0, 1};
-    public static final int [] INTAKE_ARM_RIGHT  = new int[] {2, 3};
+    public static final int [] INTAKE_ARM_LEFT   = new int[] {8, 9};
+    public static final int [] INTAKE_ARM_RIGHT  = new int[] {7, 6};
 
     // Indexer
     public static final int INDEXER_LEFT  = 7;
@@ -59,10 +59,10 @@ public final class Constants {
     public static final double SHOOTER_RPM = 5000;
 
     // Climber
-    public static final int [] CLIMBER_LEFT_UPPER  = new int[] {4, 5};
-    public static final int [] CLIMBER_LEFT_LOWER  = new int[] {6, 7};
-    public static final int [] CLIMBER_RIGHT_UPPER = new int[] {8, 9};
-    public static final int [] CLIMBER_RIGHT_LOWER = new int[] {10, 11};
+    public static final int [] CLIMBER_LEFT_UPPER  = new int[] {10, 11};
+    public static final int [] CLIMBER_LEFT_LOWER  = new int[] {5, 4};
+    public static final int [] CLIMBER_RIGHT_UPPER = new int[] {12, 13};
+    public static final int [] CLIMBER_RIGHT_LOWER = new int[] {3, 2};
     public static final int CLIMBER_SPINNER = 12;
     
 }

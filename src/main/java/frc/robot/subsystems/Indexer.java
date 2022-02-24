@@ -17,8 +17,9 @@ public class Indexer extends SubsystemBase {
     static CANSparkMax m_indexerRight = new CANSparkMax(Constants.INDEXER_RIGHT, MotorType.kBrushless);
 
     public Indexer() {
-        m_indexerLeft.setIdleMode(IdleMode.kBrake);
-        m_indexerRight.setIdleMode(IdleMode.kBrake);
+        m_indexerLeft.setIdleMode(IdleMode.kCoast);
+        m_indexerRight.setIdleMode(IdleMode.kCoast);
+        m_indexerRight.setInverted(true);
     }
 
     public void IndexerController(double input) {
