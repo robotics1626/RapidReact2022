@@ -34,7 +34,7 @@ public class Gatekeep extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
         m_shooterSpeed = (Shooter.m_encoderLeft.getVelocity() + Shooter.m_encoderRight.getVelocity())/2;
-        m_indexerEnabled = ((Indexer.m_indexerLeft.getEncoder().getVelocity() + Indexer.m_indexerLeft.getEncoder().getVelocity())/2 < -50) ? true : false;
+        m_indexerEnabled = ((Indexer.m_indexerLeft.getEncoder().getVelocity() + Indexer.m_indexerRight.getEncoder().getVelocity())/2 < -50) ? true : false;
         if(m_shooterSpeed < Constants.SHOOTER_RPM && m_indexerEnabled && m_gatekeeperLocked) m_gatekeeper.set(0.25);
         else if (m_shooterSpeed >= Constants.SHOOTER_RPM && m_indexerEnabled && !m_gatekeeperLocked) m_gatekeeper.set(0);
         else if (m_shooterSpeed <= Constants.SHOOTER_RPM - 100 || !m_indexerEnabled) stop();
