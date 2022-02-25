@@ -35,7 +35,7 @@ public class RobotContainer {
   private final IntakeBelt m_intakeBelt = new IntakeBelt();
   private final IntakeArm m_intakeArm = new IntakeArm();
   private final Indexer m_indexer = new Indexer();
-  private final Gatekeep m_gatekeeper = new Gatekeep();
+  private final Gatekeep m_gatekeep = new Gatekeep();
   private final Shooter m_shooter = new Shooter();
   private final Climber m_climber = new Climber();
 
@@ -67,11 +67,11 @@ public class RobotContainer {
       )
     );
 
-    // Gatekeeper
-    // The Operator's right trigger controls the gatekeeper
-    m_gatekeeper.setDefaultCommand(
+    // Gatekeep
+    // The Operator's right trigger gatekeeps, gaslights, and girlbosses
+    m_gatekeep.setDefaultCommand(
       new Girlboss(
-        m_gatekeeper, 
+        m_gatekeep, 
         () -> m_operator.getRightTriggerAxis()
       )
     );
@@ -84,6 +84,10 @@ public class RobotContainer {
         () -> m_operator.getLeftTriggerAxis()
       )
     );
+
+    // Intake
+    // Retract the intake arm on init
+    m_intakeArm.retract();
   }
 
   /**

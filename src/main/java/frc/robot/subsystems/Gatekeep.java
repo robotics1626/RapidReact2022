@@ -12,13 +12,13 @@ import frc.robot.Constants;
 
 public class Gatekeep extends SubsystemBase {
     
-    static CANSparkMax m_gatekeeper = new CANSparkMax(Constants.GATEKEEPER, MotorType.kBrushless);
+    static CANSparkMax m_gatekeep = new CANSparkMax(Constants.GATEKEEPER, MotorType.kBrushless);
     
     double m_shooterSpeed;
     boolean m_gaslight, m_indexerEnabled;
 
     public Gatekeep() {
-        m_gatekeeper.setIdleMode(IdleMode.kBrake);
+        m_gatekeep.setIdleMode(IdleMode.kBrake);
         m_gaslight = false; m_indexerEnabled = false;
     }
 
@@ -27,7 +27,7 @@ public class Gatekeep extends SubsystemBase {
     }
 
     public void stop() {
-        m_gatekeeper.stopMotor();
+        m_gatekeep.stopMotor();
         m_gaslight = false;
     }
 
@@ -36,11 +36,11 @@ public class Gatekeep extends SubsystemBase {
         // This method will be called once per scheduler run
         /*m_shooterSpeed = (Shooter.m_encoderLeft.getVelocity() + Shooter.m_encoderRight.getVelocity())/2;
         m_indexerEnabled = ((Indexer.m_indexerLeft.getEncoder().getVelocity() + Indexer.m_indexerRight.getEncoder().getVelocity())/2 < -50) ? true : false;
-        if(m_shooterSpeed < Constants.SHOOTER_RPM && m_indexerEnabled && m_gatekeeperLocked) m_gatekeeper.set(-0.25);
-        else if (m_shooterSpeed >= Constants.SHOOTER_RPM && m_indexerEnabled && !m_gatekeeperLocked) m_gatekeeper.set(0.25);
+        if(m_shooterSpeed < Constants.SHOOTER_RPM && m_indexerEnabled && m_gatekeepLocked) m_gatekeep.set(-0.25);
+        else if (m_shooterSpeed >= Constants.SHOOTER_RPM && m_indexerEnabled && !m_gatekeepLocked) m_gatekeep.set(0.25);
         else if (m_shooterSpeed <= Constants.SHOOTER_RPM - 100 || !m_indexerEnabled) stop();*/
         if (m_gaslight) {
-            m_gatekeeper.set(0.5);
+            m_gatekeep.set(0.5);
         } else {
             stop();
         }
