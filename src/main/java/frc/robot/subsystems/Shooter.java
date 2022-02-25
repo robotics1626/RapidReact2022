@@ -60,7 +60,7 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        m_velocity = ((m_encoderLeft.getVelocity() + m_encoderRight.getVelocity()/2)*6e-5);
+        m_velocity = (m_encoderLeft.getVelocity() + m_encoderRight.getVelocity()/2);
         SmartDashboard.putNumber("Shooter Speed (RPM)", m_velocity);
     }
 
