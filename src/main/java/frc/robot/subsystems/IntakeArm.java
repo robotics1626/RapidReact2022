@@ -25,7 +25,9 @@ public class IntakeArm extends SubsystemBase {
     );
 
 
-    public IntakeArm() {}
+    public IntakeArm() {
+        retract();
+    }
 
     public void extend() {
         m_intakeArmLeft.set(Value.kForward);
@@ -37,7 +39,9 @@ public class IntakeArm extends SubsystemBase {
         m_intakeArmRight.set(Value.kReverse);
       }
 
-    public void stop() {}
+    public void stop() {
+        retract();
+    }
 
     @Override
     public void periodic() {
