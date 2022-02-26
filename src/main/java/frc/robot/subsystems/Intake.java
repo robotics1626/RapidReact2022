@@ -10,18 +10,18 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax.IdleMode;
+// import com.revrobotics.RelativeEncoder;
+// import com.revrobotics.SparkMaxPIDController;
 
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
     private CANSparkMax m_leadMotor, m_followMotor;
-    private SparkMaxPIDController m_pidController;
-    private RelativeEncoder m_encoder;
+    // private SparkMaxPIDController m_pidController;
+    // private RelativeEncoder m_encoder;
     DoubleSolenoid m_intakeArmLeft, m_intakeArmRight;
 
     public Intake() {
@@ -43,14 +43,14 @@ public class Intake extends SubsystemBase {
          */
         m_followMotor.follow(m_leadMotor, true);
 
-        // Returns an object for interfacing with the integrated PID controller.
-        m_pidController = m_leadMotor.getPIDController();
+        /** Returns an object for interfacing with the integrated PID controller. */
+        // m_pidController = m_leadMotor.getPIDController();
 
         /**
          * Returns an object for interfacing with the hall sensor integrated into a brushless 
          * motor, which is connected to the front port of the SPARK MAX.
          */
-        m_encoder = m_leadMotor.getEncoder();
+        // m_encoder = m_leadMotor.getEncoder();
 
         /**
          * When the SPARK MAX is receiving a neutral command, the idle behavior of the motor 
