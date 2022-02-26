@@ -2,20 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Gatekeep;
+// TEMPORARY CONTROLLER (WILL BE REPLACED)
+
+package frc.robot.commands.Gatekeeper;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Gatekeeper;
 
 import java.util.function.DoubleSupplier;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Gatekeep;
 
-public class Girlboss extends CommandBase {
-    private final Gatekeep m_gatekeeper;
+public class GatekeeperController extends CommandBase {
+    private final Gatekeeper m_gatekeeper;
     private final DoubleSupplier m_input;
 
-    public Girlboss(Gatekeep gatekeeper, DoubleSupplier input) {
+    public GatekeeperController(Gatekeeper gatekeeper, DoubleSupplier input) {
         m_gatekeeper = gatekeeper;
         m_input = input;
-
         addRequirements(m_gatekeeper);
     }
 
@@ -24,7 +26,7 @@ public class Girlboss extends CommandBase {
 
     @Override
     public void execute() {
-        m_gatekeeper.Girlboss(m_input.getAsDouble());
+        m_gatekeeper.GatekeeperController(m_input.getAsDouble());
     }
 
     // Called once the command ends or is interrupted.
