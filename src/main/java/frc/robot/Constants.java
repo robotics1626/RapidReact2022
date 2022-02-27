@@ -21,11 +21,6 @@ public final class Constants {
 
     // Power Distribution Hub
     public static final int PDH = 1;
-    public static final int PDH_DRIVE_REAR_RIGHT  = 0;
-    public static final int PDH_DRIVE_FRONT_RIGHT = 1;
-    public static final int PDH_DRIVE_FRONT_LEFT = 18;
-    public static final int PDH_DRIVE_REAR_LEFT = 19;
-    public static final int PDH_INTAKE_BELT_LEFT = 2;
 
     // Pneumatic Hub
     public static final int PNEUMATIC_HUB = 1;
