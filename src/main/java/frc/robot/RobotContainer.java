@@ -32,8 +32,9 @@ public class RobotContainer {
 
   // Robot Compontents
   private final Drivetrain m_drivetrain = new Drivetrain();
-  private final IntakeBelt m_intakeBelt = new IntakeBelt();
-  private final IntakeArm m_intakeArm = new IntakeArm();
+  //private final IntakeBelt m_intakeBelt = new IntakeBelt();
+  //private final IntakeArm m_intakeArm = new IntakeArm();
+  private final Intake m_intake = new Intake();
   private final Indexer m_indexer = new Indexer();
   private final Gatekeeper m_gatekeeper = new Gatekeeper();
   private final Shooter m_shooter = new Shooter();
@@ -86,7 +87,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Intake
     // The Driver's left trigger extends the arm
-    new JoystickButton(m_driverLeft, 1)
+    /*new JoystickButton(m_driverLeft, 1)
       .whenPressed(() -> m_intakeArm.extend()
     );
     // The Driver's right trigger retracts the arm
@@ -100,7 +101,19 @@ public class RobotContainer {
     // The Driver's right thumb button runs the belt forwards
     new JoystickButton(m_driverRight, 2)
       .whileActiveContinuous(() -> m_intakeBelt.forwards()
-    );
+    );*/
+
+    /** Intake Controls */
+    /** The Driver's triggers toggle the state of the intake arms. */
+    new JoystickButton(m_driverLeft, 1).whenPressed(() -> m_intake.toggle());
+    new JoystickButton(m_driverRight, 1).whenPressed(() -> m_intake.toggle());
+    /** The Driver's thumb buttons control the retrieval and ejection of the cargo. */
+    new JoystickButton(m_driverLeft, 2)
+      .whenPressed(() -> m_intake.eject())
+      .whenReleased(() -> m_intake.stop());
+    new JoystickButton(m_driverRight, 2)
+    .whenPressed(() -> m_intake.retrieve())
+    .whenReleased(() -> m_intake.stop());
 
     /** Climber Controls */
     /** The Operator's A and B buttons toggle the climber's claws.*/

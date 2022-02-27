@@ -39,12 +39,12 @@ public final class Constants {
     // Compressor
     public static final int COMPRESSOR = 0;
     
-    // Intake
-    public static final int INTAKE_BELT_LEFT     = 5;
-    public static final int INTAKE_BELT_RIGHT    = 6;
-    public static final double INTAKE_BELT_POWER = 0.80;
-    public static final int [] INTAKE_ARM_LEFT   = new int[] {8, 9};
-    public static final int [] INTAKE_ARM_RIGHT  = new int[] {6, 7};
+    /** Intake */
+    public static final int INTAKE_MOTOR_LEFT = 5;
+    public static final int INTAKE_MOTOR_RIGHT = 6;
+    public static final double INTAKE_SPEED = 0.8;
+    public static final int [] INTAKE_ARM_LEFT = new int[] {8, 9};
+    public static final int [] INTAKE_ARM_RIGHT = new int[] {6, 7};
 
     // Indexer
     public static final int INDEXER_LEFT  = 7;
