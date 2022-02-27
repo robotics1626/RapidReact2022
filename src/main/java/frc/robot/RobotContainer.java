@@ -4,18 +4,18 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.*;
-
 import frc.robot.commands.Drivetrain.*;
-//import frc.robot.commands.Autonomous.*;
+import frc.robot.commands.Gatekeep.*;
+import frc.robot.commands.Indexer.*;
+import frc.robot.commands.Shooter.*;
+import frc.robot.commands.Autonomous.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,48 +25,65 @@ import frc.robot.commands.Drivetrain.*;
  */
 
 public class RobotContainer {
-  /** Controllers */
+  // Controllers
   private final XboxController m_operator = new XboxController(Constants.CONTROLLER_OPERATOR);
   private final Joystick m_driverLeft = new Joystick(Constants.JOYSTICK_LEFT);
   private final Joystick m_driverRight = new Joystick(Constants.JOYSTICK_RIGHT);
 
-  /** Robot Components */
+  // Robot Compontents
   private final Drivetrain m_drivetrain = new Drivetrain();
-  private final Intake m_intake = new Intake();
+  private final IntakeBelt m_intakeBelt = new IntakeBelt();
+  private final IntakeArm m_intakeArm = new IntakeArm();
   private final Indexer m_indexer = new Indexer();
-  private final Gatekeeper m_gatekeep = new Gatekeeper();
+  private final Gatekeep m_gatekeeper = new Gatekeep();
   private final Shooter m_shooter = new Shooter();
   private final Climber m_climber = new Climber();
 
-  /** Autonomous */
-  //private final TimedDrive m_timedDrive = new TimedDrive(5, 0.25);
+  // Autonomous
+  private final TemporaryAutonomous m_temporaryAutonomous = new TemporaryAutonomous();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
 
-    /** Drivetrain Controls */
-    /** The Driver's joysticks control each side of the drivetrain respectively. */
+    // Drive Train
+    // The Driver's left joystick controls the left side of the robot
+    // The Driver's right joystick controls the right side of the robot
     m_drivetrain.setDefaultCommand(
       new TankDrive(
         m_drivetrain,
-        () -> -Math.pow(m_driverLeft.getY(),Constants.DRIVER_INPUT_CURVE),
-        () -> -Math.pow(m_driverRight.getY(),Constants.DRIVER_INPUT_CURVE)
+        () -> m_driverLeft.getY(),
+        () -> m_driverRight.getY()
       )
     );
 
-    /** Indexer Controls */
-    /** The Operator's left joystick controls the indexer belt. */
-    m_indexer.IndexerController(m_operator.getLeftY());
+    // Indexer
+    // The Operator's left joystick controls the indexer
+    m_indexer.setDefaultCommand(
+      new IndexerController(
+        m_indexer, 
+        () -> m_operator.getLeftY()
+      )
+    );
 
-    /** Gatekeeper Controls */
-    /** The Operator's right trigger unlocks the gatekeeper. */
-    m_gatekeep.GatekeeperController(m_operator.getRightTriggerAxis());
+    // Gatekeeper
+    // The Operator's right trigger controls the gatekeeper
+    m_gatekeeper.setDefaultCommand(
+      new Girlboss(
+        m_gatekeeper, 
+        () -> m_operator.getRightTriggerAxis()
+      )
+    );
 
-    /** Shooter Controls */
-    /** The Operator's left trigger spins up the flywheel. */
-    m_shooter.ShooterController(m_operator.getLeftTriggerAxis());
+    // Shooter
+    // The Operator's right trigger controls the shooter
+    m_shooter.setDefaultCommand(
+      new ShooterController(
+        m_shooter, 
+        () -> m_operator.getLeftTriggerAxis()
+      )
+    );
   }
 
   /**
@@ -76,21 +93,37 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    /** Intake Controls */
-    /** The Driver's triggers toggle the state of the intake arms. */
-    new JoystickButton(m_driverLeft, 1).whenPressed(() -> m_intake.toggle());
-    new JoystickButton(m_driverRight, 1).whenPressed(() -> m_intake.toggle());
-    /** The Driver's thumb buttons control the retrieval and ejection of the cargo. */
-    new JoystickButton(m_driverLeft, 2).whileActiveContinuous(() -> m_intake.eject());
-    new JoystickButton(m_driverRight, 2).whileActiveContinuous(() -> m_intake.retrieve());
-
-    /** Climber Controls */
-    /** The Operator's A and B buttons toggle the climber's claws.*/
-    new JoystickButton(m_operator, Button.kA.value).whenPressed(() -> m_climber.toggle(0));
-    new JoystickButton(m_operator, Button.kB.value).whenPressed(() -> m_climber.toggle(1));
-    /** The Operator's bumpers spin the climber's arms.*/
-    new JoystickButton(m_operator, Button.kLeftBumper.value).whileActiveContinuous(() -> m_climber.spin(0.25));
-    new JoystickButton(m_operator, Button.kRightBumper.value).whileActiveContinuous(() -> m_climber.spin(-0.25));
+    // Intake
+    // The Driver's left trigger extends the arm
+    new JoystickButton(m_driverLeft, 1)
+      .whenPressed(() -> m_intakeArm.extend()
+    );
+    // The Driver's right trigger retracts the arm
+    new JoystickButton(m_driverRight, 1)
+      .whenPressed(() -> m_intakeArm.retract()
+    );
+    // The Driver's left thumb button runs the belt backwards
+    new JoystickButton(m_driverLeft, 2)
+      .whileActiveContinuous(() -> m_intakeBelt.backwards()
+    );
+    // The Driver's right thumb button runs the belt forwards
+    new JoystickButton(m_driverRight, 2)
+      .whileActiveContinuous(() -> m_intakeBelt.forwards()
+    );
+    // The Operator's A and B buttons toggle the climber's claws
+    new JoystickButton(m_operator, Button.kA.value)
+      .whenPressed(() -> m_climber.toggleUpper()
+    );
+    new JoystickButton(m_operator, Button.kB.value)
+      .whenPressed(() -> m_climber.toggleLower()
+    );
+    // The Operator's bumbers spin the climber
+    new JoystickButton(m_operator, Button.kLeftBumper.value)
+      .whenPressed(() -> m_climber.spin(1)
+    );
+    new JoystickButton(m_operator, Button.kRightBumper.value)
+      .whenPressed(() -> m_climber.spin(-1)
+    );
   }
 
   /**
@@ -98,7 +131,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  /*public Command getAutonomousCommand() {
-    return m_timedDrive;
-  }*/
+  public Command getAutonomousCommand() {
+    return m_temporaryAutonomous;
+  }
 }

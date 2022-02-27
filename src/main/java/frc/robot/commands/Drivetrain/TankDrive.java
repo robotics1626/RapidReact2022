@@ -4,21 +4,24 @@
 
 package frc.robot.commands.Drivetrain;
 
+import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-import java.util.function.DoubleSupplier;
-
 public class TankDrive extends CommandBase {
 
-    private Drivetrain m_drivetrain;
-    private DoubleSupplier m_leftSpeed, m_rightSpeed;
+    // Initialize the drive train and its inputs as variables.
+    private final Drivetrain m_drivetrain;
+    private final DoubleSupplier m_left, m_right;
 
     /** This function acts as the liaison between the user and the code */
-    public TankDrive(Drivetrain drivetrain, DoubleSupplier leftSpeed, DoubleSupplier rightSpeed) {
+    public TankDrive(Drivetrain drivetrain, DoubleSupplier left, DoubleSupplier right) {
+        // Get the user input as definitions for the drivetrain and inputs.
         m_drivetrain = drivetrain;
-        m_leftSpeed = leftSpeed;
-        m_rightSpeed = rightSpeed;
+        m_left = left;
+        m_right = right;
+
+        // Ensure that the drivetrain has been defined by the user.
         addRequirements(m_drivetrain);
     }
     
@@ -28,7 +31,9 @@ public class TankDrive extends CommandBase {
     /** This function is run any time that the command is executed. */
     @Override
     public void execute() {
-        m_drivetrain.tankDrive(m_leftSpeed.getAsDouble(), m_rightSpeed.getAsDouble());
+        // Get the left and right input as a decimal number and pipe it into the
+        // drivetrain's controller with the tank drive mode.
+        m_drivetrain.tankDrive(m_left.getAsDouble(), m_right.getAsDouble());
     }
 
     /** This function is called once the command ends or is interrupted. */

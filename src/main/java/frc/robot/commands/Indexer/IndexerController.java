@@ -15,6 +15,7 @@ public class IndexerController extends CommandBase {
     public IndexerController(Indexer indexer, DoubleSupplier input) {
         m_indexer = indexer;
         m_input = input;
+
         addRequirements(m_indexer);
     }
 

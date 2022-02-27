@@ -5,32 +5,19 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.Timer;
 
-public class TimedDrive extends CommandBase {
-  private final Drivetrain m_drivetrain = new Drivetrain();
-  private final Timer m_timer = new Timer();
-  private double m_time, m_speed;
+public class TemporaryAutonomous extends CommandBase {
 
   // Use addRequirements() here to declare subsystem dependencies.
-  public TimedDrive(double time, double speed) {
-    m_time = time;
-    m_speed = speed;
-  }
+  public TemporaryAutonomous() {}
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_timer.reset();
-    m_timer.start();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    while (m_timer.get() < m_time) m_drivetrain.tankDrive(m_speed, m_speed);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
