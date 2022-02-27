@@ -15,7 +15,6 @@ public class ShooterController extends CommandBase {
     public ShooterController(Shooter shooter, DoubleSupplier input) {
         m_shooter = shooter;
         m_input = input;
-
         addRequirements(m_shooter);
     }
 

@@ -50,19 +50,18 @@ public final class Constants {
     public static final int INDEXER_LEFT  = 7;
     public static final int INDEXER_RIGHT = 8;
 
-    // Gatekeeper
+    /** Gatekeeper */
     public static final int GATEKEEPER = 9;
 
-    // Shooter
-    public static final int SHOOTER_LEFT   = 10;
-    public static final int SHOOTER_RIGHT  = 11;
-    public static final double SHOOTER_RPM = 1000;
+    /** Shooter */
+    public static final int SHOOTER_LEFT = 10;
+    public static final int SHOOTER_RIGHT = 11;
 
-    // Climber
-    public static final int [] CLIMBER_LEFT_UPPER  = new int[] {10, 11};
-    public static final int [] CLIMBER_LEFT_LOWER  = new int[] {5, 4};
+    /** Climber */
+    public static final int CLIMBER_MOTOR = 12;
+    public static final int [] CLIMBER_LEFT_UPPER = new int[] {10, 11};
+    public static final int [] CLIMBER_LEFT_LOWER = new int[] {5, 4};
     public static final int [] CLIMBER_RIGHT_UPPER = new int[] {12, 13};
     public static final int [] CLIMBER_RIGHT_LOWER = new int[] {3, 2};
-    public static final int CLIMBER_SPINNER = 12;
     
 }
