@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.subsystems.*;
 
 import frc.robot.commands.Drivetrain.*;
-import frc.robot.commands.Autonomous.*;
+//import frc.robot.commands.Autonomous.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -39,7 +39,7 @@ public class RobotContainer {
   private final Climber m_climber = new Climber();
 
   /** Autonomous */
-  private final TimedDrive m_timedDrive = new TimedDrive(5, 0.25);
+  //private final TimedDrive m_timedDrive = new TimedDrive(5, 0.25);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -51,8 +51,8 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(
       new TankDrive(
         m_drivetrain,
-        () -> Math.pow(m_driverLeft.getY(),Constants.DRIVER_INPUT_CURVE),
-        () -> Math.pow(m_driverRight.getY(),Constants.DRIVER_INPUT_CURVE)
+        () -> -Math.pow(m_driverLeft.getY(),Constants.DRIVER_INPUT_CURVE),
+        () -> -Math.pow(m_driverRight.getY(),Constants.DRIVER_INPUT_CURVE)
       )
     );
 
@@ -98,7 +98,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  /*public Command getAutonomousCommand() {
     return m_timedDrive;
-  }
+  }*/
 }
