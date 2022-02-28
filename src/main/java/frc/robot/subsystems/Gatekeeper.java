@@ -18,7 +18,7 @@ public class Gatekeeper extends SubsystemBase {
     
     private CANSparkMax m_gatekeeper;
     private boolean indexing;
-    private double velocity, setPoint;
+    private double indexerSpeed, shooterVelocity, shooterSetPoint;
 
     public Gatekeeper() {
         m_gatekeeper = new CANSparkMax(Constants.GATEKEEPER, MotorType.kBrushless);
@@ -37,7 +37,7 @@ public class Gatekeeper extends SubsystemBase {
     }
 
     public void GatekeeperController(double speed) {
-        if (indexing && velocity > setPoint-50) m_gatekeeper.set(speed);
+        if (indexing && shooterVelocity > shooterSetPoint-50) m_gatekeeper.set(speed);
     }
 
     public void stop() {
@@ -47,10 +47,11 @@ public class Gatekeeper extends SubsystemBase {
     @Override
     public void periodic() {
         indexing = SmartDashboard.getBoolean("Indexing", false);
-        velocity = SmartDashboard.getNumber("Shooter Velocity", 0);
-        setPoint = SmartDashboard.getNumber("SetPoint", setPoint);
+        indexerSpeed = SmartDashboard.getNumber("IndexerSpeed", 0);
+        shooterVelocity = SmartDashboard.getNumber("Shooter Velocity", 0);
+        shooterSetPoint = SmartDashboard.getNumber("SetPoint", 0);
         
-        if(indexing && velocity < setPoint-50) m_gatekeeper.set(0.5);
+        if(indexing && shooterVelocity < shooterSetPoint-50) m_gatekeeper.set(-indexerSpeed);
         else stop();
     }
 

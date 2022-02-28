@@ -42,6 +42,7 @@ public class Indexer extends SubsystemBase {
     public void IndexerController(double input) {
         m_leadMotor.set(input);
         SmartDashboard.putBoolean("Indexing", true);
+        SmartDashboard.putNumber("Indexer Speed", input);
     }
 
     /** This function is called once each time the the command ends or is interrupted. */
@@ -52,6 +53,7 @@ public class Indexer extends SubsystemBase {
          */
         m_leadMotor.stopMotor();
         SmartDashboard.putBoolean("Indexing", false);
+        SmartDashboard.putNumber("Indexer Speed", 0);
     }
 
     @Override
