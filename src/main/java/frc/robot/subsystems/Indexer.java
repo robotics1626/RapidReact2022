@@ -41,7 +41,6 @@ public class Indexer extends SubsystemBase {
 
     public void IndexerController(double input) {
         m_leadMotor.set(input);
-        SmartDashboard.putBoolean("Indexing", true);
         SmartDashboard.putNumber("Indexer Speed", input);
     }
 
@@ -52,8 +51,6 @@ public class Indexer extends SubsystemBase {
          * re-enable the motor.
          */
         m_leadMotor.stopMotor();
-        SmartDashboard.putBoolean("Indexing", false);
-        SmartDashboard.putNumber("Indexer Speed", 0);
     }
 
     @Override

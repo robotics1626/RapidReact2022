@@ -37,7 +37,12 @@ public class Gatekeeper extends SubsystemBase {
     }
 
     public void GatekeeperController(double speed) {
-        if (indexing && shooterVelocity > shooterSetPoint-50) m_gatekeeper.set(speed);
+        /*if (indexerSpeed < 0 && shooterVelocity > shooterSetPoint-50) {
+            m_gatekeeper.set(indexerSpeed);
+        } else if (indexerSpeed >= 0.01) {
+            m_gatekeeper.set(indexerSpeed * -1);
+        }*/
+        m_gatekeeper.set(speed);
     }
 
     public void stop() {
@@ -46,13 +51,11 @@ public class Gatekeeper extends SubsystemBase {
 
     @Override
     public void periodic() {
-        indexing = SmartDashboard.getBoolean("Indexing", false);
-        indexerSpeed = SmartDashboard.getNumber("IndexerSpeed", 0);
+        /*indexerSpeed = SmartDashboard.getNumber("IndexerSpeed", 0);
         shooterVelocity = SmartDashboard.getNumber("Shooter Velocity", 0);
         shooterSetPoint = SmartDashboard.getNumber("SetPoint", 0);
-        
-        if(indexing && shooterVelocity < shooterSetPoint-50) m_gatekeeper.set(-indexerSpeed);
-        else stop();
+        if(indexerSpeed < 0 && shooterVelocity < shooterSetPoint-50) m_gatekeeper.set(indexerSpeed*-1);
+        else stop();*/
     }
 
 }

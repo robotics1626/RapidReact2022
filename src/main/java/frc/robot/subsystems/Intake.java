@@ -13,15 +13,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.IdleMode;
-// import com.revrobotics.RelativeEncoder;
-// import com.revrobotics.SparkMaxPIDController;
 
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
     private CANSparkMax m_leadMotor, m_followMotor;
-    // private SparkMaxPIDController m_pidController;
-    // private RelativeEncoder m_encoder;
     DoubleSolenoid m_intakeArmLeft, m_intakeArmRight;
 
     public Intake() {
@@ -42,15 +38,6 @@ public class Intake extends SubsystemBase {
          * as a parameter the SPARK MAX you want to configure as a leader.
          */
         m_followMotor.follow(m_leadMotor, true);
-
-        /** Returns an object for interfacing with the integrated PID controller. */
-        // m_pidController = m_leadMotor.getPIDController();
-
-        /**
-         * Returns an object for interfacing with the hall sensor integrated into a brushless 
-         * motor, which is connected to the front port of the SPARK MAX.
-         */
-        // m_encoder = m_leadMotor.getEncoder();
 
         /**
          * When the SPARK MAX is receiving a neutral command, the idle behavior of the motor 
@@ -87,24 +74,6 @@ public class Intake extends SubsystemBase {
          */
         m_intakeArmLeft.toggle();
         m_intakeArmRight.toggle();
-    }
-
-    /** Toggle the state of the intake arms. */
-    public void extend() {
-        /**
-         * Set the solenoids to extend.
-         */
-        m_intakeArmLeft.set(Value.kForward);
-        m_intakeArmRight.set(Value.kForward);
-    }
-
-            /** Toggle the state of the intake arms. */
-    public void retract() {
-        /**
-         * Set the solenoids to retract.
-         */
-        m_intakeArmLeft.set(Value.kReverse);
-        m_intakeArmRight.set(Value.kReverse);
     }
 
     /** This function is called once each time the the command ends or is interrupted. */

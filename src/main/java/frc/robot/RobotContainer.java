@@ -48,9 +48,6 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-    /** Set the intake to retract. */
-    m_intake.retract();
-
     /** Configure the button bindings */
     configureButtonBindings();
 
@@ -84,6 +81,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
     /** Intake Controls */
     /** The Driver's triggers toggle the state of the intake arms. */
     new JoystickButton(m_driverLeft, 1).whenPressed(() -> m_intake.toggle());
