@@ -13,26 +13,27 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // Operator and Drive Controllers
+    /** Operator and Driver Controllers */
     public static final int CONTROLLER_OPERATOR = 0;
-    public static final int JOYSTICK_LEFT       = 1;
-    public static final int JOYSTICK_RIGHT      = 2;
+    public static final int JOYSTICK_LEFT = 1;
+    public static final int JOYSTICK_RIGHT = 2;
     public static final double JOYSTICK_CURVE   = 5/3;
+    //public static final double DRIVER_INPUT_CURVE = 3;
 
-    // Power Distribution Hub
+    /** Power Distribution Hub */
     public static final int PDH = 1;
 
-    // Pneumatic Hub
-    public static final int PNEUMATIC_HUB = 1;
+    /** Pneumatic Hub */
+    public static final int REVPH = 1;
 
-    // Drive Train
-    public static final int DRIVE_FRONT_LEFT  = 3;
-    public static final int DRIVE_REAR_LEFT   = 1;
-    public static final int DRIVE_FRONT_RIGHT = 4;
-    public static final int DRIVE_REAR_RIGHT  = 2;
-
-    // Compressor
+    /** Compressor */
     public static final int COMPRESSOR = 0;
+
+    /** Drive Train */
+    public static final int DRIVE_FRONT_LEFT = 3;
+    public static final int DRIVE_REAR_LEFT = 1;
+    public static final int DRIVE_FRONT_RIGHT = 4;
+    public static final int DRIVE_REAR_RIGHT = 2;
     
     /** Intake */
     public static final int INTAKE_MOTOR_LEFT = 5;
@@ -41,8 +42,8 @@ public final class Constants {
     public static final int [] INTAKE_ARM_LEFT = new int[] {8, 9};
     public static final int [] INTAKE_ARM_RIGHT = new int[] {6, 7};
 
-    // Indexer
-    public static final int INDEXER_LEFT  = 7;
+    /** Indexer */
+    public static final int INDEXER_LEFT = 7;
     public static final int INDEXER_RIGHT = 8;
 
     /** Gatekeeper */
