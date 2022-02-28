@@ -15,8 +15,6 @@ import frc.robot.Constants;
 public class Gatekeeper extends SubsystemBase {
     
     private CANSparkMax m_gatekeeper;
-    //private boolean indexing;
-    private double indexerSpeed;
 
     public Gatekeeper() {
         m_gatekeeper = new CANSparkMax(Constants.GATEKEEPER, MotorType.kBrushless);

@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.Timer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class TimedDrive extends CommandBase {
+public class ModularAuto extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final Timer m_timer = new Timer();
   private double m_time, m_speed;
 
   // Use addRequirements() here to declare subsystem dependencies.
-  public TimedDrive(Drivetrain drivetrain) {
+  public ModularAuto(Drivetrain drivetrain) {
     SmartDashboard.putNumber("Auto Duration (s)", 2);
     SmartDashboard.putNumber("Auto Speed (%)", -0.75);
     m_drivetrain = drivetrain;

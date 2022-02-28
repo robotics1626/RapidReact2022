@@ -42,8 +42,7 @@ public class RobotContainer {
   private final Climber m_climber = new Climber();
 
   /** Autonomous */
-  private final TemporaryAutonomous m_temporaryAutonomous = new TemporaryAutonomous();
-  private final TimedDrive m_timedDrive = new TimedDrive(m_drivetrain);
+  private final ModularAuto m_modularAuto = new ModularAuto(m_drivetrain);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -109,7 +108,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    //return m_temporaryAutonomous;
-    return m_timedDrive;
+    return m_modularAuto;
   }
 }
