@@ -67,9 +67,7 @@ public class Shooter extends SubsystemBase {
         kFF = 0.000175;
         kMaxOutput = 1;
         kMinOutput = 0;
-        //kMaxRPM = 3350;
-
-        kMaxRPM = 3550;
+        kMaxRPM = 3550; // 3350
 
         /** Set the PID coefficients. */
         m_pidController.setP(kP);
@@ -93,7 +91,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void ShooterController(double input) {
-        setPoint = kMaxRPM * input;
+        if (input > 0.5) {setPoint = kMaxRPM;} else {setPoint = 0;}
         m_pidController.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
     }
 
@@ -136,7 +134,7 @@ public class Shooter extends SubsystemBase {
         if(maxRPM != kMaxRPM) kMaxRPM = maxRPM;
 
         /** Display the max velocity, set point, and velocity on the dashboard. */
-        SmartDashboard.putNumber("Max Velocity", maxRPM);
+        //SmartDashboard.putNumber("Max RPM", maxRPM);
         SmartDashboard.putNumber("SetPoint", setPoint);
         SmartDashboard.putNumber("Shooter Velocity", m_encoder.getVelocity());
     }

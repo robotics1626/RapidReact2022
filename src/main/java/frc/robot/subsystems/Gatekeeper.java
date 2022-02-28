@@ -10,15 +10,13 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.robot.Constants;
 
 public class Gatekeeper extends SubsystemBase {
     
     private CANSparkMax m_gatekeeper;
-    private boolean indexing;
-    private double indexerSpeed, shooterVelocity, shooterSetPoint;
+    //private boolean indexing;
+    private double indexerSpeed;
 
     public Gatekeeper() {
         m_gatekeeper = new CANSparkMax(Constants.GATEKEEPER, MotorType.kBrushless);
@@ -37,11 +35,6 @@ public class Gatekeeper extends SubsystemBase {
     }
 
     public void GatekeeperController(double speed) {
-        /*if (indexerSpeed < 0 && shooterVelocity > shooterSetPoint-50) {
-            m_gatekeeper.set(indexerSpeed);
-        } else if (indexerSpeed >= 0.01) {
-            m_gatekeeper.set(indexerSpeed * -1);
-        }*/
         m_gatekeeper.set(speed);
     }
 
@@ -51,11 +44,7 @@ public class Gatekeeper extends SubsystemBase {
 
     @Override
     public void periodic() {
-        /*indexerSpeed = SmartDashboard.getNumber("IndexerSpeed", 0);
-        shooterVelocity = SmartDashboard.getNumber("Shooter Velocity", 0);
-        shooterSetPoint = SmartDashboard.getNumber("SetPoint", 0);
-        if(indexerSpeed < 0 && shooterVelocity < shooterSetPoint-50) m_gatekeeper.set(indexerSpeed*-1);
-        else stop();*/
+        
     }
 
 }

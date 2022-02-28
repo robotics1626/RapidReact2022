@@ -8,21 +8,25 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Timer;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class TimedDrive extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final Timer m_timer = new Timer();
   private double m_time, m_speed;
 
   // Use addRequirements() here to declare subsystem dependencies.
-  public TimedDrive(Drivetrain drivetrain, double time, double speed) {
+  public TimedDrive(Drivetrain drivetrain) {
+    SmartDashboard.putNumber("Auto Duration (s)", 2);
+    SmartDashboard.putNumber("Auto Speed (%)", -0.75);
     m_drivetrain = drivetrain;
-    m_time = time;
-    m_speed = speed;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_time = SmartDashboard.getNumber("Auto Duration (s)", 2);
+    m_speed = SmartDashboard.getNumber("Auto Speed (%)", -0.75);
     m_timer.reset();
     m_timer.start();
   }
