@@ -58,14 +58,14 @@ public class Shooter extends SubsystemBase {
         m_encoder = m_leadMotor.getEncoder();
 
         /** Define the PID coefficients. */
-        kP = 6e-5;
+        kP = 0.00005;
         kI = 0;
         kD = 0;
         kIz = 0;
-        kFF = 0.000015;
+        kFF = 0.000175;
         kMaxOutput = 1;
         kMinOutput = -1;
-        maxRPM = 5700;
+        maxRPM = 3350;
 
         /** Set the PID coefficients. */
         m_pidController.setP(kP);
