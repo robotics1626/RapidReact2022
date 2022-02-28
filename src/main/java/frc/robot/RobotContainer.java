@@ -4,13 +4,16 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.Command;
+
 import frc.robot.subsystems.*;
+
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Gatekeeper.*;
 import frc.robot.commands.Indexer.*;
@@ -25,15 +28,13 @@ import frc.robot.commands.Autonomous.*;
  */
 
 public class RobotContainer {
-  // Controllers
+  /** Controllers */
   private final XboxController m_operator = new XboxController(Constants.CONTROLLER_OPERATOR);
   private final Joystick m_driverLeft = new Joystick(Constants.JOYSTICK_LEFT);
   private final Joystick m_driverRight = new Joystick(Constants.JOYSTICK_RIGHT);
 
-  // Robot Compontents
+  /** Robot Components */
   private final Drivetrain m_drivetrain = new Drivetrain();
-  //private final IntakeBelt m_intakeBelt = new IntakeBelt();
-  //private final IntakeArm m_intakeArm = new IntakeArm();
   private final Intake m_intake = new Intake();
   private final Indexer m_indexer = new Indexer();
   private final Gatekeeper m_gatekeeper = new Gatekeeper();
@@ -48,9 +49,8 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    // Drive Train
-    // The Driver's left joystick controls the left side of the robot
-    // The Driver's right joystick controls the right side of the robot
+    /** Drivetrain Controls */
+    /** The Driver's joysticks control each side of the drivetrain respectively. */
     m_drivetrain.setDefaultCommand(
       new TankDrive(
         m_drivetrain,
@@ -59,14 +59,9 @@ public class RobotContainer {
       )
     );
 
-    // Indexer
-    // The Operator's left joystick controls the indexer
-    m_indexer.setDefaultCommand(
-      new IndexerController(
-        m_indexer, 
-        () -> m_operator.getLeftY()
-      )
-    );
+    /** Indexer Controls */
+    /** The Operator's left joystick controls the indexer belt. */
+    m_indexer.setDefaultCommand(new IndexerController(m_indexer, () -> m_operator.getLeftY()));
 
     /** Gatekeeper Controls */
     /** The Operator's right trigger unlocks the gatekeeper. */
@@ -75,7 +70,6 @@ public class RobotContainer {
     /** Shooter Controls */
     /** The Operator's left trigger spins up the flywheel. */
     m_shooter.setDefaultCommand(new ShooterController(m_shooter, () -> m_operator.getLeftTriggerAxis()));
-
 }
 
   /**
@@ -85,24 +79,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Intake
-    // The Driver's left trigger extends the arm
-    /*new JoystickButton(m_driverLeft, 1)
-      .whenPressed(() -> m_intakeArm.extend()
-    );
-    // The Driver's right trigger retracts the arm
-    new JoystickButton(m_driverRight, 1)
-      .whenPressed(() -> m_intakeArm.retract()
-    );
-    // The Driver's left thumb button runs the belt backwards
-    new JoystickButton(m_driverLeft, 2)
-      .whileActiveContinuous(() -> m_intakeBelt.backwards()
-    );
-    // The Driver's right thumb button runs the belt forwards
-    new JoystickButton(m_driverRight, 2)
-      .whileActiveContinuous(() -> m_intakeBelt.forwards()
-    );*/
-
     /** Intake Controls */
     /** The Driver's triggers toggle the state of the intake arms. */
     new JoystickButton(m_driverLeft, 1).whenPressed(() -> m_intake.toggle());
@@ -112,8 +88,8 @@ public class RobotContainer {
       .whenPressed(() -> m_intake.eject())
       .whenReleased(() -> m_intake.stop());
     new JoystickButton(m_driverRight, 2)
-    .whenPressed(() -> m_intake.retrieve())
-    .whenReleased(() -> m_intake.stop());
+      .whenPressed(() -> m_intake.retrieve())
+      .whenReleased(() -> m_intake.stop());
 
     /** Climber Controls */
     /** The Operator's A and B buttons toggle the climber's claws.*/
