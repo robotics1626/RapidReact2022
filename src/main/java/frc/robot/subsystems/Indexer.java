@@ -5,15 +5,23 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.RelativeEncoder;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Constants;
 
 public class Indexer extends SubsystemBase {
     
     private CANSparkMax m_leadMotor, m_followMotor;
+    private SparkMaxPIDController m_pidController;
+    private RelativeEncoder m_encoder;
 
     public Indexer() {
         /** Create a new object to control the SPARK MAX motor controllers. */
@@ -35,13 +43,13 @@ public class Indexer extends SubsystemBase {
         m_followMotor.follow(m_leadMotor, true);
 
         /** Returns an object for interfacing with the integrated PID controller. */
-        // m_pidController = m_leadMotor.getPIDController();
+        m_pidController = m_leadMotor.getPIDController();
 
         /**
          * Returns an object for interfacing with the hall sensor integrated into a brushless 
          * motor, which is connected to the front port of the SPARK MAX.
          */
-        // m_encoder = m_leadMotor.getEncoder();
+        m_encoder = m_leadMotor.getEncoder();
 
         /**
          * When the SPARK MAX is receiving a neutral command, the idle behavior of the motor 
@@ -54,6 +62,7 @@ public class Indexer extends SubsystemBase {
 
     public void IndexerController(double input) {
         m_leadMotor.set(input);
+        SmartDashboard.putBoolean("Indexing", true);
     }
 
     /** This function is called once each time the the command ends or is interrupted. */
@@ -63,6 +72,7 @@ public class Indexer extends SubsystemBase {
          * re-enable the motor.
          */
         m_leadMotor.stopMotor();
+        SmartDashboard.putBoolean("Indexing", false);
     }
 
     @Override

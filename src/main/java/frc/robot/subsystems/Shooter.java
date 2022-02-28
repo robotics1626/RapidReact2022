@@ -5,13 +5,15 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.RelativeEncoder;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Constants;
 
@@ -58,7 +60,7 @@ public class Shooter extends SubsystemBase {
         m_encoder = m_leadMotor.getEncoder();
 
         /** Define the PID coefficients. */
-        kP = 0.00005;
+        kP = 0.00005; // Try 256
         kI = 0;
         kD = 0;
         kIz = 0;
@@ -124,7 +126,7 @@ public class Shooter extends SubsystemBase {
 
         //** Display the set point and velocity on the dashboard. */
         SmartDashboard.putNumber("SetPoint", setPoint);
-        SmartDashboard.putNumber("Velocity", m_encoder.getVelocity());
+        SmartDashboard.putNumber("Shooter Velocity", m_encoder.getVelocity());
     }
 
 }
