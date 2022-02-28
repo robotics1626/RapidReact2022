@@ -22,7 +22,7 @@ public class Shooter extends SubsystemBase {
     private CANSparkMax m_leadMotor, m_followMotor;
     private SparkMaxPIDController m_pidController;
     private RelativeEncoder m_encoder;
-    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, setPoint;
+    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, kMaxRPM, setPoint;
 
     public Shooter() {
         /** Create a new object to control the SPARK MAX motor controllers. */
@@ -66,8 +66,8 @@ public class Shooter extends SubsystemBase {
         kIz = 0;
         kFF = 0.000175;
         kMaxOutput = 1;
-        kMinOutput = -1;
-        maxRPM = 3350;
+        kMinOutput = 0;
+        kMaxRPM = 3350;
 
         /** Set the PID coefficients. */
         m_pidController.setP(kP);
@@ -85,10 +85,13 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("Feed Forward", kFF);
         SmartDashboard.putNumber("Max Output", kMaxOutput);
         SmartDashboard.putNumber("Min Output", kMinOutput);
+
+        /** Display the Max RPM on the dashboard */
+        SmartDashboard.putNumber("Max RPM", kMaxRPM);
     }
 
     public void ShooterController(double input) {
-        setPoint = maxRPM * input;
+        setPoint = kMaxRPM * input;
         m_pidController.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
     }
 
@@ -113,6 +116,9 @@ public class Shooter extends SubsystemBase {
         double max = SmartDashboard.getNumber("Max Output", 0);
         double min = SmartDashboard.getNumber("Min Output", 0);
 
+        /** Read the Max RPM from the dashboard */
+        double maxRPM = SmartDashboard.getNumber("MaxRPM", 0);
+
         /** Write the PID coefficients to the controller from the dashboard. */
         if(p != kP) m_pidController.setP(p); kP = p;
         if(i != kI) m_pidController.setI(i); kI = i;
@@ -123,6 +129,9 @@ public class Shooter extends SubsystemBase {
             m_pidController.setOutputRange(min, max);
             kMinOutput = min; kMaxOutput = max;
         }
+
+        /** Write the max RPM to its variable from the dashboard */
+        if(maxRPM != kMaxRPM) kMaxRPM = maxRPM;
 
         //** Display the set point and velocity on the dashboard. */
         SmartDashboard.putNumber("SetPoint", setPoint);
