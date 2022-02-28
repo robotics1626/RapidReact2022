@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
     private CANSparkMax m_leadMotor, m_followMotor;
     private SparkMaxPIDController m_pidController;
     private RelativeEncoder m_encoder;
-    public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, setPoint;
+    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, setPoint;
 
     public Shooter() {
         /** Create a new object to control the SPARK MAX motor controllers. */
@@ -124,7 +124,7 @@ public class Shooter extends SubsystemBase {
 
         //** Display the set point and velocity on the dashboard. */
         SmartDashboard.putNumber("SetPoint", setPoint);
-        SmartDashboard.putNumber("ProcessVariable", m_encoder.getVelocity());
+        SmartDashboard.putNumber("Velocity", m_encoder.getVelocity());
     }
 
 }
