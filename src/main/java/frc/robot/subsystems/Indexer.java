@@ -17,6 +17,7 @@ import frc.robot.Constants;
 public class Indexer extends SubsystemBase {
     
     private CANSparkMax m_leadMotor, m_followMotor;
+    private boolean m_indexing;
 
     public Indexer() {
         /** Create a new object to control the SPARK MAX motor controllers. */
@@ -37,11 +38,14 @@ public class Indexer extends SubsystemBase {
          */
         m_leadMotor.setIdleMode(IdleMode.kCoast);
         m_followMotor.setIdleMode(IdleMode.kCoast);
+
+        m_indexing = false;
+        SmartDashboard.putBoolean("Indexing", m_indexing);
     }
 
     public void IndexerController(double input) {
+        if (input < 0) { m_indexing = true; } else { m_indexing = false; }
         m_leadMotor.set(input);
-        SmartDashboard.putNumber("Indexer Speed", input);
     }
 
     /** This function is called once each time the the command ends or is interrupted. */
@@ -56,6 +60,7 @@ public class Indexer extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        SmartDashboard.putBoolean("Indexing", m_indexing);
     }
 
 }
