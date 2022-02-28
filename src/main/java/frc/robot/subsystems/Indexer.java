@@ -10,9 +10,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.RelativeEncoder;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Constants;
@@ -20,8 +17,6 @@ import frc.robot.Constants;
 public class Indexer extends SubsystemBase {
     
     private CANSparkMax m_leadMotor, m_followMotor;
-    private SparkMaxPIDController m_pidController;
-    private RelativeEncoder m_encoder;
 
     public Indexer() {
         /** Create a new object to control the SPARK MAX motor controllers. */
@@ -34,22 +29,6 @@ public class Indexer extends SubsystemBase {
          */
         m_leadMotor.restoreFactoryDefaults();
         m_followMotor.restoreFactoryDefaults();
-
-        /**
-         * In CAN mode, one SPARK MAX can be configured to follow another. This is done by calling
-         * the follow() method on the SPARK MAX you want to configure as a follower, and by passing
-         * as a parameter the SPARK MAX you want to configure as a leader.
-         */
-        m_followMotor.follow(m_leadMotor, true);
-
-        /** Returns an object for interfacing with the integrated PID controller. */
-        m_pidController = m_leadMotor.getPIDController();
-
-        /**
-         * Returns an object for interfacing with the hall sensor integrated into a brushless 
-         * motor, which is connected to the front port of the SPARK MAX.
-         */
-        m_encoder = m_leadMotor.getEncoder();
 
         /**
          * When the SPARK MAX is receiving a neutral command, the idle behavior of the motor 
