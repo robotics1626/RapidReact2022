@@ -13,23 +13,56 @@ import frc.robot.Constants;
 
 public class Indexer extends SubsystemBase {
     
-    static CANSparkMax m_indexerLeft = new CANSparkMax(Constants.INDEXER_LEFT, MotorType.kBrushless);
-    static CANSparkMax m_indexerRight = new CANSparkMax(Constants.INDEXER_RIGHT, MotorType.kBrushless);
+    private CANSparkMax m_leadMotor, m_followMotor;
 
     public Indexer() {
-        m_indexerLeft.setIdleMode(IdleMode.kCoast);
-        m_indexerRight.setIdleMode(IdleMode.kCoast);
-        m_indexerRight.setInverted(true);
+        /** Create a new object to control the SPARK MAX motor controllers. */
+        m_leadMotor = new CANSparkMax(Constants.INDEXER_LEFT, MotorType.kBrushless);
+        m_followMotor = new CANSparkMax(Constants.INDEXER_RIGHT, MotorType.kBrushless);
+
+        /**
+         * Restore motor controller parameters to factory default until the next controller 
+         * reboot.
+         */
+        m_leadMotor.restoreFactoryDefaults();
+        m_followMotor.restoreFactoryDefaults();
+
+        /**
+         * In CAN mode, one SPARK MAX can be configured to follow another. This is done by calling
+         * the follow() method on the SPARK MAX you want to configure as a follower, and by passing
+         * as a parameter the SPARK MAX you want to configure as a leader.
+         */
+        m_followMotor.follow(m_leadMotor, true);
+
+        /** Returns an object for interfacing with the integrated PID controller. */
+        // m_pidController = m_leadMotor.getPIDController();
+
+        /**
+         * Returns an object for interfacing with the hall sensor integrated into a brushless 
+         * motor, which is connected to the front port of the SPARK MAX.
+         */
+        // m_encoder = m_leadMotor.getEncoder();
+
+        /**
+         * When the SPARK MAX is receiving a neutral command, the idle behavior of the motor 
+         * will effectively disconnect all motor wires. This allows the motor to spin down at 
+         * its own rate. 
+         */
+        m_leadMotor.setIdleMode(IdleMode.kCoast);
+        m_followMotor.setIdleMode(IdleMode.kCoast);
     }
 
     public void IndexerController(double input) {
-        m_indexerLeft.set(input);
-        m_indexerRight.set(input);
+        m_leadMotor.set(input);
     }
 
+    /** This function is called once each time the the command ends or is interrupted. */
     public void stop() {
-        m_indexerLeft.stopMotor();
-        m_indexerRight.stopMotor();
+        /**
+         * Stop motor movement. Motor can be moved again by calling set without having to 
+         * re-enable the motor.
+         */
+        m_leadMotor.stopMotor();
     }
 
     @Override
