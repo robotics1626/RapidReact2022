@@ -46,7 +46,11 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the button bindings
+
+    /** Set the intake to retract. */
+    m_intake.retract();
+
+    /** Configure the button bindings */
     configureButtonBindings();
 
     /** Drivetrain Controls */

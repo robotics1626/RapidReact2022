@@ -89,6 +89,24 @@ public class Intake extends SubsystemBase {
         m_intakeArmRight.toggle();
     }
 
+    /** Toggle the state of the intake arms. */
+    public void extend() {
+        /**
+         * Set the solenoids to extend.
+         */
+        m_intakeArmLeft.set(Value.kForward);
+        m_intakeArmRight.set(Value.kForward);
+    }
+
+            /** Toggle the state of the intake arms. */
+    public void retract() {
+        /**
+         * Set the solenoids to retract.
+         */
+        m_intakeArmLeft.set(Value.kReverse);
+        m_intakeArmRight.set(Value.kReverse);
+    }
+
     /** This function is called once each time the the command ends or is interrupted. */
     public void stop() {
         /**
