@@ -14,7 +14,6 @@ import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Gatekeeper.*;
 import frc.robot.commands.Indexer.*;
 import frc.robot.commands.Shooter.*;
-import frc.robot.commands.Autonomous.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -55,19 +54,16 @@ public class ModularAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.retract();
-
     while (m_timer.get() < 5) {
+      m_intake.retract();
       m_indexer.setDefaultCommand(new IndexerController(m_indexer, () -> 1.0));
       m_gatekeeper.setDefaultCommand(new GatekeeperController(m_gatekeeper, () -> 1.0));
       m_shooter.setDefaultCommand(new ShooterController(m_shooter, () -> 1.0));
     }
-
     while (m_timer.get() > 5 && m_timer.get() < 5 + m_time) {
       m_drivetrain.tankDrive(m_speed, m_speed);
+      m_intake.extend();
     }
-
-    if (m_timer.get() == 5) m_intake.extend();
   }
 
   // Called once the command ends or is interrupted.

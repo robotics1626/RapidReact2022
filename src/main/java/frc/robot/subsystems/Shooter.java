@@ -83,11 +83,8 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("D Gain", kD);
         SmartDashboard.putNumber("I Zone", kIz);
         SmartDashboard.putNumber("Feed Forward", kFF);
-        //SmartDashboard.putNumber("Max Output", kMaxOutput);
-        //SmartDashboard.putNumber("Min Output", kMinOutput);
 
-        /** Display the Max RPM on the dashboard */
-        //SmartDashboard.putNumber("Max RPM", kMaxRPM);
+        SmartDashboard.putBoolean("Shooting", false);
     }
 
     public void ShooterController(double input) {
@@ -116,9 +113,6 @@ public class Shooter extends SubsystemBase {
         double max = SmartDashboard.getNumber("Max Output", kMaxOutput);
         double min = SmartDashboard.getNumber("Min Output", kMinOutput);
 
-        /** Read the Max RPM from the dashboard */
-        //double maxRPM = SmartDashboard.getNumber("MaxRPM", kMaxRPM);
-
         /** Write the PID coefficients to the controller from the dashboard. */
         if(p != kP) m_pidController.setP(p); kP = p;
         if(i != kI) m_pidController.setI(i); kI = i;
@@ -130,14 +124,10 @@ public class Shooter extends SubsystemBase {
             kMinOutput = min; kMaxOutput = max;
         }
 
-        /** Write the max RPM to its variable from the dashboard */
-        //if(maxRPM != kMaxRPM) kMaxRPM = maxRPM;
-
-        /** Display the max velocity, set point, and velocity on the dashboard. */
-        //SmartDashboard.putNumber("Max RPM", maxRPM);
+        /** Display the set point and velocity on the dashboard. */
         SmartDashboard.putNumber("SetPoint", setPoint);
         SmartDashboard.putNumber("Shooter Velocity", m_encoder.getVelocity());
-        if (m_encoder.getVelocity() >= setPoint - 50 || m_encoder.getVelocity() <= setPoint + 50) {
+        if (m_encoder.getVelocity() >= setPoint - 100 && m_encoder.getVelocity() <= setPoint + 100 && setPoint > 0) {
             SmartDashboard.putBoolean("Shooting", true);
         } else {
             SmartDashboard.putBoolean("Shooting", false);
