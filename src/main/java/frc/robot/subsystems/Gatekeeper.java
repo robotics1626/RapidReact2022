@@ -34,8 +34,10 @@ public class Gatekeeper extends SubsystemBase {
     }
 
     public void GatekeeperController(double speed) {
-        if (SmartDashboard.getBoolean("Indexing", false)) {
+        if (SmartDashboard.getBoolean("Indexing", false) && SmartDashboard.getBoolean("Shooting", false)) {
             m_gatekeeper.set(speed);
+        } else if (SmartDashboard.getBoolean("Indexing", false) && !SmartDashboard.getBoolean("Shooting", false)){
+            m_gatekeeper.set(-0.5);
         } else {
             stop();
         }
@@ -46,8 +48,6 @@ public class Gatekeeper extends SubsystemBase {
     }
 
     @Override
-    public void periodic() {
-        
-    }
+    public void periodic() {}
 
 }
