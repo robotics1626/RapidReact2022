@@ -42,7 +42,7 @@ public class RobotContainer {
   private final Climber m_climber = new Climber();
 
   /** Autonomous */
-  private final ModularAuto m_modularAuto = new ModularAuto(m_drivetrain);
+  private final ModularAuto m_modularAuto = new ModularAuto(m_drivetrain, m_intake, m_indexer, m_gatekeeper, m_shooter, m_climber);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
