@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.Timer;
 
 import frc.robot.subsystems.*;
 
-import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Gatekeeper.*;
 import frc.robot.commands.Indexer.*;
 import frc.robot.commands.Shooter.*;
@@ -27,7 +26,7 @@ public class ModularAuto extends CommandBase {
 
   private final Timer m_timer = new Timer();
 
-  private double m_time, m_speed;
+  private double m_time, m_speed, m_delay;
 
   // Use addRequirements() here to declare subsystem dependencies.
   public ModularAuto(Drivetrain drivetrain, Intake intake, Indexer indexer, Gatekeeper gatekeeper, Shooter shooter, Climber climber) {
@@ -45,8 +44,9 @@ public class ModularAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_time = SmartDashboard.getNumber("A.Duration", 2);
+    m_time = SmartDashboard.getNumber("A.Duration", 2.5);
     m_speed = SmartDashboard.getNumber("A.Speed", -0.75);
+    m_delay = SmartDashboard.getNumber("A.Delay", 5.0);
     m_timer.reset();
     m_timer.start();
   }
@@ -54,21 +54,29 @@ public class ModularAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    while (m_timer.get() < 5) {
+    while (m_timer.get() <= 2.5) {
       m_intake.retract();
+      m_drivetrain.tankDrive(0.25, 0.25);
+    }
+    while (m_timer.get() <= m_delay) {
       m_indexer.setDefaultCommand(new IndexerController(m_indexer, () -> 1.0));
       m_gatekeeper.setDefaultCommand(new GatekeeperController(m_gatekeeper, () -> 1.0));
       m_shooter.setDefaultCommand(new ShooterController(m_shooter, () -> 1.0));
     }
-    while (m_timer.get() > 5 && m_timer.get() < 5 + m_time) {
+    while (m_timer.get() >= m_delay && m_timer.get() < m_delay + m_time) {
       m_drivetrain.tankDrive(m_speed, m_speed);
-      m_intake.extend();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_drivetrain.stop();
+    m_intake.stop();
+    m_indexer.stop();
+    m_gatekeeper.stop();
+    m_intake.extend();
+  }
 
   // Returns true when the command should end.
   @Override

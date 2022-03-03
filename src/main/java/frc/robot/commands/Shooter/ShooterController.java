@@ -5,16 +5,20 @@
 package frc.robot.commands.Shooter;
 
 import java.util.function.DoubleSupplier;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
 public class ShooterController extends CommandBase {
     private final Shooter m_shooter;
     private final DoubleSupplier m_input;
+    private double m_maxRpm;
 
     public ShooterController(Shooter shooter, DoubleSupplier input) {
         m_shooter = shooter;
         m_input = input;
+        m_maxRpm = 3650;
         addRequirements(m_shooter);
     }
 
@@ -23,13 +27,18 @@ public class ShooterController extends CommandBase {
 
     @Override
     public void execute() {
-        m_shooter.ShooterController(m_input.getAsDouble());
+        m_maxRpm = SmartDashboard.getNumber("Preferred RPM", m_maxRpm);
+        if (m_input.getAsDouble() > 0.5) {
+            m_shooter.ShooterController(m_maxRpm);
+            //SmartDashboard.putBoolean("Shooting", true);
+        } else end(true);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         m_shooter.stop();
+        SmartDashboard.putBoolean("Shooting", false);
     }
 
     // Returns true when the command should end.
