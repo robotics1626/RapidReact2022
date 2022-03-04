@@ -41,9 +41,12 @@ public class ModularAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_delay = 5.0;
     m_time = 2.5;
     m_speed = -0.75;
-    m_delay = 5.0;
+    SmartDashboard.putNumber("Auto Delay", m_delay);
+    SmartDashboard.putNumber("Auto Speed", m_speed);
+    SmartDashboard.putNumber("Auto Length", m_time);
     m_timer.reset();
     m_timer.start();
   }
@@ -51,9 +54,12 @@ public class ModularAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    while (m_timer.get() <= 2.5) {
+    m_delay = SmartDashboard.getNumber("Auto Delay", m_delay);
+    m_speed = SmartDashboard.getNumber("Auto Speed", m_speed);
+    m_time = SmartDashboard.getNumber("Auto Length", m_time);
+    while (m_timer.get() <= m_time) {
       m_intake.retract();
-      m_drivetrain.tankDrive(0.25, 0.25);
+      m_drivetrain.tankDrive(m_speed, m_speed);
     }
     while (m_timer.get() <= m_delay) {
       m_indexer.setDefaultCommand(new IndexerController(m_indexer, () -> 1.0));
