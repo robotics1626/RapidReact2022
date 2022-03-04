@@ -60,6 +60,7 @@ public class ModularAuto extends CommandBase {
     m_delay = SmartDashboard.getNumber("Auto Delay", m_delay);
     m_speed = SmartDashboard.getNumber("Auto Speed", m_speed);
     m_time = SmartDashboard.getNumber("Auto Length", m_time);
+    m_shoot = SmartDashboard.getBoolean("Auto Shooter", m_shoot);
     while (m_timer.get() <= m_delay && m_shoot) {
       m_intake.retract();
       m_indexer.setDefaultCommand(new IndexerController(m_indexer, () -> 1.0));
