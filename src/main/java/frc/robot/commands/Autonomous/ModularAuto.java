@@ -27,6 +27,7 @@ public class ModularAuto extends CommandBase {
   private final Timer m_timer = new Timer();
 
   private double m_time, m_speed, m_delay;
+  private boolean m_shoot;
 
   // Use addRequirements() here to declare subsystem dependencies.
   public ModularAuto(Drivetrain drivetrain, Intake intake, Indexer indexer, Gatekeeper gatekeeper, Shooter shooter, Climber climber) {
@@ -44,9 +45,11 @@ public class ModularAuto extends CommandBase {
     m_delay = 5.0;
     m_time = 2.5;
     m_speed = -0.75;
+    m_shoot = true;
     SmartDashboard.putNumber("Auto Delay", m_delay);
     SmartDashboard.putNumber("Auto Speed", m_speed);
     SmartDashboard.putNumber("Auto Length", m_time);
+    SmartDashboard.putBoolean("Auto Shooter", m_shoot);
     m_timer.reset();
     m_timer.start();
   }
@@ -57,17 +60,15 @@ public class ModularAuto extends CommandBase {
     m_delay = SmartDashboard.getNumber("Auto Delay", m_delay);
     m_speed = SmartDashboard.getNumber("Auto Speed", m_speed);
     m_time = SmartDashboard.getNumber("Auto Length", m_time);
-    while (m_timer.get() <= m_time) {
+    while (m_timer.get() <= m_delay && m_shoot) {
       m_intake.retract();
-      m_drivetrain.tankDrive(m_speed, m_speed);
-    }
-    while (m_timer.get() <= m_delay) {
       m_indexer.setDefaultCommand(new IndexerController(m_indexer, () -> 1.0));
       m_gatekeeper.setDefaultCommand(new GatekeeperController(m_gatekeeper, () -> 1.0));
       m_shooter.setDefaultCommand(new ShooterController(m_shooter, () -> 1.0));
     }
     while (m_timer.get() >= m_delay && m_timer.get() < m_delay + m_time) {
       m_drivetrain.tankDrive(m_speed, m_speed);
+      m_intake.extend();
     }
   }
 
