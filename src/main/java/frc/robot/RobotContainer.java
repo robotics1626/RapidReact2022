@@ -95,8 +95,8 @@ public class RobotContainer {
 
     /** Climber Controls */
     /** The Operator's A and B buttons toggle the climber's claws.*/
-    new JoystickButton(m_operator, Button.kA.value).whenPressed(() -> m_climber.toggle(0));
-    new JoystickButton(m_operator, Button.kB.value).whenPressed(() -> m_climber.toggle(1));
+    //new JoystickButton(m_operator, Button.kA.value).whenPressed(() -> m_climber.toggle(0));
+    //new JoystickButton(m_operator, Button.kB.value).whenPressed(() -> m_climber.toggle(1));
     /** The Operator's bumpers spin the climber's arms.*/
     new JoystickButton(m_operator, Button.kLeftBumper.value).whileActiveContinuous(() -> m_climber.spin(0.25));
     new JoystickButton(m_operator, Button.kRightBumper.value).whileActiveContinuous(() -> m_climber.spin(-0.25));

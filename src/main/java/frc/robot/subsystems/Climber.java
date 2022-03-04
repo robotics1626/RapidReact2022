@@ -6,61 +6,29 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
 
-    CANSparkMax m_climberSpinner = new CANSparkMax(Constants.CLIMBER_MOTOR, MotorType.kBrushless);
-    
-    DoubleSolenoid m_climberLeftUpper = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_LEFT_UPPER[0], Constants.CLIMBER_LEFT_UPPER[1]);
-    DoubleSolenoid m_climberLeftLower = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_LEFT_LOWER[0], Constants.CLIMBER_LEFT_LOWER[1]);
-
-    DoubleSolenoid m_climberRightUpper = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_RIGHT_UPPER[0], Constants.CLIMBER_RIGHT_UPPER[1]);
-    DoubleSolenoid m_climberRightLower = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_RIGHT_LOWER[0], Constants.CLIMBER_RIGHT_LOWER[1]);
+    CANSparkMax m_climber = new CANSparkMax(Constants.CLIMBER_MOTOR, MotorType.kBrushless);
 
     public Climber() {
-        m_climberSpinner.setIdleMode(IdleMode.kBrake);
-
-        m_climberLeftUpper.set(Value.kForward);
-        m_climberLeftLower.set(Value.kForward);
-
-        m_climberRightUpper.set(Value.kForward);
-        m_climberRightLower.set(Value.kForward);
+        m_climber.setIdleMode(IdleMode.kBrake);
+        m_climber.setSoftLimit(SoftLimitDirection.kForward, 10);
+        m_climber.setSoftLimit(SoftLimitDirection.kReverse, 10);
     }
 
     public void spin(double input){
-        m_climberSpinner.set(input);
-    }
-
-    public void toggle(int side) {
-        switch (side) {
-            case 0:
-                m_climberLeftUpper.toggle();
-                m_climberRightUpper.toggle();
-                break;
-            case 1:
-                m_climberLeftLower.toggle();
-                m_climberRightLower.toggle();
-                break;
-        }
+        m_climber.set(input);
     }
 
     public void stop() {
-        m_climberSpinner.stopMotor();
-
-        m_climberLeftUpper.set(Value.kOff);
-        m_climberLeftLower.set(Value.kOff);
-        
-        m_climberRightUpper.set(Value.kOff);
-        m_climberRightLower.set(Value.kOff);
+        m_climber.stopMotor();
     }
 
     @Override
