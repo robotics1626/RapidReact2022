@@ -10,17 +10,26 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
 
-    CANSparkMax m_climber = new CANSparkMax(Constants.CLIMBER_MOTOR, MotorType.kBrushless);
+    CANSparkMax m_climber;
+    private CANSparkMax m_motor;
+    private RelativeEncoder m_encoder;
 
     public Climber() {
+        m_climber = new CANSparkMax(Constants.CLIMBER_MOTOR, MotorType.kBrushless);
+        m_encoder = m_climber.getEncoder();
         m_climber.setIdleMode(IdleMode.kBrake);
-        //m_climber.setSoftLimit(SoftLimitDirection.kForward, 10);
-        //m_climber.setSoftLimit(SoftLimitDirection.kReverse, 10);
+        m_climber.setSoftLimit(SoftLimitDirection.kForward, 150);
+        m_climber.setSoftLimit(SoftLimitDirection.kReverse, 0);
+        m_encoder.setPosition(0);
     }
 
     public void spin(double input){
@@ -34,6 +43,7 @@ public class Climber extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        SmartDashboard.putNumber("Climber Position", m_encoder.getPosition());
     }
 
 }
