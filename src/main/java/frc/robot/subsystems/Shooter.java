@@ -88,7 +88,8 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putBoolean("Shooting", false);
 
         /** Display the intended RPM of the shooter. */
-        SmartDashboard.putNumber("Max RPM", kMaxRpm);
+        //SmartDashboard.putNumber("Max RPM", kMaxRpm);
+        SmartDashboard.putNumber("Preferred RPM", 3600);
     }
 
     public void ShooterController(double input) {

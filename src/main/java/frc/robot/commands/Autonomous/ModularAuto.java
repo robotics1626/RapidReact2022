@@ -30,9 +30,6 @@ public class ModularAuto extends CommandBase {
 
   // Use addRequirements() here to declare subsystem dependencies.
   public ModularAuto(Drivetrain drivetrain, Intake intake, Indexer indexer, Gatekeeper gatekeeper, Shooter shooter, Climber climber) {
-    SmartDashboard.putNumber("A.Duration", 2);
-    SmartDashboard.putNumber("A.Speed", -0.75);
-    
     m_drivetrain = drivetrain;
     m_indexer = indexer;
     m_intake = intake;
@@ -44,9 +41,9 @@ public class ModularAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_time = SmartDashboard.getNumber("A.Duration", 2.5);
-    m_speed = SmartDashboard.getNumber("A.Speed", -0.75);
-    m_delay = SmartDashboard.getNumber("A.Delay", 5.0);
+    m_time = 2.5;
+    m_speed = -0.75;
+    m_delay = 5.0;
     m_timer.reset();
     m_timer.start();
   }
