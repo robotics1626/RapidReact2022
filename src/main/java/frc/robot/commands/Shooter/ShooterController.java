@@ -31,7 +31,7 @@ public class ShooterController extends CommandBase {
         if (m_input.getAsDouble() > 0.5) {
             m_shooter.ShooterController(m_maxRpm);
             //SmartDashboard.putBoolean("Shooting", true);
-        } else end(true);
+        } else m_shooter.stop();
     }
 
     // Called once the command ends or is interrupted.

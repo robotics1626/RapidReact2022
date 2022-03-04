@@ -19,8 +19,8 @@ public class Climber extends SubsystemBase {
 
     public Climber() {
         m_climber.setIdleMode(IdleMode.kBrake);
-        m_climber.setSoftLimit(SoftLimitDirection.kForward, 10);
-        m_climber.setSoftLimit(SoftLimitDirection.kReverse, 10);
+        //m_climber.setSoftLimit(SoftLimitDirection.kForward, 10);
+        //m_climber.setSoftLimit(SoftLimitDirection.kReverse, 10);
     }
 
     public void spin(double input){
