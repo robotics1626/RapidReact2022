@@ -42,10 +42,10 @@ public class ModularAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_delay = 5.0;
-    m_time = 2.5;
-    m_speed = -0.75;
-    m_shoot = true;
+    m_delay = 0.0;
+    m_time = 1.0;
+    m_speed = -1.0;
+    m_shoot = false;
     SmartDashboard.putNumber("Auto Delay", m_delay);
     SmartDashboard.putNumber("Auto Speed", m_speed);
     SmartDashboard.putNumber("Auto Length", m_time);
