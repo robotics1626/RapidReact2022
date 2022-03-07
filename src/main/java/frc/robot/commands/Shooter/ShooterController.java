@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
 public class ShooterController extends CommandBase {
-    private final Shooter m_shooter;
-    private final DoubleSupplier m_input;
-    private double m_maxRpm;
+    private final Shooter shooter;
+    private final DoubleSupplier input;
+    private double maxRpm;
 
     public ShooterController(Shooter shooter, DoubleSupplier input) {
-        m_shooter = shooter;
-        m_input = input;
-        m_maxRpm = 3600;
-        addRequirements(m_shooter);
+        this.shooter = shooter;
+        this.input = input;
+        this.maxRpm = 3600;
+        addRequirements(shooter);
     }
 
     @Override
@@ -27,17 +27,17 @@ public class ShooterController extends CommandBase {
 
     @Override
     public void execute() {
-        m_maxRpm = SmartDashboard.getNumber("Preferred RPM", m_maxRpm);
-        if (m_input.getAsDouble() > 0.5) {
-            m_shooter.ShooterController(m_maxRpm);
+        maxRpm = SmartDashboard.getNumber("Preferred RPM", maxRpm);
+        if (input.getAsDouble() > 0.5) {
+            shooter.ShooterController(maxRpm);
             //SmartDashboard.putBoolean("Shooting", true);
-        } else m_shooter.stop();
+        } else shooter.stop();
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_shooter.stop();
+        shooter.stop();
         SmartDashboard.putBoolean("Shooting", false);
     }
 

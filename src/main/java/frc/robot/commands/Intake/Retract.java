@@ -2,25 +2,20 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Drivetrain;
-import frc.robot.subsystems.Drivetrain;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import java.util.function.DoubleSupplier;
+import frc.robot.subsystems.Intake;
 
-public class TankDrive extends CommandBase {
+public class Retract extends CommandBase {
+  private Intake intake;
 
-  private Drivetrain drivetrain;
-  private DoubleSupplier leftSpeed, rightSpeed;
-
-  /** Creates a new TankDrive. */
-  public TankDrive(Drivetrain drivetrain, DoubleSupplier leftSpeed, DoubleSupplier rightSpeed) {
+  /** Creates a new Eject. */
+  public Retract(Intake intake) {
     // Use addRequirements() here to declare subsystem dependencies.
-    drivetrain = this.drivetrain;
-    leftSpeed = this.leftSpeed;
-    rightSpeed = this.rightSpeed;
-    addRequirements(drivetrain);
+    intake = this.intake;
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
@@ -30,14 +25,12 @@ public class TankDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.tankDrive(leftSpeed.getAsDouble(), rightSpeed.getAsDouble());
+    intake.retract();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    drivetrain.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

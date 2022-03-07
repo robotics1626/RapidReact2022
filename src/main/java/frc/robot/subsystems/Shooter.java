@@ -22,12 +22,12 @@ public class Shooter extends SubsystemBase {
     private CANSparkMax m_leadMotor, m_followMotor;
     private SparkMaxPIDController m_pidController;
     private RelativeEncoder m_encoder;
-    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, kMaxRpm, setPoint;
+    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, setPoint;
 
     public Shooter() {
         /** Create a new object to control the SPARK MAX motor controllers. */
-        m_leadMotor = new CANSparkMax(Constants.SHOOTER_LEFT, MotorType.kBrushless);
-        m_followMotor = new CANSparkMax(Constants.SHOOTER_RIGHT, MotorType.kBrushless);
+        m_leadMotor = new CANSparkMax(Constants.Shooter.Motor.LEFT, MotorType.kBrushless);
+        m_followMotor = new CANSparkMax(Constants.Shooter.Motor.RIGHT, MotorType.kBrushless);
 
         /**
          * Restore motor controller parameters to factory default until the next controller 
@@ -67,7 +67,6 @@ public class Shooter extends SubsystemBase {
         kFF = 0.000175;
         kMaxOutput = 1;
         kMinOutput = 0;
-        //kMaxRpm = 3650; // 3350
 
         /** Set the PID coefficients. */
         m_pidController.setP(kP);
@@ -88,7 +87,6 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putBoolean("Shooting", false);
 
         /** Display the intended RPM of the shooter. */
-        //SmartDashboard.putNumber("Max RPM", kMaxRpm);
         SmartDashboard.putNumber("Preferred RPM", 3600);
     }
 
@@ -116,8 +114,8 @@ public class Shooter extends SubsystemBase {
         double d = SmartDashboard.getNumber("D Gain", kD);
         double iz = SmartDashboard.getNumber("I Zone", kIz);
         double ff = SmartDashboard.getNumber("Feed Forward", kFF);
-        //double max = SmartDashboard.getNumber("Max Output", kMaxOutput);
-        //double min = SmartDashboard.getNumber("Min Output", kMinOutput);
+        double max = SmartDashboard.getNumber("Max Output", kMaxOutput);
+        double min = SmartDashboard.getNumber("Min Output", kMinOutput);
 
         /** Write the PID coefficients to the controller from the dashboard. */
         if(p != kP) m_pidController.setP(p); kP = p;
@@ -125,10 +123,10 @@ public class Shooter extends SubsystemBase {
         if(d != kD) m_pidController.setD(d); kD = d;
         if(iz != kIz) m_pidController.setIZone(iz); kIz = iz;
         if(ff != kFF) m_pidController.setFF(ff); kFF = ff;
-        /*if(max != kMaxOutput || min != kMinOutput) {
+        if(max != kMaxOutput || min != kMinOutput) {
             m_pidController.setOutputRange(min, max);
             kMinOutput = min; kMaxOutput = max;
-        }*/
+        }
 
         /** Display the set point and velocity on the dashboard. */
         SmartDashboard.putNumber("SetPoint", setPoint);

@@ -6,30 +6,42 @@
 
 package frc.robot.commands.Autonomous;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-import static frc.robot.RobotContainer.*;
+import static frc.robot.Robot.*;
 
 import frc.robot.commands.Drivetrain.TankDrive;
 import frc.robot.commands.Gatekeeper.GatekeeperController;
 import frc.robot.commands.Indexer.IndexerController;
 import frc.robot.commands.Shooter.ShooterController;
-
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-
+import frc.robot.commands.Intake.*;
 
 public class Autonomous extends SequentialCommandGroup {
-  /** Creates a new BasicAuto. */
-  public Autonomous() {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+  /** Creates a new autonomous command. */
+  /*public Autonomous() {
     addCommands(
-      new IndexerController(m_indexer, () -> 1.0).alongWith(
-        new GatekeeperController(m_gatekeeper, () -> 1.0),
-        new ShooterController(m_shooter, () -> 1.0)
+      new IndexerController(INDEXER, () -> 1.0).alongWith(
+        new GatekeeperController(GATEKEEPER, () -> 1.0),
+        new ShooterController(SHOOTER, () -> 1.0)
       ).withTimeout(5),
-      //new WaitCommand(5),
-      new TankDrive(m_drivetrain, () -> -0.75, () -> -0.75).withTimeout(2)
+      new TankDrive(DRIVETRAIN, () -> -0.5, () -> -0.5).withTimeout(3)
+    );
+  }*/
+  public Autonomous() {
+    addCommands(
+      new InstantCommand(INTAKE::extend, INTAKE),
+      new TankDrive(DRIVETRAIN, () -> 0.5, () -> 0.5).alongWith(
+        new Retrieve(INTAKE),
+        new IndexerController(INDEXER, () -> 1.0)
+      ).withTimeout(3),
+      new InstantCommand(INTAKE::retract, INTAKE),
+      new TankDrive(DRIVETRAIN, () -> -0.5, () -> 0.5).withTimeout(3),
+      new TankDrive(DRIVETRAIN, () -> 0.5, () -> 0.5).withTimeout(3),
+      new IndexerController(INDEXER, () -> 1.0).alongWith(
+        new GatekeeperController(GATEKEEPER, () -> 1.0),
+        new ShooterController(SHOOTER, () -> 1.0)
+      ).withTimeout(6)
     );
   }
 }

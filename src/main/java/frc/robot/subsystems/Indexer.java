@@ -21,8 +21,8 @@ public class Indexer extends SubsystemBase {
 
     public Indexer() {
         /** Create a new object to control the SPARK MAX motor controllers. */
-        m_leadMotor = new CANSparkMax(Constants.INDEXER_LEFT, MotorType.kBrushless);
-        m_followMotor = new CANSparkMax(Constants.INDEXER_RIGHT, MotorType.kBrushless);
+        m_leadMotor = new CANSparkMax(Constants.Indexer.Motor.LEFT, MotorType.kBrushless);
+        m_followMotor = new CANSparkMax(Constants.Indexer.Motor.RIGHT, MotorType.kBrushless);
 
         /**
          * Restore motor controller parameters to factory default until the next controller 

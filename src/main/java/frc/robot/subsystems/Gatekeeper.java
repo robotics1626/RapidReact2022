@@ -18,7 +18,7 @@ public class Gatekeeper extends SubsystemBase {
     private CANSparkMax m_gatekeeper;
 
     public Gatekeeper() {
-        m_gatekeeper = new CANSparkMax(Constants.GATEKEEPER, MotorType.kBrushless);
+        m_gatekeeper = new CANSparkMax(Constants.Gatekeeper.MOTOR, MotorType.kBrushless);
         /**
          * Restore motor controller parameters to factory default until the next controller 
          * reboot.

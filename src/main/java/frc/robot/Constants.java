@@ -14,11 +14,14 @@ package frc.robot;
  */
 public final class Constants {
     /** Operator and Driver Controllers */
-    public static final int CONTROLLER_OPERATOR = 0;
-    public static final int JOYSTICK_LEFT = 1;
-    public static final int JOYSTICK_RIGHT = 2;
-    public static final double JOYSTICK_CURVE   = 5/3;
-    //public static final double DRIVER_INPUT_CURVE = 3;
+    public static final class Controller {
+        public static final int OPERATOR = 0;
+        public static final class Driver {
+            public static final int LEFT = 1;
+            public static final int RIGHT = 2;
+            public static final double CURVE = 3;
+        }
+    }
 
     /** Power Distribution Hub */
     public static final int PDH = 1;
@@ -30,34 +33,51 @@ public final class Constants {
     public static final int COMPRESSOR = 0;
 
     /** Drive Train */
-    public static final int DRIVE_FRONT_LEFT = 3;
-    public static final int DRIVE_REAR_LEFT = 1;
-    public static final int DRIVE_FRONT_RIGHT = 4;
-    public static final int DRIVE_REAR_RIGHT = 2;
-    
+    public static final class Drivetrain {
+        public static final class Motor {
+            public static final int LEFT_FRONT = 3;
+            public static final int LEFT_REAR = 1;
+            public static final int RIGHT_FRONT = 4;
+            public static final int RIGHT_REAR = 2;
+        }
+    }
+
     /** Intake */
-    public static final int INTAKE_MOTOR_LEFT = 5;
-    public static final int INTAKE_MOTOR_RIGHT = 6;
-    public static final double INTAKE_SPEED = 0.8;
-    public static final int [] INTAKE_ARM_LEFT = new int[] {8, 9};
-    public static final int [] INTAKE_ARM_RIGHT = new int[] {6, 7};
+    public static final class Intake {
+        public static final class Motor {
+            public static final int LEFT = 5;
+            public static final int RIGHT = 6;
+        }
+        public static final class Piston {
+            public static final int [] LEFT = new int[] {8, 9};
+            public static final int [] RIGHT = new int[] {6, 7};
+        }
+    }
 
     /** Indexer */
-    public static final int INDEXER_LEFT = 7;
-    public static final int INDEXER_RIGHT = 8;
+    public static final class Indexer {
+        public static final class Motor {
+            public static final int LEFT = 7;
+            public static final int RIGHT = 8;
+        }
+    }
 
     /** Gatekeeper */
-    public static final int GATEKEEPER = 9;
+    public static final class Gatekeeper {
+        public static final int MOTOR = 9;
+        
+    }
 
     /** Shooter */
-    public static final int SHOOTER_LEFT = 10;
-    public static final int SHOOTER_RIGHT = 11;
+    public static final class Shooter {
+        public static final class Motor {
+            public static final int LEFT = 10;
+            public static final int RIGHT = 11;
+        }
+    }
 
     /** Climber */
-    public static final int CLIMBER_MOTOR = 12;
-    public static final int [] CLIMBER_LEFT_UPPER = new int[] {10, 11};
-    public static final int [] CLIMBER_LEFT_LOWER = new int[] {5, 4};
-    public static final int [] CLIMBER_RIGHT_UPPER = new int[] {12, 13};
-    public static final int [] CLIMBER_RIGHT_LOWER = new int[] {3, 2};
-    
+    public static final class Climber {
+        public static final int MOTOR = 12;
+    }
 }

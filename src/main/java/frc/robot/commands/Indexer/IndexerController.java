@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Indexer;
 
 public class IndexerController extends CommandBase {
-    private final Indexer m_indexer;
-    private final DoubleSupplier m_input;
+    private final Indexer indexer;
+    private final DoubleSupplier input;
 
     public IndexerController(Indexer indexer, DoubleSupplier input) {
-        m_indexer = indexer;
-        m_input = input;
-        addRequirements(m_indexer);
+        this.indexer = indexer;
+        this.input = input;
+        addRequirements(indexer);
     }
 
     @Override
@@ -23,13 +23,13 @@ public class IndexerController extends CommandBase {
 
     @Override
     public void execute() {
-        m_indexer.IndexerController(m_input.getAsDouble());
+        indexer.IndexerController(input.getAsDouble());
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_indexer.stop();
+        indexer.stop();
     }
 
     // Returns true when the command should end.

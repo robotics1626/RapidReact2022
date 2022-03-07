@@ -22,8 +22,8 @@ public class Intake extends SubsystemBase {
 
     public Intake() {
         /** Create a new object to control the SPARK MAX motor controllers. */
-        m_leadMotor = new CANSparkMax(Constants.INTAKE_MOTOR_LEFT, MotorType.kBrushless);
-        m_followMotor = new CANSparkMax(Constants.INTAKE_MOTOR_RIGHT, MotorType.kBrushless);
+        m_leadMotor = new CANSparkMax(Constants.Intake.Motor.LEFT, MotorType.kBrushless);
+        m_followMotor = new CANSparkMax(Constants.Intake.Motor.RIGHT, MotorType.kBrushless);
 
         /**
          * Restore motor controller parameters to factory default until the next controller 
@@ -48,8 +48,8 @@ public class Intake extends SubsystemBase {
         m_followMotor.setIdleMode(IdleMode.kCoast);
 
         /** Construct a pair of double solenoid for REV pneumatics modules. */
-        m_intakeArmLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.INTAKE_ARM_LEFT[0], Constants.INTAKE_ARM_LEFT[1]);
-        m_intakeArmRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.INTAKE_ARM_RIGHT[0], Constants.INTAKE_ARM_RIGHT[1]);
+        m_intakeArmLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Intake.Piston.LEFT[0], Constants.Intake.Piston.LEFT[1]);
+        m_intakeArmRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Intake.Piston.RIGHT[0], Constants.Intake.Piston.RIGHT[1]);
 
         /** Set the intake arms to contract by default. */
         m_intakeArmLeft.set(Value.kReverse);
@@ -58,12 +58,12 @@ public class Intake extends SubsystemBase {
 
     /** Retrieve cargo for transportation. */
     public void retrieve() {
-        m_leadMotor.set(Constants.INTAKE_SPEED);
+        m_leadMotor.set(0.8);
     }
 
     /** Eject cargo from the robot. */
     public void eject() {
-        m_leadMotor.set(-Constants.INTAKE_SPEED);
+        m_leadMotor.set(-0.8);
     }
 
     /** Toggle the state of the intake arms. */
