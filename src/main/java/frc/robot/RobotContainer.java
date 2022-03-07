@@ -34,15 +34,15 @@ public class RobotContainer {
   private final Joystick m_driverRight = new Joystick(Constants.JOYSTICK_RIGHT);
 
   /** Robot Components */
-  private final Drivetrain m_drivetrain = new Drivetrain();
-  private final Intake m_intake = new Intake();
-  private final Indexer m_indexer = new Indexer();
-  private final Gatekeeper m_gatekeeper = new Gatekeeper();
-  private final Shooter m_shooter = new Shooter();
-  private final Climber m_climber = new Climber();
+  public static final Drivetrain m_drivetrain = new Drivetrain();
+  public static final Intake m_intake = new Intake();
+  public static final Indexer m_indexer = new Indexer();
+  public static final Gatekeeper m_gatekeeper = new Gatekeeper();
+  public static final Shooter m_shooter = new Shooter();
+  public static final Climber m_climber = new Climber();
 
   /** Autonomous */
-  private final ModularAuto m_modularAuto = new ModularAuto(m_drivetrain, m_intake, m_indexer, m_gatekeeper, m_shooter, m_climber);
+  private final Autonomous m_auto = new Autonomous();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -114,6 +114,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return m_modularAuto;
+    return m_auto;
   }
 }
