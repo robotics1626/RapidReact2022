@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import static frc.robot.RobotContainer.*;
 
-import frc.robot.commands.Drivetrain.TankDrive;
-import frc.robot.commands.Gatekeeper.GatekeeperController;
-import frc.robot.commands.Indexer.IndexerController;
-import frc.robot.commands.Shooter.ShooterController;
+import frc.robot.commands.Drivetrain.*;
+import frc.robot.commands.Gatekeeper.*;
+import frc.robot.commands.Indexer.*;
+import frc.robot.commands.Shooter.*;
 
 public class Autonomous extends SequentialCommandGroup {
     public Autonomous() {

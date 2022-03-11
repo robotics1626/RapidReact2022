@@ -16,24 +16,25 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
-    /** Create new objects to control the SPARK MAX motor controllers. */
-    private final CANSparkMax m_motorFrontLeft = new CANSparkMax(Constants.DRIVE_FRONT_LEFT, MotorType.kBrushless);
-    private final CANSparkMax m_motorRearLeft = new CANSparkMax(Constants.DRIVE_REAR_LEFT, MotorType.kBrushless);
-    private final CANSparkMax m_motorFrontRight = new CANSparkMax(Constants.DRIVE_FRONT_RIGHT, MotorType.kBrushless);
-    private final CANSparkMax m_motorRearRight = new CANSparkMax(Constants.DRIVE_REAR_RIGHT, MotorType.kBrushless);
-    
-    /** Create new motor controller groups for the left and right side of the robot. */
-    private final MotorControllerGroup m_motorsLeft = new MotorControllerGroup(m_motorFrontLeft, m_motorRearLeft);
-    private final MotorControllerGroup m_motorsRight = new MotorControllerGroup(m_motorFrontRight, m_motorRearRight);
 
-    /** Construct a drive train for driving differential drive. */
-    private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_motorsLeft, m_motorsRight);
+    private CANSparkMax m_motorFrontLeft, m_motorRearLeft, m_motorFrontRight, m_motorRearRight;
+    private MotorControllerGroup m_motorsLeft, m_motorsRight;
+    private DifferentialDrive m_drivetrain;
 
-    /**
-    * This function is run when the robot is first started up and should be used for any
-    * initialization code.
-    */
     public Drivetrain() {
+        /** Create new objects to control the SPARK MAX motor controllers. */
+        m_motorFrontLeft = new CANSparkMax(Constants.DRIVE_FRONT_LEFT, MotorType.kBrushless);
+        m_motorRearLeft = new CANSparkMax(Constants.DRIVE_REAR_LEFT, MotorType.kBrushless);
+        m_motorFrontRight = new CANSparkMax(Constants.DRIVE_FRONT_RIGHT, MotorType.kBrushless);
+        m_motorRearRight = new CANSparkMax(Constants.DRIVE_REAR_RIGHT, MotorType.kBrushless);
+
+        /** Create new motor controller groups for the left and right side of the robot. */
+        m_motorsLeft = new MotorControllerGroup(m_motorFrontLeft, m_motorRearLeft);
+        m_motorsRight = new MotorControllerGroup(m_motorFrontRight, m_motorRearRight);
+
+        /** Construct a drive train for driving differential drive. */
+        m_drivetrain = new DifferentialDrive(m_motorsLeft, m_motorsRight);
+
          /**
          * Restore motor controller parameters to factory default until the next controller 
          * reboot.

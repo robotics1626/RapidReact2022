@@ -11,7 +11,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,7 +19,6 @@ import frc.robot.Constants;
 public class Climber extends SubsystemBase {
 
     CANSparkMax m_climber;
-    private CANSparkMax m_motor;
     private RelativeEncoder m_encoder;
 
     public Climber() {
