@@ -17,33 +17,20 @@ import frc.robot.commands.Indexer.IndexerController;
 import frc.robot.commands.Shooter.ShooterController;
 
 public class Autonomous extends SequentialCommandGroup {
-  /** Creates a new BasicAuto. */
-  /*public Autonomous() {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new InstantCommand(m_intake::retract, m_intake),
-      new ShooterController(m_shooter, () -> 1.0).alongWith(
-        new IndexerController(m_indexer, () -> -1.0),
-        new GatekeeperController(m_gatekeeper, () -> 1.0)
-      ).withTimeout(2),
-      new TankDrive(m_drivetrain, () -> -0.75, () -> -0.75).withTimeout(1)
-    );*/
-
     public Autonomous() {
       addCommands(
         new InstantCommand(m_intake::extend, m_intake),
         new TankDrive(m_drivetrain, () -> 0.5, () -> 0.5).alongWith(
           new InstantCommand(m_intake::retrieve, m_intake),
-          new IndexerController(m_indexer, () -> 1.0)
+          new IndexerController(m_indexer, () -> -1.0)
         ).withTimeout(3),
         new InstantCommand(m_intake::retract, m_intake),
-        new TankDrive(m_drivetrain, () -> -0.5, () -> 0.5).withTimeout(3),
+        new TankDrive(m_drivetrain, () -> -0.5, () -> 0.5).withTimeout(1),
         new TankDrive(m_drivetrain, () -> 0.5, () -> 0.5).withTimeout(3),
-        new IndexerController(m_indexer, () -> 1.0).alongWith(
-          new GatekeeperController(m_gatekeeper, () -> 1.0),
-          new ShooterController(m_shooter, () -> 1.0)
-        ).withTimeout(6)
+        new ShooterController(m_shooter, () -> 1.0).alongWith(
+          new IndexerController(m_indexer, () -> -1.0),
+          new GatekeeperController(m_gatekeeper, () -> 1.0)
+        ).withTimeout(5)
       );
   }
 }
