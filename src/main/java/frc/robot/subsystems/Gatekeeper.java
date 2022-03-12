@@ -44,6 +44,10 @@ public class Gatekeeper extends SubsystemBase {
         }
     }
 
+    public void manual() {
+        m_gatekeeper.set(-0.75);
+    }
+
     public void stop() {
         m_gatekeeper.stopMotor();
     }

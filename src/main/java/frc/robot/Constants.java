@@ -39,8 +39,8 @@ public final class Constants {
     public static final int INTAKE_MOTOR_LEFT = 5;
     public static final int INTAKE_MOTOR_RIGHT = 6;
     public static final double INTAKE_SPEED = 0.8;
-    public static final int [] INTAKE_ARM_LEFT = new int[] {8, 9};
-    public static final int [] INTAKE_ARM_RIGHT = new int[] {6, 7};
+    public static final int [] INTAKE_ARM_LEFT = new int[] {9, 8};
+    public static final int [] INTAKE_ARM_RIGHT = new int[] {7, 6};
 
     /** Indexer */
     public static final int INDEXER_LEFT = 7;
