@@ -22,7 +22,7 @@ public class Shooter extends SubsystemBase {
     private CANSparkMax m_leadMotor, m_followMotor;
     private SparkMaxPIDController m_pidController;
     private RelativeEncoder m_encoder;
-    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, kMaxRpm, setPoint;
+    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, setPoint;
 
     public Shooter() {
         /** Create a new object to control the SPARK MAX motor controllers. */
