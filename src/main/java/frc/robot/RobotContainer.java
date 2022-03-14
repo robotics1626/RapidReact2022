@@ -40,6 +40,7 @@ public class RobotContainer {
   public static final Gatekeeper m_gatekeeper = new Gatekeeper();
   public static final Shooter m_shooter = new Shooter();
   public static final Climber m_climber = new Climber();
+  public static final Gyroscope m_gyro = new Gyroscope();
 
   /** Autonomous */
   private final Autonomous m_auto = new Autonomous();
