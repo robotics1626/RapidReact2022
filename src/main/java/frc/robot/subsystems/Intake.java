@@ -82,7 +82,7 @@ public class Intake extends SubsystemBase {
         m_intakeArmRight.set(Value.kReverse);
     }
 
-    /** Set the state of the intake arms to retract. */
+    /** Set the state of the intake arms to extend. */
     public void extend() {
         m_intakeArmLeft.set(Value.kForward);
         m_intakeArmRight.set(Value.kForward);
