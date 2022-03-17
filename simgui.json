@@ -1,0 +1,56 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "SPARK MAX [1]": {
+        "header": {
+          "open": true
+        }
+      },
+      "SPARK MAX [2]": {
+        "header": {
+          "open": true
+        }
+      },
+      "SPARK MAX [3]": {
+        "header": {
+          "open": true
+        }
+      },
+      "SPARK MAX [4]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Climber": "Subsystem",
+      "/LiveWindow/Drivetrain": "Subsystem",
+      "/LiveWindow/Gatekeeper": "Subsystem",
+      "/LiveWindow/Gyroscope": "Subsystem",
+      "/LiveWindow/Indexer": "Subsystem",
+      "/LiveWindow/Intake": "Subsystem",
+      "/LiveWindow/Limelight": "Subsystem",
+      "/LiveWindow/Shooter": "Subsystem",
+      "/LiveWindow/Ungrouped/ADXRS450_Gyro[0]": "Gyro",
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+    }
+  },
+  "NetworkTables": {
+    "LiveWindow": {
+      "Limelight": {
+        "open": true
+      },
+      "open": true
+    },
+    "SmartDashboard": {
+      "open": true
+    },
+    "limelight": {
+      "open": true
+    }
+  }
+}

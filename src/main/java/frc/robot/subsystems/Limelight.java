@@ -4,38 +4,46 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase {
+  
   /** Creates a new Limelight. */
   public Limelight() {
+
   }
 
-  public boolean getValidTargets(){
-    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getBoolean(true);
+  public double redballX(){
+    double redBallX = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    return redBallX;
+  }
+
+  public double redballY(){
+    double redBallY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    return redBallY;
+  }
+
+  public double blueballX(){
+    double blueBallX = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    return blueBallX;
+  }
+
+  public double blueballY(){
+    double blueBallY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    return blueBallY;
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(2);
-    System.out.println(NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0));
 
-    // NetworkTable table = NetworkTableInstance.getDefault().getpipe(1);
-    // NetworkTableEntry tx = table.getEntry("tx");
-    // NetworkTableEntry ty = table.getEntry("ty");
-    // NetworkTableEntry ta = table.getEntry("ta");
-    // NetworkTableEntry pipe = table.getpipe(1);
+  SmartDashboard.putNumber("Red Ball X:",redballX());
+  SmartDashboard.putNumber("Red Ball Y:",redballY());
 
-    // //read values periodically
-    // double x = tx.getDouble(0.0);
-    // double y = ty.getDouble(0.0);
-    // double area = ta.getDouble(0.0);
+  SmartDashboard.putNumber("Blue Ball X:",blueballX());
+  SmartDashboard.putNumber("Blue Ball Y:",blueballY())
 
-    // //post to smart dashboard periodically
-    // SmartDashboard.putNumber("LimelightX", x);
-    // SmartDashboard.putNumber("LimelightY", y);
-    // SmartDashboard.putNumber("LimelightArea", area);
   }
 }
