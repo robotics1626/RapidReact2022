@@ -7,24 +7,39 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase {
+  boolean red = true;
   private NetworkTable table;
   private String tableName;
   /** Creates a new Limelight. */
   public Limelight() {
+    
     tableName = "limelight";
     table = NetworkTableInstance.getDefault().getTable(tableName);
   }
 
-  public double ballY(){
-    setPipeline(2);
-    table.getEntry("pipeline").setNumber(2);
+  public double blueBallY(){
+    setPipeline(1);
     NetworkTableEntry tx = table.getEntry("tx");
     double blueBallX = tx.getDouble(0.0);
     return blueBallX;
   }
 
-  public double ballX(){
+  public double blueBallX(){
     setPipeline(1);
+    NetworkTableEntry ty = table.getEntry("ty");
+    double blueBallY = ty.getDouble(0.0);
+    return blueBallY;
+  }
+
+  public double redBallY(){
+    setPipeline(2);
+    NetworkTableEntry tx = table.getEntry("tx");
+    double blueBallX = tx.getDouble(0.0);
+    return blueBallX;
+  }
+
+  public double redBallX(){
+    setPipeline(2);
     NetworkTableEntry ty = table.getEntry("ty");
     double blueBallY = ty.getDouble(0.0);
     return blueBallY;
@@ -37,14 +52,17 @@ public class Limelight extends SubsystemBase {
 
   @Override
   public void periodic() {
-    table.getEntry("ledMode").setNumber(2);
-    setPipeline(1);
-    SmartDashboard.putNumber("Target Ball X:",ballX());
-    SmartDashboard.putNumber("Target Ball Y:",ballY());
-
-    setPipeline(2);
-    SmartDashboard.putNumber("Blue Ball X:",ballX());
-    SmartDashboard.putNumber("Blue Ball Y:",ballY());
+    
+    if(red){
+      SmartDashboard.putNumber("Blue Ball X:",blueBallX());
+      SmartDashboard.putNumber("Blue Ball Y:",blueBallY());
+      red=false;
+    }
+    else{
+      SmartDashboard.putNumber("Red Ball X:",redBallX());
+      SmartDashboard.putNumber("Red Ball Y:",redBallY());
+      red=true;
+    }
   }
 }
 
