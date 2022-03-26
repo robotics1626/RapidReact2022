@@ -90,7 +90,7 @@ public class Intake extends SubsystemBase {
 
     /** This function is called once each time the the command ends or is interrupted. */
     public void stop() {
-        /**
+        /**git
          * Stop motor movement. Motor can be moved again by calling set without having to 
          * re-enable the motor.
          */

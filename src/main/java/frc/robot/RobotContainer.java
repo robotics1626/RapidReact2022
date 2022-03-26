@@ -103,11 +103,13 @@ public class RobotContainer {
     //new JoystickButton(m_operator, Button.kLeftBumper.value).whileActiveContinuous(() -> m_climber.spin(1.0));
     //new JoystickButton(m_operator, Button.kRightBumper.value).whileActiveContinuous(() -> m_climber.spin(-1.0));
     new JoystickButton(m_operator, Button.kLeftBumper.value)
-      .whenPressed(() -> m_climber.spin(-1.0))
+      .whenPressed(() -> m_climber.climb(-1.0))
       .whenReleased(() -> m_climber.stop());
-      new JoystickButton(m_operator, Button.kRightBumper.value)
-      .whenPressed(() -> m_climber.spin(1.0))
+    new JoystickButton(m_operator, Button.kRightBumper.value)
+      .whenPressed(() -> m_climber.climb(1.0))
       .whenReleased(() -> m_climber.stop());
+    new JoystickButton(m_operator, Button.kA.value)
+      .whenReleased(() -> m_climber.traverse());
   }
 
   /**
