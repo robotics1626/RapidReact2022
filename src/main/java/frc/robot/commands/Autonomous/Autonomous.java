@@ -19,13 +19,13 @@ import frc.robot.commands.Shooter.*;
 public class Autonomous extends SequentialCommandGroup {
     public Autonomous() {
       addCommands(
-        new InstantCommand(m_limelight::getPIDBlue, m_limelight),
+        //new InstantCommand(m_limelight::getPIDBlue, m_limelight),
         new InstantCommand(m_intake::extend, m_intake),
         new TankDrive(m_drivetrain, () -> 0.75, () -> 0.75).alongWith(
           new InstantCommand(m_intake::retrieve, m_intake),
           new IndexerController(m_indexer, () -> -0.75),
           new InstantCommand(m_gatekeeper::manual, m_gatekeeper)
-        ).withTimeout(4),
+        ).withTimeout(1.5),
         new InstantCommand(m_gatekeeper::stop, m_gatekeeper).alongWith(
           new InstantCommand(m_intake::stop, m_intake)
         ),
