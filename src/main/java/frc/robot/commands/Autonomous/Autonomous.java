@@ -19,7 +19,6 @@ import frc.robot.commands.Shooter.*;
 public class Autonomous extends SequentialCommandGroup {
     public Autonomous() {
       addCommands(
-        //new InstantCommand(m_limelight::getPIDBlue, m_limelight),
         new InstantCommand(m_intake::extend, m_intake),
         new TankDrive(m_drivetrain, () -> 0.75, () -> 0.75).alongWith(
           new InstantCommand(m_intake::retrieve, m_intake),

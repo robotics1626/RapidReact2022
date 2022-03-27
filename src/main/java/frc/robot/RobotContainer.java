@@ -108,8 +108,8 @@ public class RobotContainer {
     new JoystickButton(m_operator, Button.kRightBumper.value)
       .whenPressed(() -> m_climber.climb(1.0))
       .whenReleased(() -> m_climber.stop());
-    new JoystickButton(m_operator, Button.kA.value)
-      .whenReleased(() -> m_climber.traverse());
+    new JoystickButton(m_operator, Button.kA.value).whenReleased(() -> m_climber.retract());
+    new JoystickButton(m_operator, Button.kB.value).whenReleased(() -> m_climber.extend());
   }
 
   /**

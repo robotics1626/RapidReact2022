@@ -15,8 +15,6 @@ import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-
-
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
@@ -24,8 +22,11 @@ public class Climber extends SubsystemBase {
     private CANSparkMax m_climber;
     private RelativeEncoder m_encoder;
 
-    private DoubleSolenoid m_armLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_ARM_LEFT[0], Constants.CLIMBER_ARM_LEFT[1]);
-    private DoubleSolenoid m_armRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_ARM_RIGHT[0], Constants.CLIMBER_ARM_RIGHT[1]);
+    //private DoubleSolenoid m_armLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_ARM_LEFT[0], Constants.CLIMBER_ARM_LEFT[1]);
+    //private DoubleSolenoid m_armRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_ARM_RIGHT[0], Constants.CLIMBER_ARM_RIGHT[1]);
+
+    private DoubleSolenoid m_armLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, 13,12);
+    private DoubleSolenoid m_armRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, 3,2);
 
     public Climber() {
         m_climber = new CANSparkMax(Constants.CLIMBER_MOTOR, MotorType.kBrushless);
@@ -36,9 +37,19 @@ public class Climber extends SubsystemBase {
         m_encoder.setPosition(0);
     }
 
-    public void traverse() {
+    /*public void traverse() {
         m_armLeft.toggle();
         m_armRight.toggle();
+    }*/
+
+    public void extend(){
+        m_armLeft.set(Value.kForward);
+        m_armRight.set(Value.kForward);
+    }
+
+    public void retract(){
+        m_armLeft.set(Value.kReverse);
+        m_armRight.set(Value.kReverse);
     }
 
     public void climb(double input){
