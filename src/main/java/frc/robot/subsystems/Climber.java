@@ -32,8 +32,10 @@ public class Climber extends SubsystemBase {
         m_climber = new CANSparkMax(Constants.CLIMBER_MOTOR, MotorType.kBrushless);
         m_encoder = m_climber.getEncoder();
         m_climber.setIdleMode(IdleMode.kBrake);
-        m_climber.setSoftLimit(SoftLimitDirection.kForward, 150);
-        m_climber.setSoftLimit(SoftLimitDirection.kReverse, 0);
+        m_climber.setSoftLimit(SoftLimitDirection.kForward, 0);
+        m_climber.setSoftLimit(SoftLimitDirection.kReverse, -180);
+        m_climber.enableSoftLimit(SoftLimitDirection.kForward, true);
+        m_climber.enableSoftLimit(SoftLimitDirection.kReverse, true);
         m_encoder.setPosition(0);
     }
 
