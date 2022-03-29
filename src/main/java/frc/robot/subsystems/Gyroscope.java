@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Gyroscope extends SubsystemBase {
-  private ADXRS450_Gyro m_gyro;
+  private static ADXRS450_Gyro m_gyro;
   public Gyroscope() {
     m_gyro = new ADXRS450_Gyro();
     m_gyro.reset();
     m_gyro.calibrate();
   }
 
-  public double getAngle() {
+  public static double getAngle() {
     return m_gyro.getAngle();
   }
 

@@ -12,7 +12,7 @@ import frc.robot.subsystems.Shooter;
 
 public class ShooterController extends CommandBase {
     private final Shooter m_shooter;
-    private final DoubleSupplier m_input;
+    private DoubleSupplier m_input;
     private double m_maxRpm;
 
     public ShooterController(Shooter shooter, DoubleSupplier input) {
@@ -20,6 +20,10 @@ public class ShooterController extends CommandBase {
         m_input = input;
         m_maxRpm = 3600;
         addRequirements(m_shooter);
+    }
+
+    public void changeShooterPower(DoubleSupplier input){
+        m_input = input;
     }
 
     @Override
@@ -45,5 +49,11 @@ public class ShooterController extends CommandBase {
     @Override
     public boolean isFinished() {
         return false;
+    }
+
+    public void ShooterController(Shooter mShooter, Object object) {
+    }
+
+    public void changeShooterPower(Shooter mShooter, Object object) {
     }
 }
