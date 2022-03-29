@@ -47,11 +47,15 @@ public class Climber extends SubsystemBase {
     public void extend(){
         m_armLeft.set(Value.kForward);
         m_armRight.set(Value.kForward);
+        m_climber.setSoftLimit(SoftLimitDirection.kForward, 0);
+        m_climber.setSoftLimit(SoftLimitDirection.kReverse, -180);
     }
 
     public void retract(){
         m_armLeft.set(Value.kReverse);
         m_armRight.set(Value.kReverse);
+        m_climber.setSoftLimit(SoftLimitDirection.kForward, 0);
+        m_climber.setSoftLimit(SoftLimitDirection.kReverse, -180);
     }
 
     public void climb(double input){
