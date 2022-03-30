@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 
 import frc.robot.commands.Drivetrain.*;
@@ -19,6 +19,7 @@ import frc.robot.commands.Gatekeeper.*;
 import frc.robot.commands.Indexer.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.commands.Autonomous.*;
+import frc.robot.commands.PIDtoValue.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -116,6 +117,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    double initialGyro = Gyroscope.getAngle();
+    SmartDashboard.putNumber("Initial Gyro: ", initialGyro);
     return m_auto;
   }
 }
