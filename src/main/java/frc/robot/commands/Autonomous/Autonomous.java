@@ -8,6 +8,7 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import static frc.robot.RobotContainer.*;
 
@@ -20,7 +21,7 @@ public class Autonomous extends SequentialCommandGroup {
     public Autonomous() {
       addCommands(
         new InstantCommand(m_intake::extend, m_intake),
-        new TankDrive(m_drivetrain, () -> 0.75, () -> 0.75).alongWith(
+        new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).alongWith(
           new InstantCommand(m_intake::retrieve, m_intake),
           new IndexerController(m_indexer, () -> -0.75),
           new InstantCommand(m_gatekeeper::manual, m_gatekeeper)
@@ -30,8 +31,8 @@ public class Autonomous extends SequentialCommandGroup {
         ),
         new InstantCommand(m_intake::stop, m_intake),
         new InstantCommand(m_intake::retract, m_intake),
-        new TankDrive(m_drivetrain, () -> -0.75, () -> 0.75).withTimeout(0.815),
-        new TankDrive(m_drivetrain, () -> 0.75, () -> 0.75).withTimeout(4),
+        new TankDrive(m_drivetrain, () -> -0.75, () -> 0.75).withTimeout(1.0),
+        new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).withTimeout(3.0),
         new SequentialCommandGroup(
           new ShooterController(m_shooter, () -> 1.0).withTimeout(5)).alongWith(
             new IndexerController(m_indexer, () -> -1.0).withTimeout(3),
