@@ -36,7 +36,7 @@ public class TwoBall extends SequentialCommandGroup {
           new ShooterController(m_shooter, () -> 1.0).withTimeout(5)).alongWith(
             new IndexerController(m_indexer, () -> -1.0).withTimeout(3),
             new GatekeeperController(m_gatekeeper, () -> 1.0).withTimeout(3)
-        )
+        ).withTimeout(15)
       );
   }
 }
