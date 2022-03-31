@@ -30,8 +30,9 @@ public class TwoBall extends SequentialCommandGroup {
         ),
         new InstantCommand(m_intake::stop, m_intake),
         new InstantCommand(m_intake::retract, m_intake),
-        new Rotate(180),
-        new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).withTimeout(3.0),
+        new TankDrive(m_drivetrain, () -> -0.65, () -> -0.65).withTimeout(1.5),
+        new Rotate(180).withTimeout(1),
+        new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).withTimeout(1.5),
         new SequentialCommandGroup(
           new ShooterController(m_shooter, () -> 1.0).withTimeout(5)).alongWith(
             new IndexerController(m_indexer, () -> -1.0).withTimeout(3),

@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -45,10 +46,11 @@ public class RobotContainer {
   public static final Limelight m_limelight = new Limelight();
 
   /** Autonomous Commands */
-  private static final Command TWO_BALL_AUTO = new TwoBall();
-  private static final Command ONE_BALL_AUTO = new OneBall();
-  private static final Command TAXI_AUTO = new Taxi();
-  private static SendableChooser<Command> m_auto;
+  private final Command TWO_BALL_AUTO = new TwoBall();
+  private final Command ONE_BALL_AUTO = new OneBall();
+  private final Command TAXI_AUTO = new Taxi();
+  private final Command WAIT_NONE = new WaitCommand(0);
+  private SendableChooser<Command> m_auto = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -57,7 +59,7 @@ public class RobotContainer {
     m_auto.setDefaultOption("Two Ball", TWO_BALL_AUTO);
     m_auto.addOption("One Ball", ONE_BALL_AUTO);
     m_auto.addOption("Taxi", TAXI_AUTO);
-    m_auto.addOption("Do Nothing", null);
+    m_auto.addOption("Do Nothing", WAIT_NONE);
     SmartDashboard.putData("Autonomous Routine", m_auto);
 
     /** Configure the button bindings */
