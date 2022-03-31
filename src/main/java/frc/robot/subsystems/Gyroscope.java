@@ -17,6 +17,10 @@ public class Gyroscope extends SubsystemBase {
     SmartDashboard.putNumber("Gyroscope (Degrees)", 0);
   }
 
+  public double getAngle() {
+    return m_gyro.getAngle();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
