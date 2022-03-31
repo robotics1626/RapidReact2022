@@ -54,8 +54,6 @@ public final class Constants {
     public static final int SHOOTER_RIGHT = 11;
 
     /** Climber */
-    public static final int CLIMBER_MOTOR = 12;
-    public static final int [] CLIMBER_ARM_LEFT = new int[] {13, 12};
-    public static final int [] CLIMBER_ARM_RIGHT = new int[] {3, 2};
+    public static final int CLIMBER = 12;
     
 }

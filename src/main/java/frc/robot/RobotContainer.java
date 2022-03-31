@@ -107,20 +107,14 @@ public class RobotContainer {
       .whenReleased(() -> m_intake.stop());
 
     /** Climber Controls */
-    /** The Operator's A and B buttons toggle the climber's claws.*/
-    //new JoystickButton(m_operator, Button.kA.value).whenPressed(() -> m_climber.toggle(0));
-    //new JoystickButton(m_operator, Button.kB.value).whenPressed(() -> m_climber.toggle(1));
-    /** The Operator's bumpers spin the climber's arms.*/
-    //new JoystickButton(m_operator, Button.kLeftBumper.value).whileActiveContinuous(() -> m_climber.spin(1.0));
-    //new JoystickButton(m_operator, Button.kRightBumper.value).whileActiveContinuous(() -> m_climber.spin(-1.0));
+    /** The Operator's right bumper extends the climber */
+    new JoystickButton(m_operator, Button.kRightBumper.value)
+      .whenPressed(() -> m_climber.climb(-1.0))
+      .whenReleased(() -> m_climber.stop());
+    /** The Operator's left bumper retracts the climber */
     new JoystickButton(m_operator, Button.kLeftBumper.value)
       .whenPressed(() -> m_climber.climb(1.0))
       .whenReleased(() -> m_climber.stop());
-    new JoystickButton(m_operator, Button.kRightBumper.value)
-      .whenPressed(() -> m_climber.climb(-1.0)) //up
-      .whenReleased(() -> m_climber.stop());
-    new JoystickButton(m_operator, Button.kA.value).whenReleased(() -> m_climber.retract());
-    new JoystickButton(m_operator, Button.kB.value).whenReleased(() -> m_climber.extend());
   }
 
   /**

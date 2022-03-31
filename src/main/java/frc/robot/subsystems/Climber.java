@@ -12,9 +12,6 @@ import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
@@ -22,14 +19,8 @@ public class Climber extends SubsystemBase {
     private CANSparkMax m_climber;
     private RelativeEncoder m_encoder;
 
-    //private DoubleSolenoid m_armLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_ARM_LEFT[0], Constants.CLIMBER_ARM_LEFT[1]);
-    //private DoubleSolenoid m_armRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_ARM_RIGHT[0], Constants.CLIMBER_ARM_RIGHT[1]);
-
-    private DoubleSolenoid m_armLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, 13,12);
-    private DoubleSolenoid m_armRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, 3,2);
-
     public Climber() {
-        m_climber = new CANSparkMax(Constants.CLIMBER_MOTOR, MotorType.kBrushless);
+        m_climber = new CANSparkMax(Constants.CLIMBER, MotorType.kBrushless);
         m_encoder = m_climber.getEncoder();
         m_climber.setIdleMode(IdleMode.kBrake);
         m_climber.setSoftLimit(SoftLimitDirection.kForward, 0);
@@ -37,25 +28,6 @@ public class Climber extends SubsystemBase {
         m_climber.enableSoftLimit(SoftLimitDirection.kForward, true);
         m_climber.enableSoftLimit(SoftLimitDirection.kReverse, true);
         m_encoder.setPosition(0);
-    }
-
-    /*public void traverse() {
-        m_armLeft.toggle();
-        m_armRight.toggle();
-    }*/
-
-    public void extend(){
-        m_armLeft.set(Value.kForward);
-        m_armRight.set(Value.kForward);
-        m_climber.setSoftLimit(SoftLimitDirection.kForward, 0);
-        m_climber.setSoftLimit(SoftLimitDirection.kReverse, -180);
-    }
-
-    public void retract(){
-        m_armLeft.set(Value.kReverse);
-        m_armRight.set(Value.kReverse);
-        m_climber.setSoftLimit(SoftLimitDirection.kForward, 0);
-        m_climber.setSoftLimit(SoftLimitDirection.kReverse, -180);
     }
 
     public void climb(double input){
