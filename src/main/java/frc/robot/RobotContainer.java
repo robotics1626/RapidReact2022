@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 
 import frc.robot.commands.Drivetrain.*;
@@ -29,9 +30,9 @@ import frc.robot.commands.Autonomous.*;
 
 public class RobotContainer {
   /** Controllers */
-  private final XboxController m_operator = new XboxController(Constants.CONTROLLER_OPERATOR);
-  private final Joystick m_driverLeft = new Joystick(Constants.JOYSTICK_LEFT);
-  private final Joystick m_driverRight = new Joystick(Constants.JOYSTICK_RIGHT);
+  private static final XboxController m_operator = new XboxController(Constants.CONTROLLER_OPERATOR);
+  private static final Joystick m_driverLeft = new Joystick(Constants.JOYSTICK_LEFT);
+  private static final Joystick m_driverRight = new Joystick(Constants.JOYSTICK_RIGHT);
 
   /** Robot Components */
   public static final Drivetrain m_drivetrain = new Drivetrain();
@@ -44,10 +45,17 @@ public class RobotContainer {
   public static final Limelight m_limelight = new Limelight();
 
   /** Autonomous */
-  private final Autonomous m_auto = new Autonomous();
+  private static final Command TWO_BALL_AUTO = new TwoBallAuto();
+  private static final Command ONE_BALL_AUTO = new TwoBallAuto();
+  private static SendableChooser<Command> m_auto;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+    /** Autonomous Chooser */
+    m_auto.setDefaultOption("Two Ball Auto", TWO_BALL_AUTO);
+    m_auto.addOption("One Ball Auto", ONE_BALL_AUTO);
+    SmartDashboard.putData("Autonomous Routine", m_auto);
 
     /** Configure the button bindings */
     configureButtonBindings();
@@ -118,6 +126,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return m_auto;
+    return m_auto.getSelected();
   }
 }

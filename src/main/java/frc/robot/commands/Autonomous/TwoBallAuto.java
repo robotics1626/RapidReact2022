@@ -8,7 +8,6 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import static frc.robot.RobotContainer.*;
 
@@ -17,8 +16,8 @@ import frc.robot.commands.Gatekeeper.*;
 import frc.robot.commands.Indexer.*;
 import frc.robot.commands.Shooter.*;
 
-public class Autonomous extends SequentialCommandGroup {
-    public Autonomous() {
+public class TwoBallAuto extends SequentialCommandGroup {
+    public TwoBallAuto() {
       addCommands(
         new InstantCommand(m_intake::extend, m_intake),
         new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).alongWith(
