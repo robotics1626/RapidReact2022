@@ -45,16 +45,19 @@ public class RobotContainer {
   public static final Limelight m_limelight = new Limelight();
 
   /** Autonomous */
-  private static final Command TWO_BALL_AUTO = new TwoBallAuto();
-  private static final Command ONE_BALL_AUTO = new TwoBallAuto();
+  private static final Command TWO_BALL_AUTO = new TwoBall();
+  private static final Command ONE_BALL_AUTO = new OneBall();
+  private static final Command TAXI_AUTO = new Taxi();
   private static SendableChooser<Command> m_auto;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
     /** Autonomous Chooser */
-    m_auto.setDefaultOption("Two Ball Auto", TWO_BALL_AUTO);
-    m_auto.addOption("One Ball Auto", ONE_BALL_AUTO);
+    m_auto.setDefaultOption("Two Ball", TWO_BALL_AUTO);
+    m_auto.addOption("One Ball", ONE_BALL_AUTO);
+    m_auto.addOption("Taxi", TAXI_AUTO);
+    m_auto.addOption("Do Nothing", null);
     SmartDashboard.putData("Autonomous Routine", m_auto);
 
     /** Configure the button bindings */

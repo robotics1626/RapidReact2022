@@ -16,8 +16,8 @@ import frc.robot.commands.Gatekeeper.*;
 import frc.robot.commands.Indexer.*;
 import frc.robot.commands.Shooter.*;
 
-public class TwoBallAuto extends SequentialCommandGroup {
-    public TwoBallAuto() {
+public class TwoBall extends SequentialCommandGroup {
+    public TwoBall() {
       addCommands(
         new InstantCommand(m_intake::extend, m_intake),
         new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).alongWith(
