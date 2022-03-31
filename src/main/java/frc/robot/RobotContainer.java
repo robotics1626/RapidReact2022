@@ -44,7 +44,7 @@ public class RobotContainer {
   public static final Gyroscope m_gyro = new Gyroscope();
   public static final Limelight m_limelight = new Limelight();
 
-  /** Autonomous */
+  /** Autonomous Commands */
   private static final Command TWO_BALL_AUTO = new TwoBall();
   private static final Command ONE_BALL_AUTO = new OneBall();
   private static final Command TAXI_AUTO = new Taxi();
