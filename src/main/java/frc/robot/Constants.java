@@ -54,6 +54,6 @@ public final class Constants {
     public static final int SHOOTER_RIGHT = 11;
 
     /** Climber */
-    public static final int CLIMBER = 12;
+    public static final int CLIMBER  = 12;
     
 }

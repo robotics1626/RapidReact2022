@@ -109,13 +109,13 @@ public class RobotContainer {
       .whenReleased(() -> m_intake.stop());
 
     /** Climber Controls */
-    /** The Operator's right bumper extends the climber */
+    /** The Operator's right bumper retracts the climber */
     new JoystickButton(m_operator, Button.kRightBumper.value)
-      .whenPressed(() -> m_climber.climb(-1.0))
-      .whenReleased(() -> m_climber.stop());
-    /** The Operator's left bumper retracts the climber */
-    new JoystickButton(m_operator, Button.kLeftBumper.value)
       .whenPressed(() -> m_climber.climb(1.0))
+      .whenReleased(() -> m_climber.stop());
+    /** The Operator's left bumper extends the climber */
+    new JoystickButton(m_operator, Button.kLeftBumper.value)
+      .whenPressed(() -> m_climber.climb(-1.0))
       .whenReleased(() -> m_climber.stop());
   }
 

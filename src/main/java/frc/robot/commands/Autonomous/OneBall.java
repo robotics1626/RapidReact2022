@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import static frc.robot.RobotContainer.*;
 
+import frc.robot.commands.Drivetrain.TankDrive;
 import frc.robot.commands.Gatekeeper.*;
 import frc.robot.commands.Indexer.*;
 import frc.robot.commands.Shooter.*;
@@ -21,7 +22,9 @@ public class OneBall extends SequentialCommandGroup {
           new ShooterController(m_shooter, () -> 1.0).withTimeout(5)).alongWith(
             new IndexerController(m_indexer, () -> -1.0).withTimeout(3),
             new GatekeeperController(m_gatekeeper, () -> 1.0).withTimeout(3)
-        ).withTimeout(15)
+        ),
+        new TankDrive(m_drivetrain, () -> -0.65, () -> -0.65).alongWith(
+        ).withTimeout(1.5)
       );
   }
 }
