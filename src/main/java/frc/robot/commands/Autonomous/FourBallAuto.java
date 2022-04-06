@@ -60,8 +60,10 @@ public class FourBallAuto extends SequentialCommandGroup {
           new InstantCommand(m_gatekeeper::manual, m_gatekeeper)
         ).withTimeout(1),
 
-        //slow down when we get close
-        new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(1),
+        //look for the blue ball when we get close
+        new TargetBlueBall(1).withTimeout(1.5),
+        //Alt to limelight
+        // new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(1.5),
 
         //stop for a little
         new TankDrive(m_drivetrain, () -> 0.0, () -> 0.0).withTimeout(0.2),
@@ -71,15 +73,16 @@ public class FourBallAuto extends SequentialCommandGroup {
         new InstantCommand(m_intake::retract, m_intake),
         new TankDrive(m_drivetrain, () -> -0.4, () -> -0.4).alongWith(
           new InstantCommand(m_gatekeeper::stop, m_gatekeeper)
-        ).withTimeout(1.5),
+        ).withTimeout(0.5),
 
+        //Rotate toward goal
         new Rotate(215).withTimeout(3),
 
         //move back to centerpoint
         new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(2),
 
         //turn back toward fender
-        new RotateCounterClock(180).withTimeout(2),
+        new RotateCounterClock(180).withTimeout(1.5),
         new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(2),
 
         //FIRE!

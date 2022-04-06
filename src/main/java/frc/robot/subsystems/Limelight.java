@@ -57,7 +57,6 @@ public class Limelight extends SubsystemBase {
     if(red){
       SmartDashboard.putNumber("Blue Ball X:",blueBallX());
       SmartDashboard.putNumber("Blue Ball Y:",blueBallY());
-      getPIDBlue();
       // red=false;
     }
     else{
