@@ -46,13 +46,13 @@ public class FourBallAuto extends SequentialCommandGroup {
           new IndexerController(m_indexer, () -> -1.0).withTimeout(2)
         ).withTimeout(0.7),
         
-        //Entering a land of imagination
+        //Entering wonderland
 
         //move back and turn around
         new TankDrive(m_drivetrain, () -> -0.4, () -> -0.4).withTimeout(0.8),
         new RotateCounterClock(35).withTimeout(1.5),
         
-        //extend stuff and start driving
+        //extend stuff and start driving toward human player
         new InstantCommand(m_intake::extend, m_intake),
         new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).alongWith(
           new InstantCommand(m_intake::retrieve, m_intake),
@@ -60,22 +60,33 @@ public class FourBallAuto extends SequentialCommandGroup {
           new InstantCommand(m_gatekeeper::manual, m_gatekeeper)
         ).withTimeout(1),
 
-        //slow down
+        //slow down when we get close
         new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(1),
 
         //stop for a little
         new TankDrive(m_drivetrain, () -> 0.0, () -> 0.0).withTimeout(0.2),
         
         //move back and turn around 
+        new InstantCommand(m_intake::stop, m_intake),
+        new InstantCommand(m_intake::retract, m_intake),
         new TankDrive(m_drivetrain, () -> -0.4, () -> -0.4).alongWith(
-          new InstantCommand(m_intake::retract, m_intake),
           new InstantCommand(m_gatekeeper::stop, m_gatekeeper)
         ).withTimeout(1.5),
 
         new Rotate(215).withTimeout(3),
 
         //move back to centerpoint
-        new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(2)
+        new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(2),
+
+        //turn back toward fender
+        new RotateCounterClock(180).withTimeout(2),
+        new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(2),
+
+        //FIRE!
+        new ShooterController(m_shooter, () -> 1.0).withTimeout(5).alongWith(
+          new GatekeeperController(m_gatekeeper, () -> 1.0).withTimeout(0.7),
+          new IndexerController(m_indexer, () -> -1.0).withTimeout(2)
+        ).withTimeout(0.7)
       );
   }
 }
