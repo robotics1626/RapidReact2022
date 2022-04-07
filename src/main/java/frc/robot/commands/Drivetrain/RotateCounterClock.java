@@ -30,7 +30,7 @@ public class RotateCounterClock extends CommandBase {
     }
 
     while(m_gyro.getAngle() > m_initAngle + m_angle) {
-      m_drivetrain.tankDrive(-0.4, 0.4);
+      m_drivetrain.tankDrive(-0.5, 0.5);
     }
   }
 

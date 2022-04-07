@@ -31,7 +31,7 @@ public class FourBallAuto extends SequentialCommandGroup {
         new InstantCommand(m_intake::stop, m_intake),
         new InstantCommand(m_intake::retract, m_intake),
         new TankDrive(m_drivetrain, () -> -0.65, () -> -0.65).withTimeout(1.5),
-        new Rotate(180).withTimeout(0.7),
+        new Rotate(180).withTimeout(0.9),
         new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).withTimeout(1.5),
 
         new SequentialCommandGroup(
@@ -48,42 +48,43 @@ public class FourBallAuto extends SequentialCommandGroup {
         
         //Entering wonderland
 
-        //move back and turn around
-        new TankDrive(m_drivetrain, () -> -0.4, () -> -0.4).withTimeout(0.8),
+        //move back and turn toward ball
+        new TankDrive(m_drivetrain, () -> -0.65, () -> -0.65).withTimeout(0.8),
         new RotateCounterClock(78).withTimeout(1.5),
         
-        //extend stuff and start driving toward human player
+        //extend stuff and start driving toward ball
         new InstantCommand(m_intake::extend, m_intake),
-        new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).alongWith(
+        new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).alongWith(
           new InstantCommand(m_intake::retrieve, m_intake),
           new IndexerController(m_indexer, () -> -0.75),
           new InstantCommand(m_gatekeeper::manual, m_gatekeeper)
-        ).withTimeout(1),
+        ).withTimeout(1.7),
 
+        //ignore for now
         //look for the blue ball when we get close
-        new TargetBlueBall(1).withTimeout(1.5),
+        // new TargetBlueBall(1).withTimeout(1.5),
         //Alt to limelight
         // new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(1.5),
 
         //stop for a little
-        new TankDrive(m_drivetrain, () -> 0.0, () -> 0.0).withTimeout(0.2),
+        new TankDrive(m_drivetrain, () -> 0.0, () -> 0.0).withTimeout(0.1),
         
-        //move back and turn around 
+        //go back to goal
         new InstantCommand(m_intake::stop, m_intake),
         new InstantCommand(m_intake::retract, m_intake),
-        new TankDrive(m_drivetrain, () -> -0.4, () -> -0.4).alongWith(
+        new TankDrive(m_drivetrain, () -> -0.65, () -> -0.65).alongWith(
           new InstantCommand(m_gatekeeper::stop, m_gatekeeper)
-        ).withTimeout(0.5),
+        ).withTimeout(1.7),
 
         //Rotate toward goal
-        new Rotate(258).withTimeout(3),
+        new Rotate(180).withTimeout(0.9),
 
-        //move back to centerpoint
-        new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(2),
+        //move to fender
+        new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).withTimeout(0.8),
 
         //turn back toward fender
-        new RotateCounterClock(180).withTimeout(1.5),
-        new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(2),
+        // new RotateCounterClock(180).withTimeout(1.5),
+        // new TankDrive(m_drivetrain, () -> 0.4, () -> 0.4).withTimeout(2),
 
         //FIRE!
         new ShooterController(m_shooter, () -> 1.0).withTimeout(5).alongWith(
