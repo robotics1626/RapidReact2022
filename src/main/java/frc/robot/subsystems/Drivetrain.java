@@ -56,6 +56,7 @@ public class Drivetrain extends SubsystemBase {
 
         /** Invert the direction of the right-side speed controllers. */
         m_motorsRight.setInverted(true);
+        m_motorsLeft.setInverted(false);
     }
 
     /** This function makes use of the driver input to control the robot like a tank. */

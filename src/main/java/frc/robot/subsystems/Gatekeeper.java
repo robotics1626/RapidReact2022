@@ -31,6 +31,7 @@ public class Gatekeeper extends SubsystemBase {
          * electrical energy within the motor and brings it to a quick stop. 
          */
         m_gatekeeper.setIdleMode(IdleMode.kBrake);
+        m_gatekeeper.setInverted(false);
     }
 
     public void GatekeeperController(double speed) {
