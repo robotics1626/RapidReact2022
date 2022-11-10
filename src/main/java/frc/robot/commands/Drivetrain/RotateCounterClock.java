@@ -25,10 +25,10 @@ public class RotateCounterClock extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    while(m_gyro.getAngle() > (m_initAngle + m_angle)+20) {
+    while(m_gyro.getAngle() > (m_initAngle + m_angle)-20) {
       m_drivetrain.tankDrive(-0.6, 0.6);
     }
-
+    
     while(m_gyro.getAngle() > m_initAngle + m_angle) {
       m_drivetrain.tankDrive(-0.5, 0.5);
     }
