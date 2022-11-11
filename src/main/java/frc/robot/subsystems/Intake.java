@@ -48,8 +48,8 @@ public class Intake extends SubsystemBase {
         m_followMotor.setIdleMode(IdleMode.kCoast);
 
         /** Construct a pair of double solenoid for REV pneumatics modules. */
-        m_intakeArmLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.INTAKE_ARM_LEFT[0], Constants.INTAKE_ARM_LEFT[1]);
-        m_intakeArmRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.INTAKE_ARM_RIGHT[0], Constants.INTAKE_ARM_RIGHT[1]);
+        m_intakeArmLeft = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.INTAKE_ARM_LEFT[0], Constants.INTAKE_ARM_LEFT[1]);
+        m_intakeArmRight = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.INTAKE_ARM_RIGHT[0], Constants.INTAKE_ARM_RIGHT[1]);
 
         /** Set the intake arms to contract by default. */
         m_intakeArmLeft.set(Value.kReverse);

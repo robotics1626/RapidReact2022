@@ -8,24 +8,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase {
   boolean red = true;
-  double xSetpoint = 0.0;
-  double Kp = 1.0;
-  double Ki = 0.0;
-  double Kd = 1.0;
-  double p = 0.0;
-  double PID = 0.0;
-  double previousI = 0.0;
-  double previousError = 1.0;
-  double previousPID = 0.0;
-  double i = 0.0;
-  double d = 0.0;  
   long startTime = System.nanoTime();
   long endTime = System.nanoTime();
   private NetworkTable table;
   private String tableName;
   /** Creates a new Limelight. */
   public Limelight() {
-    
     tableName = "limelight";
     table = NetworkTableInstance.getDefault().getTable(tableName);
   }
@@ -63,47 +51,13 @@ public class Limelight extends SubsystemBase {
     pipelineEntry.setNumber(pipeline);
   }
 
-  public double getPIDBlue() {
-    // P = Kp * error
-    if(blueBallX()==0){
-      previousPID = PID;
-    }
-    else{
-      p = Kp * blueBallX();
-      i = previousI + Ki * blueBallX();
-      
-      double duration = -((double)endTime - (double)startTime)/100000000;
-      if(previousError == 0){
-        previousError = 1;
-      }
-      d = Kd *(blueBallX()/previousError)/duration;
-
-      PID = p+i+d;
-      previousPID = PID;
-      previousError = blueBallX();
-      previousI = i;
-      SmartDashboard.putNumber("duration:",duration);
-    }
-
-    SmartDashboard.putNumber("P:",p);
-    SmartDashboard.putNumber("I:",i);
-    SmartDashboard.putNumber("D:",d);
-    SmartDashboard.putNumber("PID:",PID);
-
-    SmartDashboard.putNumber("Previuous Error:",previousError);
-    SmartDashboard.putNumber("endTime:",endTime);
-    SmartDashboard.putNumber("startTime:",startTime); 
-    return PID;
-  }
-
   @Override
   public void periodic() {
     startTime = System.nanoTime();
     if(red){
       SmartDashboard.putNumber("Blue Ball X:",blueBallX());
       SmartDashboard.putNumber("Blue Ball Y:",blueBallY());
-      getPIDBlue();
-      red=false;
+      // red=false;
     }
     else{
       SmartDashboard.putNumber("Red Ball X:",redBallX());

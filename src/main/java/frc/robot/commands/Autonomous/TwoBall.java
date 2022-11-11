@@ -43,7 +43,12 @@ public class TwoBall extends SequentialCommandGroup {
         new ShooterController(m_shooter, () -> 1.0).withTimeout(5).alongWith(
           new GatekeeperController(m_gatekeeper, () -> 1.0).withTimeout(0.7),
           new IndexerController(m_indexer, () -> -1.0).withTimeout(2)
-        ).withTimeout(0.7)
+        ).withTimeout(0.7),
+
+        new TankDrive(m_drivetrain, () -> -0.65, () -> -0.65).withTimeout(0.8).alongWith(
+          new InstantCommand(m_intake::retrieve, m_intake)
+        ),
+        new Rotate(180).withTimeout(1)
       );
   }
 }

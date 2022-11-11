@@ -47,6 +47,7 @@ public class RobotContainer {
 
   /** Autonomous Commands */
   private final Command TWO_BALL_AUTO = new TwoBall();
+  private final Command FOUR_BALL_AUTO = new FourBallAuto();
   private final Command ONE_BALL_AUTO = new OneBall();
   private final Command TAXI_AUTO = new Taxi();
   private final Command WAIT_NONE = new WaitCommand(0);
@@ -59,6 +60,7 @@ public class RobotContainer {
     m_auto.setDefaultOption("Two Ball", TWO_BALL_AUTO);
     m_auto.addOption("One Ball", ONE_BALL_AUTO);
     m_auto.addOption("Taxi", TAXI_AUTO);
+    m_auto.addOption("Four Ball", FOUR_BALL_AUTO);
     m_auto.addOption("Do Nothing", WAIT_NONE);
     SmartDashboard.putData("Autonomous Routine", m_auto);
 
