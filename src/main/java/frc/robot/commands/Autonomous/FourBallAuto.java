@@ -50,7 +50,7 @@ public class FourBallAuto extends SequentialCommandGroup {
 
         //move back and turn toward ball
         new TankDrive(m_drivetrain, () -> -0.65, () -> -0.65).withTimeout(0.8),
-        new Rotate(90).withTimeout(0.9),
+        new RotateCounterClock(115).withTimeout(0.9),
         
         //extend stuff and start driving toward ball
         new InstantCommand(m_intake::extend, m_intake),
