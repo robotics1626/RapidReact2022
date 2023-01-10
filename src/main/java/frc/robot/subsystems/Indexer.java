@@ -31,10 +31,12 @@ public class Indexer extends SubsystemBase {
         m_leadMotor.restoreFactoryDefaults();
         m_followMotor.restoreFactoryDefaults();
 
+        m_followMotor.setInverted(true);
+        m_followMotor.follow(m_leadMotor,true);
         /**
          * When the SPARK MAX is receiving a neutral command, the idle behavior of the motor 
          * will effectively disconnect all motor wires. This allows the motor to spin down at 
-         * its own rate. 
+         * its own rate. \
          */
         m_leadMotor.setIdleMode(IdleMode.kCoast);
         m_followMotor.setIdleMode(IdleMode.kCoast);

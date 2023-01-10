@@ -77,7 +77,7 @@ public class FourBallAuto extends SequentialCommandGroup {
         ).withTimeout(1.7),
 
         //Rotate toward goal
-        new Rotate(180).withTimeout(0.9),
+        new Rotate(25).withTimeout(0.9),
 
         //move to fender
         new TankDrive(m_drivetrain, () -> 0.65, () -> 0.65).withTimeout(0.8),
@@ -95,4 +95,4 @@ public class FourBallAuto extends SequentialCommandGroup {
   }
 }
 
-//papa josh disapproved (for now)
+//papa josh approved
